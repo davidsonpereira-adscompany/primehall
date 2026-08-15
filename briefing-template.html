@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing Completo &mdash; ADS Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --laranja: #FF5C00;
+    --preto: #0A0A0A;
+    --cinza-escuro: #1A1A1A;
+    --cinza-medio: #2A2A2A;
+    --cinza-claro: #888;
+    --cinza-border: rgba(255,255,255,0.08);
+    --branco: #FFFFFF;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--preto);
+    color: var(--branco);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 32px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Print styles — fundo branco, texto legível */
+  @media print {
+    @page { margin: 15mm 14mm; }
+
+    body {
+      background: #fff !important;
+      color: #111 !important;
+      padding: 0 !important;
+      font-size: 12px !important;
+      max-width: 100% !important;
+    }
+
+    .no-print { display: none !important; }
+
+    /* Cabeçalho */
+    .header { border-bottom-color: #ddd !important; }
+    .header-tag { color: #FF5C00 !important; }
+    .header h1  { color: #111 !important; }
+    .header h1 em { color: #FF5C00 !important; }
+    .header p   { color: #555 !important; }
+    .header-line { background: #FF5C00 !important; }
+
+    /* Nome ADS Company abaixo da logo */
+    .header > div[style*="font-family"] { color: #111 !important; }
+    .header > div[style*="font-family"] em { color: #FF5C00 !important; }
+
+    /* Seções */
+    .section-tag { color: #FF5C00 !important; }
+    .section h2  { color: #111 !important; }
+    .section h2 em { color: #FF5C00 !important; }
+
+    /* Labels dos campos */
+    .field-label { color: #555 !important; }
+
+    /* Inputs e textareas */
+    .field-input,
+    .field-textarea {
+      background: #f5f5f5 !important;
+      color: #111 !important;
+      border-color: #ccc !important;
+    }
+    .field-input::placeholder,
+    .field-textarea::placeholder { color: #aaa !important; }
+
+    /* Divisores */
+    .divider { background: linear-gradient(90deg, #FF5C00, rgba(255,92,0,0.1)) !important; }
+
+    /* Tabelas */
+    .obj-table th    { background: #eee !important; color: #333 !important; }
+    .obj-table td    { color: #111 !important; border-bottom-color: #ddd !important; }
+    .obj-table input { background: #f5f5f5 !important; color: #111 !important; border-color: transparent !important; }
+    .obj-table input::placeholder { color: #bbb !important; }
+    .obj-table td:first-child { color: #FF5C00 !important; }
+
+    /* Escalas de tom */
+    .scale-label { color: #333 !important; }
+    .scale-track { background: #e0e0e0 !important; }
+    .scale-fill  { background: #FF5C00 !important; }
+    .scale-input { background: #f5f5f5 !important; color: #111 !important; border-color: #ccc !important; }
+
+    /* Nível de consciência */
+    .level-option          { background: #f9f9f9 !important; border-color: #ddd !important; }
+    .level-option .lo-label { color: #111 !important; }
+    .level-option .lo-desc  { color: #666 !important; }
+    .level-option input[type="radio"] { accent-color: #FF5C00; }
+
+    /* Rodapé da página */
+    div[style*="border-top"] p,
+    div[style*="border-top"] em { color: #333 !important; }
+    div[style*="border-top"] em { color: #FF5C00 !important; }
+  }
+
+  /* Header */
+  .header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--cinza-border); text-align: center; }
+  .header img { height: 80px; margin-bottom: 16px; }
+  .header-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--laranja); margin-bottom: 12px; }
+  .header h1 { font-family: var(--serif); font-size: 2rem; font-weight: 400; line-height: 1.2; margin-bottom: 8px; }
+  .header h1 em { font-style: italic; color: var(--laranja); }
+  .header-line { width: 60px; height: 2px; background: var(--laranja); margin: 16px auto; }
+  .header p { font-size: 0.88rem; color: var(--cinza-claro); font-weight: 300; max-width: 560px; margin: 0 auto; }
+
+  /* Section */
+  .section { margin-bottom: 40px; }
+  .section-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--laranja); margin-bottom: 10px; }
+  .section h2 { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; margin-bottom: 20px; }
+  .section h2 em { font-style: italic; color: var(--laranja); }
+
+  /* Fields */
+  .field { margin-bottom: 16px; }
+  .field-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cinza-claro); margin-bottom: 6px; }
+  .field-input {
+    width: 100%;
+    background: var(--cinza-escuro);
+    border: 1px solid var(--cinza-border);
+    padding: 14px 16px;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--branco);
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field-input:focus { border-color: var(--laranja); }
+  .field-input::placeholder { color: rgba(255,255,255,0.25); font-style: italic; }
+  .field-textarea {
+    width: 100%;
+    background: var(--cinza-escuro);
+    border: 1px solid var(--cinza-border);
+    padding: 14px 16px;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--branco);
+    font-weight: 300;
+    outline: none;
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.2s;
+  }
+  .field-textarea:focus { border-color: var(--laranja); }
+  .field-textarea::placeholder { color: rgba(255,255,255,0.25); font-style: italic; }
+
+  /* Grid */
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .field-grid { grid-template-columns: 1fr; } }
+
+  /* Table */
+  .obj-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  .obj-table th { background: var(--cinza-medio); padding: 10px 14px; text-align: left; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cinza-claro); }
+  .obj-table td { padding: 4px; border-bottom: 1px solid var(--cinza-border); }
+  .obj-table td:first-child { width: 36px; text-align: center; color: var(--laranja); font-weight: 600; padding: 10px; font-size: 0.85rem; }
+  .obj-table input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 10px;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--branco);
+    font-weight: 300;
+    outline: none;
+  }
+  .obj-table input:focus { border-color: var(--laranja); background: var(--cinza-escuro); }
+  .obj-table input::placeholder { color: rgba(255,255,255,0.2); font-style: italic; }
+
+  /* Scale */
+  .scale-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .scale-label { width: 180px; font-size: 0.85rem; color: rgba(255,255,255,0.7); flex-shrink: 0; }
+  .scale-track { flex: 1; height: 6px; background: var(--cinza-medio); position: relative; cursor: pointer; }
+  .scale-fill { height: 100%; background: var(--laranja); width: 50%; transition: width 0.1s; }
+  .scale-input {
+    width: 56px;
+    background: var(--cinza-escuro);
+    border: 1px solid var(--cinza-border);
+    padding: 6px 8px;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    color: var(--branco);
+    text-align: center;
+    outline: none;
+  }
+  .scale-input:focus { border-color: var(--laranja); }
+
+  /* Divider */
+  .divider { width: 100%; height: 1px; background: linear-gradient(90deg, var(--laranja), rgba(255,92,0,0.05)); margin: 40px 0; }
+
+  /* Buttons */
+  .btn-bar { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+  .btn {
+    display: inline-block; padding: 14px 36px;
+    font-family: var(--sans); font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; cursor: pointer; transition: opacity 0.2s;
+    text-decoration: none;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn-primary { background: var(--laranja); color: var(--preto); }
+  .btn-outline { background: transparent; color: var(--laranja); border: 1px solid var(--laranja); }
+
+  /* Radio level */
+  .level-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .level-option {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; background: var(--cinza-escuro);
+    border: 1px solid var(--cinza-border); cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .level-option:hover { border-color: rgba(255,92,0,0.3); }
+  .level-option input[type="radio"] { accent-color: var(--laranja); width: 16px; height: 16px; }
+  .level-option .lo-label { font-size: 0.85rem; font-weight: 500; color: var(--branco); }
+  .level-option .lo-desc { font-size: 0.8rem; color: var(--cinza-claro); font-weight: 300; margin-left: auto; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <img src="Ícone-sf 1.png" alt="ADS Company" style="margin-bottom:6px;">
+  <div style="font-family:var(--serif); font-size:1.1rem; font-weight:400; letter-spacing:0.18em; text-transform:uppercase; color:var(--branco); margin-bottom:4px; margin-top:-8px;">ADS <em style="font-style:italic; color:var(--laranja);">Company</em></div>
+  <div class="header-tag">Template de Briefing</div>
+  <h1>Briefing <em>Completo</em></h1>
+  <div class="header-line"></div>
+  <p>Preencha cada campo com as informa&ccedil;&otilde;es do seu projeto. Ao final, clique em &ldquo;Salvar como PDF&rdquo; para baixar preenchido.</p>
+</div>
+
+<!-- 1. VISAO GERAL -->
+<div class="section">
+  <div class="section-tag">01 &mdash; Vis&atilde;o Geral</div>
+  <h2>Sobre o <em>projeto</em></h2>
+  <div class="field"><div class="field-label">Nome do projeto</div><input class="field-input" type="text" placeholder="Ex: ADS Company"></div>
+  <div class="field"><div class="field-label">O que &eacute;</div><input class="field-input" type="text" placeholder="Descreva em 1 frase o que &eacute; o seu produto/servi&ccedil;o"></div>
+  <div class="field"><div class="field-label">Resultado que entrega</div><input class="field-input" type="text" placeholder="Qual transforma&ccedil;&atilde;o o cliente tem?"></div>
+  <div class="field"><div class="field-label">Formato</div><input class="field-input" type="text" placeholder="Curso, mentoria, servi&ccedil;o, produto digital, SaaS..."></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 2. PUBLICO -->
+<div class="section">
+  <div class="section-tag">02 &mdash; P&uacute;blico-Alvo</div>
+  <h2>Quem &eacute; o <em>cliente ideal</em></h2>
+  <div class="field-grid">
+    <div class="field"><div class="field-label">Cliente ideal</div><input class="field-input" type="text" placeholder="Quem &eacute;? (profiss&atilde;o, idade, situa&ccedil;&atilde;o)"></div>
+    <div class="field"><div class="field-label">Profiss&atilde;o / perfil</div><input class="field-input" type="text" placeholder="O que faz no dia a dia?"></div>
+  </div>
+  <div class="field"><div class="field-label">Dor principal</div><textarea class="field-textarea" placeholder="Qual o maior problema que sente hoje?"></textarea></div>
+  <div class="field"><div class="field-label">Desejo mais forte</div><textarea class="field-textarea" placeholder="O que mais quer conquistar?"></textarea></div>
+  <div class="field-grid">
+    <div class="field"><div class="field-label">Situa&ccedil;&atilde;o atual</div><textarea class="field-textarea" placeholder="Onde est&aacute; agora?"></textarea></div>
+    <div class="field"><div class="field-label">Situa&ccedil;&atilde;o desejada</div><textarea class="field-textarea" placeholder="Onde quer chegar?"></textarea></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 3. OFERTA -->
+<div class="section">
+  <div class="section-tag">03 &mdash; Oferta</div>
+  <h2>O que voc&ecirc; <em>vende</em></h2>
+  <div class="field"><div class="field-label">Nome da oferta</div><input class="field-input" type="text" placeholder="Nome do produto/servi&ccedil;o"></div>
+  <div class="field-grid">
+    <div class="field"><div class="field-label">Pre&ccedil;o</div><input class="field-input" type="text" placeholder="R$ ___"></div>
+    <div class="field"><div class="field-label">Garantia</div><input class="field-input" type="text" placeholder="___ dias / sem garantia"></div>
+  </div>
+  <div class="field"><div class="field-label">O que est&aacute; incluso</div><textarea class="field-textarea" placeholder="Liste tudo que o cliente recebe"></textarea></div>
+  <div class="field"><div class="field-label">B&ocirc;nus diferencial</div><input class="field-input" type="text" placeholder="Algo extra que s&oacute; voc&ecirc; oferece"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 4. OBJECOES -->
+<div class="section">
+  <div class="section-tag">04 &mdash; Obje&ccedil;&otilde;es</div>
+  <h2>Por que <em>n&atilde;o</em> comprariam</h2>
+  <table class="obj-table">
+    <thead><tr><th>#</th><th>Obje&ccedil;&atilde;o</th><th>Sua resposta</th><th>Prova</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><input type="text" placeholder="Obje&ccedil;&atilde;o mais comum"></td><td><input type="text" placeholder="Como voc&ecirc; responde"></td><td><input type="text" placeholder="Que prova sustenta"></td></tr>
+      <tr><td>2</td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td></tr>
+      <tr><td>3</td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td></tr>
+      <tr><td>4</td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td></tr>
+      <tr><td>5</td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="divider"></div>
+
+<!-- 5. CONCORRENTES -->
+<div class="section">
+  <div class="section-tag">05 &mdash; Concorrentes</div>
+  <h2>Quem mais <em>resolve</em> esse problema</h2>
+  <table class="obj-table">
+    <thead><tr><th>#</th><th>Concorrente</th><th>O que faz bem</th><th>O que falta</th><th>Seu diferencial</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td></tr>
+      <tr><td>2</td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td></tr>
+      <tr><td>3</td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td><td><input type="text" placeholder=""></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="divider"></div>
+
+<!-- 6. ANGULOS -->
+<div class="section">
+  <div class="section-tag">06 &mdash; &Acirc;ngulos de Campanha</div>
+  <h2>Formas de <em>abordar</em> o p&uacute;blico</h2>
+  <div class="field"><div class="field-label">&Acirc;ngulo de Dor</div><input class="field-input" type="text" placeholder="Explora o problema. Ex: 'Voc&ecirc; est&aacute; cansado de...'"></div>
+  <div class="field"><div class="field-label">&Acirc;ngulo de Desejo</div><input class="field-input" type="text" placeholder="Pinta o futuro. Ex: 'Imagine quando...'"></div>
+  <div class="field"><div class="field-label">&Acirc;ngulo de Prova</div><input class="field-input" type="text" placeholder="Mostra resultados. Ex: 'Fulano conseguiu...'"></div>
+  <div class="field"><div class="field-label">&Acirc;ngulo de Urg&ecirc;ncia</div><input class="field-input" type="text" placeholder="Por que agora. Ex: 'O mercado est&aacute; mudando...'"></div>
+  <div class="field"><div class="field-label">&Acirc;ngulo de Curiosidade</div><input class="field-input" type="text" placeholder="Mecanismo &uacute;nico. Ex: 'O m&eacute;todo que...'"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 7. PROMESSAS -->
+<div class="section">
+  <div class="section-tag">07 &mdash; Promessas</div>
+  <h2>O que voc&ecirc; <em>promete</em></h2>
+  <div class="field"><div class="field-label">Promessa central</div><textarea class="field-textarea" placeholder="A promessa principal da sua oferta"></textarea></div>
+  <div class="field"><div class="field-label">Sub-promessa 1</div><input class="field-input" type="text" placeholder="Benef&iacute;cio espec&iacute;fico"></div>
+  <div class="field"><div class="field-label">Sub-promessa 2</div><input class="field-input" type="text" placeholder="Benef&iacute;cio espec&iacute;fico"></div>
+  <div class="field"><div class="field-label">Sub-promessa 3</div><input class="field-input" type="text" placeholder="Benef&iacute;cio espec&iacute;fico"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 8. PROVAS -->
+<div class="section">
+  <div class="section-tag">08 &mdash; Provas</div>
+  <h2>Por que devem <em>acreditar</em></h2>
+  <div class="field"><div class="field-label">Depoimentos de clientes</div><textarea class="field-textarea" placeholder="Liste depoimentos reais (ou marque 'a preencher')"></textarea></div>
+  <div class="field"><div class="field-label">Resultados num&eacute;ricos</div><input class="field-input" type="text" placeholder="N&uacute;meros concretos que provam"></div>
+  <div class="field"><div class="field-label">Credenciais do expert</div><input class="field-input" type="text" placeholder="Sua experi&ecirc;ncia, forma&ccedil;&atilde;o, resultados"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 9. MECANISMO -->
+<div class="section">
+  <div class="section-tag">09 &mdash; Mecanismo &Uacute;nico</div>
+  <h2>O m&eacute;todo que <em>faz funcionar</em></h2>
+  <div class="field"><div class="field-label">Nome do m&eacute;todo</div><input class="field-input" type="text" placeholder="Como se chama o seu sistema/framework"></div>
+  <div class="field"><div class="field-label">Por que funciona</div><textarea class="field-textarea" placeholder="Explique a l&oacute;gica por tr&aacute;s"></textarea></div>
+  <div class="field"><div class="field-label">Diferencial</div><input class="field-input" type="text" placeholder="O que tem de diferente dos outros"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 10. NIVEL CONSCIENCIA -->
+<div class="section">
+  <div class="section-tag">10 &mdash; N&iacute;vel de Consci&ecirc;ncia (Schwartz)</div>
+  <h2>Onde o p&uacute;blico <em>est&aacute;</em></h2>
+  <p style="font-size:0.88rem; color:var(--cinza-claro); font-weight:300; margin-bottom:16px;">Selecione o n&iacute;vel predominante do seu p&uacute;blico:</p>
+  <div class="level-options">
+    <label class="level-option"><input type="radio" name="nivel" value="inconsciente"><span class="lo-label">Inconsciente</span><span class="lo-desc">N&atilde;o sabe que tem o problema</span></label>
+    <label class="level-option"><input type="radio" name="nivel" value="problema"><span class="lo-label">Consciente do Problema</span><span class="lo-desc">Sabe que d&oacute;i, n&atilde;o sabe a solu&ccedil;&atilde;o</span></label>
+    <label class="level-option"><input type="radio" name="nivel" value="solucao"><span class="lo-label">Consciente da Solu&ccedil;&atilde;o</span><span class="lo-desc">Sabe que existe, n&atilde;o conhece a sua</span></label>
+    <label class="level-option"><input type="radio" name="nivel" value="produto"><span class="lo-label">Consciente do Produto</span><span class="lo-desc">Conhece sua oferta, n&atilde;o comprou</span></label>
+    <label class="level-option"><input type="radio" name="nivel" value="mais"><span class="lo-label">Mais Consciente</span><span class="lo-desc">Pronto para comprar</span></label>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 11. TOM -->
+<div class="section">
+  <div class="section-tag">11 &mdash; Tom de Comunica&ccedil;&atilde;o</div>
+  <h2>Como a marca <em>fala</em></h2>
+  <div class="scale-row"><span class="scale-label">Formal &harr; Casual</span><div class="scale-track" data-scale="1"><div class="scale-fill" style="width:50%"></div></div><input class="scale-input" type="number" min="0" max="100" value="50" data-scale-input="1"></div>
+  <div class="scale-row"><span class="scale-label">S&eacute;rio &harr; Divertido</span><div class="scale-track" data-scale="2"><div class="scale-fill" style="width:50%"></div></div><input class="scale-input" type="number" min="0" max="100" value="50" data-scale-input="2"></div>
+  <div class="scale-row"><span class="scale-label">T&eacute;cnico &harr; Acess&iacute;vel</span><div class="scale-track" data-scale="3"><div class="scale-fill" style="width:50%"></div></div><input class="scale-input" type="number" min="0" max="100" value="50" data-scale-input="3"></div>
+  <div class="scale-row"><span class="scale-label">Autorit&aacute;rio &harr; Amig&aacute;vel</span><div class="scale-track" data-scale="4"><div class="scale-fill" style="width:50%"></div></div><input class="scale-input" type="number" min="0" max="100" value="50" data-scale-input="4"></div>
+  <div class="field" style="margin-top:16px;"><div class="field-label">Persona da marca</div><input class="field-input" type="text" placeholder="Mentor, amigo, autoridade, parceiro..."></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 12. RESTRICOES -->
+<div class="section">
+  <div class="section-tag">12 &mdash; Restri&ccedil;&otilde;es e Contexto</div>
+  <h2>Limites e <em>prazos</em></h2>
+  <div class="field-grid">
+    <div class="field"><div class="field-label">Prazo de lan&ccedil;amento</div><input class="field-input" type="text" placeholder="Data ou 'sem prazo definido'"></div>
+    <div class="field"><div class="field-label">Or&ccedil;amento</div><input class="field-input" type="text" placeholder="R$ ___ para tr&aacute;fego / produ&ccedil;&atilde;o"></div>
+  </div>
+  <div class="field"><div class="field-label">Canais priorit&aacute;rios</div><input class="field-input" type="text" placeholder="Instagram, YouTube, email, WhatsApp..."></div>
+  <div class="field"><div class="field-label">Restri&ccedil;&otilde;es do nicho</div><input class="field-input" type="text" placeholder="Regula&ccedil;&atilde;o, compliance, limita&ccedil;&otilde;es..."></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ACTIONS -->
+<div style="text-align:center; padding:32px 0;" class="no-print">
+  <p style="font-size:0.95rem; color:rgba(255,255,255,0.7); font-weight:400; margin-bottom:20px;">Preencheu tudo? Salve como PDF.</p>
+  <div class="btn-bar">
+    <button class="btn btn-primary" onclick="window.print()">Salvar como PDF</button>
+    <button class="btn btn-outline" onclick="copyAsText()">Copiar como Texto</button>
+  </div>
+  <p style="font-size:0.75rem; color:var(--cinza-claro); margin-top:16px; font-weight:300;">No di&aacute;logo de impress&atilde;o, selecione &ldquo;Salvar como PDF&rdquo; como destino.</p>
+</div>
+
+<div style="text-align:center; padding:24px 0; border-top:1px solid var(--cinza-border);">
+  <p style="font-family:var(--serif); font-size:0.95rem;">ADS Company &mdash; <em style="font-style:italic; color:var(--laranja);">Assessoria de Marketing e Performance</em></p>
+  <p style="font-size:0.75rem; color:var(--cinza-claro); margin-top:4px;">ADS Company &mdash; Template de Briefing</p>
+</div>
+
+<script>
+  // Scale sliders
+  document.querySelectorAll('.scale-track').forEach(track => {
+    const id = track.dataset.scale;
+    const input = document.querySelector(`[data-scale-input="${id}"]`);
+    const fill = track.querySelector('.scale-fill');
+
+    track.addEventListener('click', e => {
+      const rect = track.getBoundingClientRect();
+      const pct = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+      const val = Math.max(0, Math.min(100, pct));
+      fill.style.width = val + '%';
+      input.value = val;
+    });
+
+    input.addEventListener('input', () => {
+      const val = Math.max(0, Math.min(100, parseInt(input.value) || 0));
+      fill.style.width = val + '%';
+    });
+  });
+
+  // Copy as text
+  function copyAsText() {
+    let text = 'BRIEFING COMPLETO\n';
+    text += '=================\n\n';
+
+    document.querySelectorAll('.section').forEach(section => {
+      const tag = section.querySelector('.section-tag');
+      if (tag) text += tag.textContent.toUpperCase() + '\n';
+
+      section.querySelectorAll('.field').forEach(field => {
+        const label = field.querySelector('.field-label');
+        const input = field.querySelector('.field-input, .field-textarea');
+        if (label && input) {
+          text += label.textContent + ': ' + (input.value || '[a preencher]') + '\n';
+        }
+      });
+
+      section.querySelectorAll('.obj-table tbody tr').forEach(row => {
+        const cells = row.querySelectorAll('input');
+        if (cells.length > 0) {
+          const num = row.querySelector('td:first-child');
+          const vals = Array.from(cells).map(c => c.value || '').filter(v => v);
+          if (vals.length > 0) text += (num ? num.textContent + '. ' : '') + vals.join(' | ') + '\n';
+        }
+      });
+
+      const radios = section.querySelectorAll('input[type="radio"]:checked');
+      radios.forEach(r => {
+        const label = r.closest('.level-option').querySelector('.lo-label');
+        if (label) text += 'Nivel predominante: ' + label.textContent + '\n';
+      });
+
+      const scales = section.querySelectorAll('.scale-input');
+      if (scales.length > 0) {
+        scales.forEach(s => {
+          const row = s.closest('.scale-row');
+          const label = row.querySelector('.scale-label');
+          if (label) text += label.textContent + ': ' + s.value + '/100\n';
+        });
+      }
+
+      text += '\n';
+    });
+
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.btn-outline');
+      const orig = btn.textContent;
+      btn.textContent = 'Copiado!';
+      btn.style.borderColor = '#22C55E';
+      btn.style.color = '#22C55E';
+      setTimeout(() => { btn.textContent = orig; btn.style.borderColor = ''; btn.style.color = ''; }, 2000);
+    });
+  }
+</script>
+</body>
+</html>

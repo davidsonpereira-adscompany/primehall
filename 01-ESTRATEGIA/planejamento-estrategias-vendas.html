@@ -1,0 +1,2651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planejamento de Estratégias de Vendas — Malla 100 Alça na Prime Hall</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --laranja: #FF5C00;
+  --laranja-light: #FF7A2E;
+  --laranja-glow: rgba(255, 92, 0, 0.15);
+  --preto: #060606;
+  --cinza-card: #141414;
+  --cinza-card-hover: #1a1a1a;
+  --cinza-borda: #222;
+  --branco: #F5F5F5;
+  --cinza-claro: #888;
+  --cinza-medio: #666;
+  --verde: #22C55E;
+  --vermelho: #EF4444;
+  --amarelo: #F59E0B;
+  --azul: #3B82F6;
+  --roxo: #8B5CF6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--preto);
+  color: var(--branco);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── BACK BUTTON ── */
+#back-central {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 99999;
+  font-family: 'Inter', sans-serif;
+}
+
+#back-central a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(6,6,6,0.95);
+  border: 1px solid rgba(255,92,0,0.4);
+  color: #FF5C00;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s;
+}
+
+#back-central a:hover {
+  border-color: rgba(255,92,0,0.8);
+  box-shadow: 0 4px 24px rgba(255,92,0,0.2);
+}
+
+/* ── CONTAINER ── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 100px 20px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,92,0,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--laranja);
+  border: 1px solid rgba(255,92,0,0.3);
+  padding: 8px 20px;
+  border-radius: 30px;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.hero h1 span {
+  color: var(--laranja);
+}
+
+.hero .subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--cinza-claro);
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+
+.hero-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.hero-info-item {
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-borda);
+  padding: 16px 24px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 160px;
+}
+
+.hero-info-item .label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cinza-claro);
+  margin-bottom: 4px;
+}
+
+.hero-info-item .value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--branco);
+}
+
+.hero-info-item .value.highlight {
+  color: var(--laranja);
+}
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 60px;
+}
+
+.section-number {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--laranja);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  color: var(--cinza-claro);
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+  max-width: 700px;
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 20px;
+  transition: border-color 0.2s;
+}
+
+.card:hover {
+  border-color: rgba(255,92,0,0.3);
+}
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--laranja-glow);
+  border: 1px solid rgba(255,92,0,0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card p, .card li {
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.card ul, .card ol {
+  padding-left: 20px;
+}
+
+.card ul li {
+  margin-bottom: 6px;
+}
+
+.card strong {
+  color: var(--branco);
+}
+
+/* ── GRID ── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* ── TABLES ── */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--cinza-borda);
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+thead {
+  background: rgba(255,92,0,0.08);
+}
+
+th {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--laranja);
+  padding: 14px 16px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--cinza-borda);
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: #ccc;
+  vertical-align: top;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background: rgba(255,92,0,0.03);
+}
+
+/* ── KPI BOXES ── */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.kpi-box {
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.kpi-box .kpi-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--laranja);
+  line-height: 1.2;
+}
+
+.kpi-box .kpi-label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cinza-claro);
+  margin-top: 6px;
+}
+
+/* ── FUNNEL ── */
+.funnel-container {
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.funnel-stage {
+  position: relative;
+  margin-bottom: 2px;
+}
+
+.funnel-bar {
+  margin: 0 auto;
+  padding: 24px 30px;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s;
+  cursor: default;
+}
+
+.funnel-bar:hover {
+  transform: scale(1.02);
+}
+
+.funnel-bar.topo {
+  background: linear-gradient(135deg, rgba(255,92,0,0.12), rgba(255,92,0,0.06));
+  border: 1px solid rgba(255,92,0,0.25);
+  width: 100%;
+}
+
+.funnel-bar.meio {
+  background: linear-gradient(135deg, rgba(255,122,46,0.10), rgba(255,122,46,0.05));
+  border: 1px solid rgba(255,122,46,0.25);
+  width: 75%;
+}
+
+.funnel-bar.fundo {
+  background: linear-gradient(135deg, rgba(34,197,94,0.10), rgba(34,197,94,0.05));
+  border: 1px solid rgba(34,197,94,0.3);
+  width: 50%;
+}
+
+.funnel-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.funnel-bar.topo .funnel-label { color: var(--laranja); }
+.funnel-bar.meio .funnel-label { color: var(--laranja-light); }
+.funnel-bar.fundo .funnel-label { color: var(--verde); }
+
+.funnel-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--branco);
+  margin-bottom: 4px;
+}
+
+.funnel-desc {
+  font-size: 0.8rem;
+  color: var(--cinza-claro);
+}
+
+.funnel-arrow {
+  text-align: center;
+  color: var(--cinza-claro);
+  font-size: 1.2rem;
+  padding: 6px 0;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  position: relative;
+  padding-left: 32px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--laranja), var(--verde));
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 20px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  background: var(--laranja);
+  border-radius: 50%;
+  border: 2px solid var(--preto);
+}
+
+.timeline-date {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--laranja);
+  margin-bottom: 4px;
+}
+
+.timeline-content {
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.timeline-content h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.timeline-content p, .timeline-content li {
+  font-size: 0.85rem;
+  color: #bbb;
+}
+
+/* ── CHECKLIST ── */
+.checklist {
+  list-style: none;
+  padding: 0;
+}
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.checklist li:last-child {
+  border-bottom: none;
+}
+
+.check-icon {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--laranja);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── SCRIPT BLOCK ── */
+.script-block {
+  background: rgba(255,92,0,0.04);
+  border: 1px solid rgba(255,92,0,0.15);
+  border-left: 3px solid var(--laranja);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin: 16px 0;
+  font-size: 0.88rem;
+  line-height: 1.9;
+  color: #ddd;
+}
+
+.script-block .script-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--laranja);
+  margin-bottom: 10px;
+}
+
+/* ── ALERT BOXES ── */
+.alert {
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin: 20px 0;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.alert-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.alert-success {
+  background: rgba(34,197,94,0.06);
+  border: 1px solid rgba(34,197,94,0.2);
+}
+
+.alert-success .alert-icon {
+  background: rgba(34,197,94,0.15);
+}
+
+.alert-warning {
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.2);
+}
+
+.alert-warning .alert-icon {
+  background: rgba(245,158,11,0.15);
+}
+
+.alert-danger {
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.2);
+}
+
+.alert-danger .alert-icon {
+  background: rgba(239,68,68,0.15);
+}
+
+.alert-info {
+  background: rgba(59,130,246,0.06);
+  border: 1px solid rgba(59,130,246,0.2);
+}
+
+.alert-info .alert-icon {
+  background: rgba(59,130,246,0.15);
+}
+
+/* ── OBJECTION HANDLER ── */
+.objection {
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.objection-trigger {
+  font-weight: 700;
+  color: var(--vermelho);
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.objection-response {
+  font-size: 0.88rem;
+  color: #ccc;
+  line-height: 1.8;
+  padding-left: 26px;
+}
+
+.objection-response strong {
+  color: var(--verde);
+}
+
+/* ── PROGRESS BAR ── */
+.progress-track {
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  height: 8px;
+  overflow: hidden;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.3s;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--cinza-borda), transparent);
+  margin: 60px 0;
+}
+
+/* ── BADGE ── */
+.badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.badge-laranja {
+  background: rgba(255,92,0,0.15);
+  color: var(--laranja);
+  border: 1px solid rgba(255,92,0,0.3);
+}
+
+.badge-verde {
+  background: rgba(34,197,94,0.15);
+  color: var(--verde);
+  border: 1px solid rgba(34,197,94,0.3);
+}
+
+.badge-amarelo {
+  background: rgba(245,158,11,0.15);
+  color: var(--amarelo);
+  border: 1px solid rgba(245,158,11,0.3);
+}
+
+.badge-azul {
+  background: rgba(59,130,246,0.15);
+  color: var(--azul);
+  border: 1px solid rgba(59,130,246,0.3);
+}
+
+.badge-vermelho {
+  background: rgba(239,68,68,0.15);
+  color: var(--vermelho);
+  border: 1px solid rgba(239,68,68,0.3);
+}
+
+.badge-roxo {
+  background: rgba(139,92,246,0.15);
+  color: var(--roxo);
+  border: 1px solid rgba(139,92,246,0.3);
+}
+
+/* ── STAT TILE ── */
+.stat-tile {
+  text-align: center;
+  padding: 20px 16px;
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 10px;
+}
+
+.stat-tile .stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.stat-tile .stat-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cinza-claro);
+  margin-top: 4px;
+}
+
+/* ── TOC ── */
+.toc {
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 48px;
+}
+
+.toc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--branco);
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  columns: 2;
+  column-gap: 40px;
+}
+
+.toc-list li {
+  break-inside: avoid;
+  margin-bottom: 10px;
+}
+
+.toc-list a {
+  color: #bbb;
+  text-decoration: none;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.2s;
+}
+
+.toc-list a:hover {
+  color: var(--laranja);
+}
+
+.toc-num {
+  font-weight: 700;
+  color: var(--laranja);
+  font-size: 0.8rem;
+  min-width: 24px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 1px solid var(--cinza-borda);
+  margin-top: 60px;
+}
+
+.footer p {
+  font-size: 0.75rem;
+  color: var(--cinza-claro);
+  letter-spacing: 0.1em;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .container { padding: 20px 16px 60px; }
+  .hero { padding: 80px 16px 40px; }
+  .card { padding: 20px; }
+  .toc-list { columns: 1; }
+  .hero-info-item { min-width: 140px; padding: 12px 16px; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  th, td { padding: 10px 12px; font-size: 0.8rem; }
+  .funnel-bar.meio { width: 85%; }
+  .funnel-bar.fundo { width: 70%; }
+}
+
+@media (max-width: 480px) {
+  .hero-info { flex-direction: column; align-items: center; }
+  .hero-info-item { width: 100%; }
+  .kpi-row { grid-template-columns: 1fr; }
+  #back-central a { font-size: 9px; padding: 8px 12px; }
+}
+
+/* ── SCROLL TO TOP ── */
+.scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  background: var(--laranja);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(255,92,0,0.3);
+  z-index: 999;
+  transition: opacity 0.2s;
+}
+
+.scroll-top:hover {
+  opacity: 0.85;
+}
+</style>
+</head>
+<body>
+
+<!-- BACK BUTTON -->
+<div id="back-central">
+  <a href="../index.html"
+     onmouseover="this.style.borderColor='rgba(255,92,0,0.8)';this.style.boxShadow='0 4px 24px rgba(255,92,0,0.2)'"
+     onmouseout="this.style.borderColor='rgba(255,92,0,0.4)';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.5)'">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="flex-shrink:0"><path d="M8 2L4 6L8 10" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Central Prime Hall
+  </a>
+</div>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- HERO -->
+<!-- ═══════════════════════════════════════════════ -->
+<header class="hero">
+  <div class="hero-badge">Documento Estratégico de Vendas</div>
+  <h1>Malla 100 Alça<br><span>na Prime Hall</span></h1>
+  <p class="subtitle">Planejamento completo para vender 700 ingressos em 7 dias</p>
+
+  <div class="hero-info">
+    <div class="hero-info-item">
+      <div class="label">Data</div>
+      <div class="value highlight">21 de Agosto</div>
+    </div>
+    <div class="hero-info-item">
+      <div class="label">Local</div>
+      <div class="value">Prime Hall</div>
+    </div>
+    <div class="hero-info-item">
+      <div class="label">Capacidade</div>
+      <div class="value highlight">700 ingressos</div>
+    </div>
+    <div class="hero-info-item">
+      <div class="label">Receita Alvo</div>
+      <div class="value">R$28k — R$35k</div>
+    </div>
+    <div class="hero-info-item">
+      <div class="label">Cidade</div>
+      <div class="value">Barreiras-BA</div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SUMÁRIO -->
+<!-- ═══════════════════════════════════════════════ -->
+<nav class="toc">
+  <div class="toc-title">Sumário do Planejamento</div>
+  <ol class="toc-list">
+    <li><a href="#resumo"><span class="toc-num">01</span> Resumo Executivo</a></li>
+    <li><a href="#funil"><span class="toc-num">02</span> Funil de Vendas do Evento</a></li>
+    <li><a href="#trafego"><span class="toc-num">03</span> Estratégia de Tráfego Pago</a></li>
+    <li><a href="#organico"><span class="toc-num">04</span> Estratégia de Conteúdo Orgânico</a></li>
+    <li><a href="#whatsapp"><span class="toc-num">05</span> Estratégia de Vendas no WhatsApp</a></li>
+    <li><a href="#offline"><span class="toc-num">06</span> Estratégias Offline / Na Rua</a></li>
+    <li><a href="#influenciadores"><span class="toc-num">07</span> Estratégia de Influenciadores</a></li>
+    <li><a href="#parcerias"><span class="toc-num">08</span> Parcerias Estratégicas</a></li>
+    <li><a href="#jorge-mateus"><span class="toc-num">09</span> Jogada Jorge &amp; Mateus</a></li>
+    <li><a href="#cronograma"><span class="toc-num">10</span> Cronograma Diário (14–21/ago)</a></li>
+    <li><a href="#tracker"><span class="toc-num">11</span> Tracker de Vendas</a></li>
+    <li><a href="#contingencia"><span class="toc-num">12</span> Plano de Contingência</a></li>
+  </ol>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 01 · RESUMO EXECUTIVO -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="resumo">
+  <div class="section-number">Seção 01</div>
+  <h2 class="section-title">Resumo Executivo</h2>
+  <p class="section-subtitle">Visão geral da operação: meta, receita, pilares de ação e posicionamento estratégico.</p>
+
+  <div class="kpi-row">
+    <div class="kpi-box">
+      <div class="kpi-value">700</div>
+      <div class="kpi-label">Ingressos a Vender</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-value">7</div>
+      <div class="kpi-label">Dias de Operação</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-value">R$35k</div>
+      <div class="kpi-label">Receita Máxima</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-value">43–55x</div>
+      <div class="kpi-label">ROAS Esperado</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#FF5C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      Objetivo Central
+    </div>
+    <p>Vender <strong>700 ingressos</strong> para o show de <strong>Malla 100 Alça</strong> na Prime Hall, em Barreiras-BA, no período de <strong>14 a 21 de agosto de 2026</strong>, utilizando uma operação integrada de tráfego pago, conteúdo orgânico, vendas offline e parcerias locais.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        Receita Potencial
+      </div>
+      <div class="table-wrapper" style="border:none;margin:0;">
+        <table>
+          <thead><tr><th>Cenário</th><th>Ingressos</th><th>Receita</th></tr></thead>
+          <tbody>
+            <tr><td>Conservador</td><td>700 a R$40</td><td><strong>R$28.000</strong></td></tr>
+            <tr><td>Realista (mix de lotes)</td><td>700 mix</td><td><strong>R$31.500</strong></td></tr>
+            <tr><td>Otimista (muita porta)</td><td>700 c/ porta</td><td><strong>R$35.000</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#FF5C00" stroke-width="2"/><path d="M8 12l3 3 5-5" stroke="#FF5C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        4 Pilares da Operação
+      </div>
+      <ul>
+        <li><strong>Tráfego Pago:</strong> Meta Ads (Alcance + Engajamento + WhatsApp). Orçamento ~R$640, ROAS projetado 43x–55x.</li>
+        <li><strong>Conteúdo Orgânico:</strong> Instagram, Facebook, WhatsApp Status e listas de transmissão.</li>
+        <li><strong>Vendas Offline:</strong> Pontos de venda físicos, carro de som, faixas e banners em pontos estratégicos.</li>
+        <li><strong>Parcerias:</strong> Influenciadores locais, comércios, rádios, faculdades e academias.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="#FF5C00" stroke-width="2"/><path d="M12 6v6l4 2" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      Contexto de Mercado
+    </div>
+    <p style="margin-bottom:12px;"><strong>Malla 100 Alça</strong> é uma das maiores bandas de forró do Brasil, com <strong>807 mil seguidores</strong> no Instagram e <strong>centenas de milhões de visualizações</strong> no YouTube. Hits como "Enfermeira", "Lágrimas Reais" e "Amor Fake" fazem parte do repertório popular do Nordeste e do Brasil.</p>
+    <p style="margin-bottom:12px;">O público de <strong>Barreiras e entorno</strong> (Luís Eduardo Magalhães, São Desidério, Angical, Baianópolis, Cristópolis) totaliza aproximadamente <strong>370 mil pessoas</strong>, o que representa um mercado amplo para 700 ingressos.</p>
+    <p><strong>Vantagem competitiva:</strong> O dono da Prime Hall é popular na cidade e possui público fiel, o que gera tração orgânica significativa sem custo adicional.</p>
+  </div>
+
+  <div class="alert alert-warning">
+    <div class="alert-icon">&#9888;</div>
+    <div>
+      <strong>Atenção — Concorrência direta:</strong> Jorge &amp; Mateus (Allanbick Produções) fará show em Barreiras no <strong>sábado, 22 de agosto</strong>. Isso exige posicionamento estratégico cuidadoso. Veja a seção 09 — "Jogada Jorge &amp; Mateus".
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 02 · FUNIL DE VENDAS DO EVENTO -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="funil">
+  <div class="section-number">Seção 02</div>
+  <h2 class="section-title">Funil de Vendas do Evento</h2>
+  <p class="section-subtitle">Jornada do público: do desconhecimento à compra do ingresso. Cada etapa exige uma abordagem diferente.</p>
+
+  <div class="funnel-container">
+    <div class="funnel-stage">
+      <div class="funnel-bar topo">
+        <div class="funnel-label">Topo — Reconhecimento</div>
+        <div class="funnel-title">Quem nem sabia do show</div>
+        <div class="funnel-desc">Tráfego pago (alcance) + orgânico + carro de som + faixas</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12l7 7 7-7" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="funnel-stage">
+      <div class="funnel-bar meio">
+        <div class="funnel-label">Meio — Interesse</div>
+        <div class="funnel-title">Sabe do show, está considerando</div>
+        <div class="funnel-desc">Engajamento + prova social + influenciadores + enquetes</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12l7 7 7-7" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="funnel-stage">
+      <div class="funnel-bar fundo">
+        <div class="funnel-label">Fundo — Ação / Compra</div>
+        <div class="funnel-title">Quer comprar o ingresso</div>
+        <div class="funnel-desc">WhatsApp (77 99801-4490) + pontos de venda físicos</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title" style="color:var(--laranja);">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#FF5C00" stroke-width="2"/><path d="M12 8v4l3 3" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        Topo de Funil
+      </div>
+      <ul class="checklist">
+        <li><span class="check-icon"></span> Campanha Meta Ads — Alcance (raio 80 km)</li>
+        <li><span class="check-icon"></span> Posts orgânicos no Instagram e Facebook</li>
+        <li><span class="check-icon"></span> Carro de som nos bairros de Barreiras</li>
+        <li><span class="check-icon"></span> Faixas na BR-242 e rotatórias</li>
+        <li><span class="check-icon"></span> WhatsApp Status — artes do evento</li>
+        <li><span class="check-icon"></span> Compartilhamento em grupos de Facebook</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--laranja-light);">
+        <div class="card-icon" style="background:rgba(255,122,46,0.12);border-color:rgba(255,122,46,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="#FF7A2E" stroke-width="2"/></svg>
+        </div>
+        Meio de Funil
+      </div>
+      <ul class="checklist">
+        <li><span class="check-icon"></span> Campanha Meta Ads — Engajamento</li>
+        <li><span class="check-icon"></span> Reels com compilação de shows da banda</li>
+        <li><span class="check-icon"></span> Stories com enquetes e contagem regressiva</li>
+        <li><span class="check-icon"></span> Prints de vendas e prova social</li>
+        <li><span class="check-icon"></span> Influenciadores locais divulgando</li>
+        <li><span class="check-icon"></span> Trechos de hits nos stories (Enfermeira, etc.)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--verde);">
+        <div class="card-icon" style="background:rgba(34,197,94,0.12);border-color:rgba(34,197,94,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#22C55E" stroke-width="2"/><path d="M22 4L12 14.01l-3-3" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        Fundo de Funil
+      </div>
+      <ul class="checklist">
+        <li><span class="check-icon"></span> Campanha Meta Ads — Mensagens (WhatsApp)</li>
+        <li><span class="check-icon"></span> Atendimento ágil no WhatsApp (77 99801-4490)</li>
+        <li><span class="check-icon"></span> Pontos de venda: Tabacaria, Empório, Açougues</li>
+        <li><span class="check-icon"></span> Urgência: mudança de lote, últimos ingressos</li>
+        <li><span class="check-icon"></span> Follow-up com quem perguntou e não comprou</li>
+        <li><span class="check-icon"></span> Listas de transmissão com CTA direto</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <div class="alert-icon">&#128161;</div>
+    <div>
+      <strong>Lógica do funil:</strong> A maioria das pessoas em Barreiras já conhece a Prime Hall e o dono é popular. Isso significa que uma parcela significativa do público já está no <strong>meio de funil</strong> naturalmente. O esforço principal é converter esse interesse em ação — ou seja, <strong>fazer a pessoa ir até o WhatsApp ou ponto de venda e pagar</strong>.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 03 · ESTRATÉGIA DE TRÁFEGO PAGO -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="trafego">
+  <div class="section-number">Seção 03</div>
+  <h2 class="section-title">Estratégia de Tráfego Pago</h2>
+  <p class="section-subtitle">Resumo das 3 campanhas de Meta Ads. O planejamento detalhado de tráfego está no documento dedicado.</p>
+
+  <div class="kpi-row">
+    <div class="kpi-box">
+      <div class="kpi-value">R$640</div>
+      <div class="kpi-label">Orçamento Total</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-value">3</div>
+      <div class="kpi-label">Campanhas</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-value">43–55x</div>
+      <div class="kpi-label">ROAS Projetado</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-value">80 km</div>
+      <div class="kpi-label">Raio de Segmentação</div>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Campanha</th>
+          <th>Objetivo</th>
+          <th>Orçamento</th>
+          <th>Período</th>
+          <th>Público</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Campanha 01</strong><br><span class="badge badge-laranja">Alcance</span></td>
+          <td>Máximo de pessoas impactadas na região. Tornar o show conhecido.</td>
+          <td><strong>R$200</strong><br>~R$29/dia</td>
+          <td>14 a 20/ago<br>(7 dias)</td>
+          <td>18–55 anos, raio 80 km de Barreiras, interesse em forró/shows/música</td>
+        </tr>
+        <tr>
+          <td><strong>Campanha 02</strong><br><span class="badge badge-amarelo">Engajamento</span></td>
+          <td>Gerar interações (curtidas, comentários, compartilhamentos) para prova social.</td>
+          <td><strong>R$200</strong><br>~R$29/dia</td>
+          <td>14 a 20/ago<br>(7 dias)</td>
+          <td>Público que já interagiu com a página + lookalike regional</td>
+        </tr>
+        <tr>
+          <td><strong>Campanha 03</strong><br><span class="badge badge-verde">Mensagens WhatsApp</span></td>
+          <td>Direcionar para o WhatsApp de vendas (77 99801-4490). Conversão direta.</td>
+          <td><strong>R$240</strong><br>~R$34/dia</td>
+          <td>14 a 20/ago<br>(7 dias)</td>
+          <td>Público quente: engajou com posts do evento, visitou perfil, raio 50 km</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2V3z" stroke="#FF5C00" stroke-width="2"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7V3z" stroke="#FF5C00" stroke-width="2"/></svg>
+        </div>
+        Segmentação Geográfica
+      </div>
+      <ul>
+        <li><strong>Centro:</strong> Barreiras-BA (raio 10 km) — público principal</li>
+        <li><strong>LEM:</strong> Luís Eduardo Magalhães (90 km) — alto poder aquisitivo</li>
+        <li><strong>São Desidério:</strong> 45 km — público agro</li>
+        <li><strong>Angical:</strong> 60 km — entorno imediato</li>
+        <li><strong>Baianópolis:</strong> 80 km — limite do raio</li>
+        <li><strong>Cristópolis:</strong> 70 km — entorno ativo</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 20V10M18 20V4M6 20v-4" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        Métricas de Acompanhamento
+      </div>
+      <ul>
+        <li><strong>Alcance total:</strong> Meta de 50.000–80.000 pessoas impactadas</li>
+        <li><strong>CTR:</strong> Acima de 1,5% (benchmark eventos locais)</li>
+        <li><strong>Custo por mensagem WhatsApp:</strong> Meta abaixo de R$2,00</li>
+        <li><strong>Conversões via WhatsApp:</strong> Meta de 120–170 mensagens iniciadas</li>
+        <li><strong>Taxa de conversão WhatsApp:</strong> Alvo de 40%+ (mensagem → ingresso)</li>
+        <li><strong>Monitoramento:</strong> Gerenciador de anúncios 2x/dia (manhã e noite)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert alert-success">
+    <div class="alert-icon">&#9989;</div>
+    <div>
+      <strong>Por que R$640 é suficiente:</strong> Em cidades do interior (até 200k hab.), o CPM (custo por mil impressões) é significativamente menor que em capitais — entre R$5 e R$15. Com R$640, é viável alcançar 50.000–80.000 pessoas únicas. Combinado com a força orgânica do dono da casa e os canais offline, o investimento é altamente eficiente.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 04 · ESTRATÉGIA DE CONTEÚDO ORGÂNICO -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="organico">
+  <div class="section-number">Seção 04</div>
+  <h2 class="section-title">Estratégia de Conteúdo Orgânico</h2>
+  <p class="section-subtitle">Presença constante em todas as plataformas. O conteúdo orgânico é o motor que sustenta a operação inteira.</p>
+
+  <!-- INSTAGRAM -->
+  <div class="card" style="border-left:3px solid var(--laranja);">
+    <div class="card-title">
+      <div class="card-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#FF5C00" stroke-width="2"/><circle cx="12" cy="12" r="5" stroke="#FF5C00" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#FF5C00"/></svg>
+      </div>
+      Instagram (Prime Hall / Tabacaria do Cais)
+    </div>
+
+    <h4 style="margin:16px 0 8px;color:var(--branco);font-size:0.95rem;">Feed — Posts de Divulgação</h4>
+    <ul>
+      <li><strong>Frequência:</strong> Mínimo 1 post por dia (14 a 21/ago)</li>
+      <li><strong>Formato 1 — Arte do evento:</strong> Imagem com data, local, preço e WhatsApp. Legenda com CTA ("Garanta seu ingresso pelo WhatsApp").</li>
+      <li><strong>Formato 2 — Carrossel de músicas:</strong> 5–8 slides com capas/trechos dos maiores hits da banda (Enfermeira, Lágrimas Reais, Amor Fake). Legenda: "Qual dessas você vai cantar dia 21?"</li>
+      <li><strong>Formato 3 — Prova social:</strong> Print de conversa (com permissão) mostrando pedidos de ingresso. Legenda: "O povo tá garantindo! E você?"</li>
+      <li><strong>Formato 4 — Contagem regressiva:</strong> "Faltam X dias" com visual impactante da banda.</li>
+      <li><strong>Horários ideais:</strong> 12h00 (almoço), 18h30 (saída do trabalho), 21h00 (noite)</li>
+    </ul>
+
+    <h4 style="margin:20px 0 8px;color:var(--branco);font-size:0.95rem;">Stories — Motor de Engajamento Diário</h4>
+    <ul>
+      <li><strong>Frequência:</strong> Mínimo 3 stories por dia, idealmente 5–7</li>
+      <li><strong>Contagem regressiva:</strong> Usar o sticker de contagem regressiva do Instagram (fixa no perfil)</li>
+      <li><strong>Trechos de músicas:</strong> Clipes de 15s dos maiores hits com legenda "Dia 21 ao vivo"</li>
+      <li><strong>Bastidores:</strong> Preparação do espaço, montagem, equipe trabalhando</li>
+      <li><strong>Prova social:</strong> Prints de WhatsApp com pedidos de ingresso (borrar nome/foto do comprador)</li>
+      <li><strong>Enquetes:</strong> "Você vem dia 21?" (Sim / Ainda pensando) — "Qual hit você quer ouvir?" — "Individual ou casadinha?"</li>
+      <li><strong>Caixa de perguntas:</strong> "Tire suas dúvidas sobre o show" — responder publicamente nos stories</li>
+      <li><strong>Link no story:</strong> Direcionar para o WhatsApp de vendas (se a conta tiver link nos stories)</li>
+    </ul>
+
+    <h4 style="margin:20px 0 8px;color:var(--branco);font-size:0.95rem;">Reels — Alcance Viral</h4>
+    <ul>
+      <li><strong>Frequência:</strong> 1 reel a cada 2 dias (total 3–4 reels na semana)</li>
+      <li><strong>Reel 1:</strong> Compilação de shows da Malla 100 Alça (vídeos do YouTube) — "Dia 21 em Barreiras. Você vai perder?"</li>
+      <li><strong>Reel 2:</strong> Mostrar a Prime Hall vazia com legenda "Dia 21 esse lugar vai lotar" + música da banda</li>
+      <li><strong>Reel 3:</strong> Reação de pessoas ao saber do show (pedir para amigos gravarem)</li>
+      <li><strong>Reel 4 (véspera):</strong> "Amanhã é o dia" — montagem acelerada do palco + música</li>
+    </ul>
+  </div>
+
+  <!-- FACEBOOK -->
+  <div class="card" style="border-left:3px solid var(--azul);">
+    <div class="card-title">
+      <div class="card-icon" style="background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      Facebook
+    </div>
+    <ul>
+      <li><strong>Posts compartilháveis:</strong> Arte com preço, data, local e WhatsApp. Texto curto e direto. CTA: "Marca quem vai contigo!"</li>
+      <li><strong>Evento no Facebook:</strong> <strong>Criar, sim.</strong> Mesmo que a venda não seja por lá, o evento funciona como vitrine social — as pessoas marcam "Tenho interesse" e isso aparece para os amigos.</li>
+      <li><strong>Grupos locais:</strong> Compartilhar o post nos seguintes tipos de grupo:
+        <ul>
+          <li>Grupos de Barreiras (Classificados, Notícias, Eventos)</li>
+          <li>Grupos de LEM (Luís Eduardo Magalhães)</li>
+          <li>Grupos de São Desidério, Angical, Cristópolis</li>
+          <li>Grupos de forró e shows da Bahia</li>
+        </ul>
+      </li>
+      <li><strong>Frequência:</strong> 1 post por dia + compartilhamento em 3–5 grupos</li>
+      <li><strong>Horários:</strong> 12h00, 19h00, 21h00</li>
+    </ul>
+  </div>
+
+  <!-- WHATSAPP STATUS -->
+  <div class="card" style="border-left:3px solid var(--verde);">
+    <div class="card-title">
+      <div class="card-icon" style="background:rgba(34,197,94,0.12);border-color:rgba(34,197,94,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke="#22C55E" stroke-width="2"/></svg>
+      </div>
+      WhatsApp Status
+    </div>
+    <p style="margin-bottom:12px;">O WhatsApp Status é o "stories" do WhatsApp — e no interior tem <strong>alcance gigantesco</strong>. Toda a equipe deve publicar nos seus status pessoais.</p>
+    <ul>
+      <li><strong>Horários de pico:</strong> 7h00 (manhã cedo), 12h00 (almoço), 18h00 (fim do expediente), 21h00 (noite)</li>
+      <li><strong>Conteúdo por horário:</strong>
+        <ul>
+          <li><strong>7h:</strong> Arte do evento com "Bom dia! Já garantiu seu ingresso?"</li>
+          <li><strong>12h:</strong> Contagem regressiva — "Faltam X dias para Malla 100 Alça em Barreiras"</li>
+          <li><strong>18h:</strong> Vídeo curto (15s) de um hit da banda</li>
+          <li><strong>21h:</strong> Urgência — "1º Lote só até quarta. Chama no WhatsApp!"</li>
+        </ul>
+      </li>
+      <li><strong>Quem deve publicar:</strong> Dono da Prime Hall, funcionários, vendedores, parceiros (influencers, bares)</li>
+    </ul>
+  </div>
+
+  <!-- WHATSAPP LISTAS -->
+  <div class="card" style="border-left:3px solid var(--verde);">
+    <div class="card-title">
+      <div class="card-icon" style="background:rgba(34,197,94,0.12);border-color:rgba(34,197,94,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#22C55E" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke="#22C55E" stroke-width="2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#22C55E" stroke-width="2"/></svg>
+      </div>
+      WhatsApp — Listas de Transmissão
+    </div>
+    <p style="margin-bottom:16px;">Listas de transmissão permitem enviar a mesma mensagem para muitos contatos sem criar grupo. A pessoa recebe como se fosse mensagem individual.</p>
+
+    <div class="alert alert-warning" style="margin-top:0;">
+      <div class="alert-icon">&#9888;</div>
+      <div><strong>Regra de ouro:</strong> Máximo 1 mensagem por dia (2 apenas na véspera). Cada mensagem deve ter VALOR — preço, novidade, urgência. Nunca enviar "só pra lembrar". Ninguém gosta de spam.</div>
+    </div>
+
+    <h4 style="margin:16px 0 8px;color:var(--branco);font-size:0.95rem;">Cronograma de mensagens sugerido:</h4>
+
+    <div class="script-block">
+      <div class="script-label">Quinta 14/ago — Anúncio</div>
+      "E aí, tudo bem? Sexta que vem (dia 21) tem show de MALLA 100 ALÇA na Prime Hall! 1º Lote a R$40 (individual) ou R$70 (casadinha). Pra garantir: chama aqui ou passa na Tabacaria do Cais. Bora?"
+    </div>
+
+    <div class="script-block">
+      <div class="script-label">Sábado 16/ago — Prova social</div>
+      "O povo tá garantindo ingresso pro Malla 100 Alça! 1º Lote ainda tá valendo — R$40 individual / R$70 casadinha. Só até quarta (19). Quer o seu? Me chama!"
+    </div>
+
+    <div class="script-block">
+      <div class="script-label">Segunda 18/ago — Urgência do lote</div>
+      "Atenção: 1º Lote do Malla 100 Alça encerra AMANHÃ (quarta). Depois sobe. Se não garantiu, agora é a hora: R$40 individual. Chama no WhatsApp!"
+    </div>
+
+    <div class="script-block">
+      <div class="script-label">Quarta 20/ago — Último dia de antecipado</div>
+      "Último dia pra comprar a R$40! Amanhã na porta sobe pra R$50. Show de Malla 100 Alça na Prime Hall — AMANHÃ! Vai ficar de fora?"
+    </div>
+
+    <div class="script-block">
+      <div class="script-label">Sexta 21/ago — Dia do show (manhã)</div>
+      "HOJE! Malla 100 Alça ao vivo na Prime Hall. Ainda dá tempo de garantir na porta por R$50. Abertura dos portões às [horário]. Te vejo lá!"
+    </div>
+  </div>
+
+  <!-- TABELA DE HORÁRIOS -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#FF5C00" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      Grade de Horários por Plataforma
+    </div>
+    <div class="table-wrapper" style="border:none;margin:0;">
+      <table>
+        <thead>
+          <tr><th>Plataforma</th><th>7h</th><th>12h</th><th>15h</th><th>18h</th><th>21h</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Instagram Feed</strong></td>
+            <td>—</td>
+            <td>Post</td>
+            <td>—</td>
+            <td>Post</td>
+            <td>Post</td>
+          </tr>
+          <tr>
+            <td><strong>Instagram Stories</strong></td>
+            <td>Story</td>
+            <td>Story</td>
+            <td>Story</td>
+            <td>Story</td>
+            <td>Story</td>
+          </tr>
+          <tr>
+            <td><strong>Instagram Reels</strong></td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>Reel (dias alternados)</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>Facebook</strong></td>
+            <td>—</td>
+            <td>Post</td>
+            <td>—</td>
+            <td>—</td>
+            <td>Post</td>
+          </tr>
+          <tr>
+            <td><strong>WhatsApp Status</strong></td>
+            <td>Arte</td>
+            <td>Contagem</td>
+            <td>—</td>
+            <td>Vídeo</td>
+            <td>Urgência</td>
+          </tr>
+          <tr>
+            <td><strong>WhatsApp Lista</strong></td>
+            <td>—</td>
+            <td>Mensagem (dias alternados)</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 05 · ESTRATÉGIA DE VENDAS NO WHATSAPP -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="whatsapp">
+  <div class="section-number">Seção 05</div>
+  <h2 class="section-title">Estratégia de Vendas no WhatsApp</h2>
+  <p class="section-subtitle">O WhatsApp é o ponto de conversão principal. Scripts prontos para cada etapa do atendimento.</p>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="stat-tile">
+      <div class="stat-num" style="color:var(--verde);">(77) 99801-4490</div>
+      <div class="stat-label">WhatsApp de Vendas</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-num" style="color:var(--laranja);">&lt;5 min</div>
+      <div class="stat-label">Tempo Máximo de Resposta</div>
+    </div>
+  </div>
+
+  <!-- Script de abertura -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:rgba(34,197,94,0.12);border-color:rgba(34,197,94,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z" stroke="#22C55E" stroke-width="2"/></svg>
+      </div>
+      Script 1 — Mensagem de Abertura (quando a pessoa chama)
+    </div>
+    <div class="script-block">
+      <div class="script-label">Resposta imediata</div>
+      "E aí, tudo bem? Que bom que você se interessou pelo show de Malla 100 Alça! Vai ser dia 21/08 (sexta) na Prime Hall.<br><br>
+      Temos ingressos no <strong>[lote atual]</strong>:<br><br>
+      [Se 1º Lote]<br>
+      - Individual: R$40<br>
+      - Casadinha (2 ingressos): R$70 (economia de R$10!)<br><br>
+      [Se 2º Lote]<br>
+      - Individual: R$40<br><br>
+      Quer garantir o seu? Me diz quantos ingressos precisa!"
+    </div>
+  </div>
+
+  <!-- Script de apresentação de lotes -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:rgba(255,92,0,0.12);border-color:rgba(255,92,0,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2" stroke="#FF5C00" stroke-width="2"/></svg>
+      </div>
+      Script 2 — Apresentação dos Lotes
+    </div>
+    <div class="script-block">
+      <div class="script-label">Quando perguntar "Quanto custa?"</div>
+      "Os ingressos estão assim:<br><br>
+      <strong>1º Lote (até quarta 19/08):</strong><br>
+      - Individual: R$40<br>
+      - Casadinha (2 ingressos): R$70 — você economiza R$10!<br><br>
+      <strong>2º Lote (quinta 20/08):</strong><br>
+      - Individual: R$40<br><br>
+      <strong>Na porta (sexta 21/08):</strong><br>
+      - Individual: R$50<br><br>
+      Dica: o 1º Lote é a melhor opção, principalmente a casadinha. Chama o parceiro(a), o amigo(a), e garante agora!"
+    </div>
+  </div>
+
+  <!-- Script de fechamento -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:rgba(34,197,94,0.12);border-color:rgba(34,197,94,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#22C55E" stroke-width="2"/><path d="M22 4L12 14.01l-3-3" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      Script 3 — Fechamento da Venda
+    </div>
+    <div class="script-block">
+      <div class="script-label">Quando a pessoa confirma que quer</div>
+      "Perfeito! Para fechar:<br><br>
+      - Valor: R$[valor] ([tipo de ingresso])<br>
+      - Pagamento: Pix para [chave Pix]<br><br>
+      Depois que fizer o Pix, me manda o comprovante aqui que eu confirmo na hora e mando seu ingresso. Pode fazer agora?"
+    </div>
+  </div>
+
+  <!-- Script de confirmação -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#FF5C00" stroke-width="2"/><path d="M22 4L12 14.01l-3-3" stroke="#FF5C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      Script 4 — Confirmação Após Pagamento
+    </div>
+    <div class="script-block">
+      <div class="script-label">Após receber o comprovante</div>
+      "Pagamento confirmado! Seu ingresso tá garantido.<br><br>
+      [Enviar ingresso/comprovante]<br><br>
+      Show dia 21/08 (sexta) na Prime Hall. Abertura dos portões às [horário].<br><br>
+      Dica: chega cedo pra pegar o melhor lugar! Te vejo lá!"
+    </div>
+  </div>
+
+  <!-- Script de follow-up -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="#F59E0B" stroke-width="2"/><path d="M12 6v6l4 2" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      Script 5 — Follow-up (quem não respondeu)
+    </div>
+    <div class="script-block">
+      <div class="script-label">24h depois da última mensagem sem resposta</div>
+      "E aí, conseguiu decidir sobre o show de Malla 100 Alça? O [lote atual] ainda tá valendo, mas [gatilho de urgência].<br><br>
+      Se tiver qualquer dúvida, pode mandar aqui. Vai ser um show incrível!"
+    </div>
+    <p style="margin-top:12px;font-size:0.85rem;color:var(--cinza-claro);"><strong>Regra:</strong> Apenas 1 follow-up por pessoa. Se não responder ao follow-up, não insistir mais. Respeito é mais importante que uma venda.</p>
+  </div>
+
+  <!-- OBJEÇÕES -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin:32px 0 20px;">Como Lidar com Objeções</h3>
+
+  <div class="objection">
+    <div class="objection-trigger">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#EF4444" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
+      "Tá caro"
+    </div>
+    <div class="objection-response">
+      <strong>Resposta:</strong> "Entendo! Mas compara: shows desse nível em outras cidades cobram R$80, R$100 fácil. Aqui no 1º Lote tá R$40 — metade do preço. E a casadinha fica R$35 por pessoa. É uma noite inteira de forró ao vivo com uma das maiores bandas do Brasil. Vale demais!"
+    </div>
+  </div>
+
+  <div class="objection">
+    <div class="objection-trigger">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#EF4444" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
+      "Vou pensar"
+    </div>
+    <div class="objection-response">
+      <strong>Resposta:</strong> "Tranquilo! Só fica ligado que o 1º Lote vai até quarta (19/08). Depois sobe. Se decidir, me chama aqui que resolvo rapidinho. Mas se puder garantir agora, melhor — tá voando!"
+    </div>
+  </div>
+
+  <div class="objection">
+    <div class="objection-trigger">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#EF4444" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
+      "Vou sozinho, não preciso de casadinha"
+    </div>
+    <div class="objection-response">
+      <strong>Resposta:</strong> "Sem problema, individual tá R$40! Mas pensa: se chamar um amigo, a casadinha sai R$70 — cada um paga R$35. Você economiza R$5 e ainda curte com companhia. Quer que eu reserve a casadinha?"
+    </div>
+  </div>
+
+  <div class="objection">
+    <div class="objection-trigger">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#EF4444" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
+      "Não conheço a banda"
+    </div>
+    <div class="objection-response">
+      <strong>Resposta:</strong> "Sério? Malla 100 Alça é gigante! Tem mais de 800 mil seguidores no Instagram e hits com 100 milhões de views. Escuta essa aqui:"<br><br>
+      [Enviar link do YouTube: "Enfermeira" — https://youtube.com/... ou vídeo direto no WhatsApp]<br><br>
+      "Aposto que você já ouviu e nem sabia que era deles! O show ao vivo é outro nível."
+    </div>
+  </div>
+
+  <div class="objection">
+    <div class="objection-trigger">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#EF4444" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
+      "Vou comprar na porta"
+    </div>
+    <div class="objection-response">
+      <strong>Resposta:</strong> "Pode comprar na porta sim! Só que na porta é R$50 — e ainda corre o risco de esgotar antes. Se garantir agora, paga R$40 e já chega tranquilo. Quer fechar?"
+    </div>
+  </div>
+
+  <div class="objection">
+    <div class="objection-trigger">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#EF4444" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
+      "Vou no Jorge &amp; Mateus no sábado, não dá pra ir nos dois"
+    </div>
+    <div class="objection-response">
+      <strong>Resposta:</strong> "Pô, que fim de semana, hein? Sexta de forró, sábado de sertanejo — vai ser histórico! Muita gente tá indo nos dois. E o ingresso da sexta é só R$40, não pesa no bolso. Bora fazer o fim de semana completo?"
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 06 · ESTRATÉGIAS OFFLINE / NA RUA -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="offline">
+  <div class="section-number">Seção 06</div>
+  <h2 class="section-title">Estratégias Offline / Na Rua</h2>
+  <p class="section-subtitle">Carro de som, pontos de venda, faixas e banners. No interior, o offline é tão poderoso quanto o digital.</p>
+
+  <!-- CARRO DE SOM -->
+  <div class="card" style="border-left:3px solid var(--laranja);">
+    <div class="card-title">
+      <div class="card-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M11 5L6 9H2v6h4l5 4V5z" stroke="#FF5C00" stroke-width="2"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      Carro de Som
+    </div>
+
+    <div class="script-block">
+      <div class="script-label">Roteiro do Locutor — Versão 1 (1º Lote)</div>
+      "Atenção, Barreiras! Sexta-feira, dia 21 de agosto, tem MALLA 100 ALÇA ao vivo na Prime Hall! A boa do forró, com os maiores hits: Enfermeira, Lágrimas Reais, Amor Fake e muito mais! Primeiro Lote: apenas quarenta reais o individual ou setenta reais a casadinha! Garanta seu ingresso na Tabacaria do Cais, no Empório, nos Açougues do Cais ou pelo WhatsApp: setenta e sete, nove nove oito zero um, quatro quatro nove zero! Corre que o primeiro lote é limitado! Prime Hall apresenta: Malla 100 Alça!"
+    </div>
+
+    <div class="script-block">
+      <div class="script-label">Roteiro do Locutor — Versão 2 (Últimos dias)</div>
+      "Barreiras, é amanhã! Malla 100 Alça ao vivo na Prime Hall! Último dia pra garantir ingresso antecipado a quarenta reais! Na porta sobe pra cinquenta! Não fique de fora do maior show de forró do ano! Ingresso na Tabacaria do Cais, Empório, Açougues do Cais ou WhatsApp: setenta e sete, nove nove oito zero um, quatro quatro nove zero! Prime Hall: sexta-feira, dia 21 de agosto!"
+    </div>
+
+    <h4 style="margin:20px 0 8px;color:var(--branco);font-size:0.95rem;">Rotas Sugeridas por Bairro</h4>
+    <div class="table-wrapper" style="border:none;margin:0;">
+      <table>
+        <thead><tr><th>Rota</th><th>Bairros</th><th>Perfil</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rota 1</strong></td><td>Centro, Barreirinhas, Renato Gonçalves</td><td>Comércio + residências (alta circulação)</td></tr>
+          <tr><td><strong>Rota 2</strong></td><td>Morada da Lua, Sandra Regina, Vila Rica</td><td>Bairros populares (público-alvo forte)</td></tr>
+          <tr><td><strong>Rota 3</strong></td><td>São Pedro, Jardim Ouro Branco, Vila dos Funcionários</td><td>Classe média, famílias</td></tr>
+          <tr><td><strong>Rota 4</strong></td><td>Boa Sorte, Novo Horizonte, Vila Dulce</td><td>Bairros periféricos (alto volume)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul style="margin-top:16px;">
+      <li><strong>Dias ideais:</strong> Terça (19/ago) e quarta (20/ago) — vésperas do show</li>
+      <li><strong>Horários:</strong> 9h–12h e 15h–18h (evitar horário de almoço e noite)</li>
+      <li><strong>Duração:</strong> 6 horas/dia no total</li>
+      <li><strong>Música de fundo:</strong> Hits da Malla 100 Alça entre as locuções (gera reconhecimento imediato)</li>
+    </ul>
+  </div>
+
+  <!-- PONTOS DE VENDA -->
+  <div class="card" style="border-left:3px solid var(--amarelo);">
+    <div class="card-title">
+      <div class="card-icon" style="background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" stroke="#F59E0B" stroke-width="2"/><path d="M9 22V12h6v10" stroke="#F59E0B" stroke-width="2"/></svg>
+      </div>
+      Pontos de Venda Físicos
+    </div>
+    <div class="grid-2" style="margin-top:12px;">
+      <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:16px;">
+        <h4 style="color:var(--amarelo);font-size:0.9rem;margin-bottom:8px;">Tabacaria do Cais</h4>
+        <ul style="font-size:0.85rem;">
+          <li>Banner em local visível na entrada</li>
+          <li>Ingressos à venda no balcão</li>
+          <li>Vendedor informado sobre lotes e preços</li>
+          <li>Flyers no balcão para clientes levarem</li>
+        </ul>
+      </div>
+      <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:16px;">
+        <h4 style="color:var(--amarelo);font-size:0.9rem;margin-bottom:8px;">Empório</h4>
+        <ul style="font-size:0.85rem;">
+          <li>Cartaz A3 em local de destaque</li>
+          <li>Ingressos à venda no caixa</li>
+          <li>Funcionários orientados a oferecer</li>
+          <li>Flyers junto à sacola de compras</li>
+        </ul>
+      </div>
+      <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:16px;">
+        <h4 style="color:var(--amarelo);font-size:0.9rem;margin-bottom:8px;">Açougues do Cais (todas as unidades)</h4>
+        <ul style="font-size:0.85rem;">
+          <li>Cartaz A3 no vidro/parede de cada unidade</li>
+          <li>Ingressos à venda no caixa</li>
+          <li>Vendedores orientados a mencionar quando cliente pagar</li>
+          <li>Falar: "Já sabe do show de Malla 100 Alça na sexta? Tem ingresso aqui!"</li>
+        </ul>
+      </div>
+      <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:16px;">
+        <h4 style="color:var(--amarelo);font-size:0.9rem;margin-bottom:8px;">Carro de Som</h4>
+        <ul style="font-size:0.85rem;">
+          <li>Atua como ponto de venda ambulante</li>
+          <li>Se possível, vender diretamente do carro (Pix)</li>
+          <li>Distribuir flyers nos semáforos</li>
+          <li>Parar em pontos de concentração (mercados, praças)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4 style="margin:24px 0 12px;color:var(--branco);font-size:0.95rem;">Material Necessário</h4>
+    <ul class="checklist">
+      <li><span class="check-icon"></span> <strong>Cartazes A3:</strong> Mínimo 20 unidades (5 por ponto de venda + reserva)</li>
+      <li><span class="check-icon"></span> <strong>Flyers A5:</strong> 500 unidades para distribuição em mão</li>
+      <li><span class="check-icon"></span> <strong>Banner 1,0 x 1,5m:</strong> 2 unidades (Tabacaria do Cais + Empório)</li>
+      <li><span class="check-icon"></span> <strong>Faixas 3,0 x 0,8m:</strong> 4 unidades (pontos estratégicos — ver abaixo)</li>
+      <li><span class="check-icon"></span> <strong>Prazo:</strong> Material gráfico pronto até segunda 18/ago (enviar arte até sábado 16)</li>
+    </ul>
+  </div>
+
+  <!-- FAIXAS E BANNERS -->
+  <div class="card" style="border-left:3px solid var(--roxo);">
+    <div class="card-title">
+      <div class="card-icon" style="background:rgba(139,92,246,0.12);border-color:rgba(139,92,246,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="#8B5CF6" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="#8B5CF6" stroke-width="2"/></svg>
+      </div>
+      Faixas e Banners — Pontos Estratégicos
+    </div>
+    <div class="table-wrapper" style="border:none;margin:0;">
+      <table>
+        <thead>
+          <tr><th>Local</th><th>Tipo</th><th>Por que</th><th>Instalar até</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Entrada de Barreiras (BR-242, sentido LEM)</strong></td>
+            <td>Faixa 3m</td>
+            <td>Capta quem vem de LEM (90 km, alto poder aquisitivo)</td>
+            <td>Segunda 18/ago</td>
+          </tr>
+          <tr>
+            <td><strong>Entrada de Barreiras (BR-242, sentido Salvador)</strong></td>
+            <td>Faixa 3m</td>
+            <td>Capta quem vem de Cristópolis, Baianópolis, Salvador</td>
+            <td>Segunda 18/ago</td>
+          </tr>
+          <tr>
+            <td><strong>Rotatória principal do Centro</strong></td>
+            <td>Faixa 3m</td>
+            <td>Maior fluxo de veículos da cidade</td>
+            <td>Segunda 18/ago</td>
+          </tr>
+          <tr>
+            <td><strong>Proximidades da Prime Hall</strong></td>
+            <td>Faixa 3m</td>
+            <td>Marca presença no entorno do local do evento</td>
+            <td>Segunda 18/ago</td>
+          </tr>
+          <tr>
+            <td><strong>Tabacaria do Cais (fachada)</strong></td>
+            <td>Banner 1,5m</td>
+            <td>Ponto de venda com maior fluxo</td>
+            <td>Sábado 16/ago</td>
+          </tr>
+          <tr>
+            <td><strong>Empório (fachada)</strong></td>
+            <td>Banner 1,5m</td>
+            <td>Segundo maior ponto de venda</td>
+            <td>Sábado 16/ago</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 07 · ESTRATÉGIA DE INFLUENCIADORES -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="influenciadores">
+  <div class="section-number">Seção 07</div>
+  <h2 class="section-title">Estratégia de Influenciadores</h2>
+  <p class="section-subtitle">Influenciadores locais amplificam o alcance orgânico com credibilidade e prova social que anúncio pago não consegue.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#FF5C00" stroke-width="2"/><circle cx="8.5" cy="7" r="4" stroke="#FF5C00" stroke-width="2"/><path d="M20 8v6M23 11h-6" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        Perfil Ideal do Influenciador
+      </div>
+      <ul>
+        <li><strong>Quantidade:</strong> 5 a 10 influenciadores locais</li>
+        <li><strong>Seguidores mínimos:</strong> 5.000+</li>
+        <li><strong>Localização:</strong> Barreiras e Luís Eduardo Magalhães</li>
+        <li><strong>Engajamento:</strong> Priorizar quem tem comentários reais (não comprados)</li>
+        <li><strong>Segmentos prioritários:</strong>
+          <ul>
+            <li>Lifestyle / Dia a dia de Barreiras</li>
+            <li>Balada / Eventos / Noite</li>
+            <li>Humor local</li>
+            <li>Gastronomia / Restaurantes</li>
+            <li>Moda / Beleza</li>
+            <li>Fitness / Academia</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" stroke="#FF5C00" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="#FF5C00" stroke-width="2"/></svg>
+        </div>
+        Proposta para o Influenciador
+      </div>
+      <ul>
+        <li><strong>Oferecemos:</strong>
+          <ul>
+            <li>2 ingressos cortesia (o influencer + acompanhante)</li>
+            <li>Acesso VIP / Camarote (se houver)</li>
+            <li>Menção no perfil oficial da Prime Hall</li>
+          </ul>
+        </li>
+        <li><strong>Em troca de:</strong>
+          <ul>
+            <li>3 stories de divulgação (com link/arroba)</li>
+            <li>1 post no feed (carrossel ou foto)</li>
+            <li>Presença confirmada no show</li>
+            <li>Stories no dia do evento (cobertura ao vivo)</li>
+          </ul>
+        </li>
+        <li><strong>Timeline:</strong>
+          <ul>
+            <li>Fechar parceria até <strong>sábado 16/ago</strong></li>
+            <li>Publicações de <strong>segunda (18) a quinta (20)</strong></li>
+            <li>Cobertura ao vivo na <strong>sexta (21)</strong></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Script de abordagem -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:rgba(34,197,94,0.12);border-color:rgba(34,197,94,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke="#22C55E" stroke-width="2"/></svg>
+      </div>
+      Script para Abordar o Influenciador
+    </div>
+
+    <div class="script-block">
+      <div class="script-label">Mensagem via DM ou WhatsApp</div>
+      "E aí, [nome]! Tudo bem?<br><br>
+      Sou [nome], da Prime Hall. No dia 21 de agosto (sexta), vamos receber o show de MALLA 100 ALÇA aqui em Barreiras — a banda com 800 mil seguidores e hits como Enfermeira e Lágrimas Reais.<br><br>
+      Vi que você tem um perfil incrível aqui na cidade, e queria te convidar pra fazer parte dessa divulgação. A proposta é simples:<br><br>
+      - Você ganha 2 ingressos cortesia + acesso VIP<br>
+      - Em troca, publica 3 stories e 1 post de divulgação entre segunda e quinta<br>
+      - E faz uma cobertura ao vivo no dia do show<br><br>
+      Topa? Posso mandar mais detalhes e o material pronto pra facilitar pra você."
+    </div>
+
+    <div class="alert alert-info" style="margin-top:16px;">
+      <div class="alert-icon">&#128161;</div>
+      <div>
+        <strong>Dica:</strong> Envie junto com a mensagem a arte oficial do evento e 1–2 vídeos curtos da banda. Facilite a vida do influenciador — quanto mais material pronto você entregar, maior a chance de aceitar e de publicar conteúdo de qualidade.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 08 · PARCERIAS ESTRATÉGICAS -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="parcerias">
+  <div class="section-number">Seção 08</div>
+  <h2 class="section-title">Parcerias Estratégicas</h2>
+  <p class="section-subtitle">Alianças com comércios, rádios e instituições locais para amplificar a divulgação com custo próximo de zero.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 8h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2v4l-4-4H9a1.99 1.99 0 0 1-1.414-.586m0 0L11 14h4a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2v4l4-4z" stroke="#F59E0B" stroke-width="2"/></svg>
+        </div>
+        Bares e Restaurantes
+      </div>
+      <ul>
+        <li><strong>Proposta:</strong> Divulgam o show no estabelecimento (cartaz + menção) em troca de cupom de desconto ou brinde para clientes deles</li>
+        <li><strong>Exemplo:</strong> "Clientes do [bar] ganham R$5 de desconto no ingresso" — gera exclusividade e urgência</li>
+        <li><strong>Material:</strong> Cartaz A3 personalizado com logo do bar + QR Code pro WhatsApp</li>
+        <li><strong>Prioridade:</strong> Bares e restaurantes do Centro, próximos à Prime Hall e com público jovem/adulto</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:rgba(139,92,246,0.12);border-color:rgba(139,92,246,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" stroke="#8B5CF6" stroke-width="2"/><circle cx="7" cy="7" r="1" fill="#8B5CF6"/></svg>
+        </div>
+        Salões de Beleza
+      </div>
+      <ul>
+        <li><strong>Por que:</strong> Concentram público feminino 20–45 anos — segmento forte para forró</li>
+        <li><strong>Material:</strong> Cartaz A3 + flyers no balcão/espera</li>
+        <li><strong>Abordagem:</strong> "Seus clientes gostam de forró? Temos o show da Malla 100 Alça dia 21. Posso deixar uns cartazes e flyers aqui? Se quiser, organizamos ingresso com desconto pras suas clientes"</li>
+        <li><strong>Meta:</strong> 3–5 salões nos bairros principais</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:rgba(34,197,94,0.12);border-color:rgba(34,197,94,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="#22C55E" stroke-width="2"/><path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="#22C55E" stroke-width="2"/></svg>
+        </div>
+        Academias
+      </div>
+      <ul>
+        <li><strong>Por que:</strong> Público jovem 18–35, ativo socialmente, consome eventos</li>
+        <li><strong>Material:</strong> Banner digital para TV da academia + flyers na recepção</li>
+        <li><strong>Proposta:</strong> "Alunos da [academia] ganham [benefício]" ou simplesmente espaço para divulgação em troca de menção</li>
+        <li><strong>Meta:</strong> 2–3 academias (CrossFit + academia grande + estúdio de dança/funcional)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2" stroke="#3B82F6" stroke-width="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        Rádios Locais
+      </div>
+      <ul>
+        <li><strong>Formatos possíveis:</strong>
+          <ul>
+            <li><strong>Spot de 15–30 segundos:</strong> Versão curta do roteiro do carro de som, adaptada para rádio</li>
+            <li><strong>Participação ao vivo:</strong> Entrevista rápida (5 min) no programa da manhã ou tarde — falar do show, da banda, dos preços</li>
+            <li><strong>Troca:</strong> Divulgação da rádio no evento (placa no palco, menção no microfone) em troca de spots gratuitos</li>
+          </ul>
+        </li>
+        <li><strong>Timeline:</strong> Contatar rádios até <strong>sábado 16/ago</strong>. Spots rodando de <strong>segunda a sexta</strong>.</li>
+        <li><strong>Rádios prioritárias:</strong> As que têm programação popular/forró e maior audiência na região</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:rgba(255,92,0,0.12);border-color:rgba(255,92,0,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="#FF5C00" stroke-width="2"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="#FF5C00" stroke-width="2"/></svg>
+        </div>
+        Faculdades
+      </div>
+      <ul>
+        <li><strong>Por que:</strong> Concentram público 18–25, grupo que consome balada e forró ativamente</li>
+        <li><strong>Ações:</strong>
+          <ul>
+            <li>Cartazes nos murais de avisos</li>
+            <li>Flyers na entrada/saída dos blocos</li>
+            <li>Contato com centros acadêmicos e diretórios para divulgação nos grupos de WhatsApp dos alunos</li>
+            <li>Possível parceria: "Estudantes apresentando carteirinha ganham R$5 off no 1º Lote"</li>
+          </ul>
+        </li>
+        <li><strong>Faculdades em Barreiras:</strong> UFOB, UNEB, FASB, UNOPAR, entre outras</li>
+        <li><strong>Timeline:</strong> Material distribuído até <strong>segunda 18/ago</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 09 · JOGADA JORGE & MATEUS -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="jorge-mateus">
+  <div class="section-number">Seção 09</div>
+  <h2 class="section-title">Jogada Jorge &amp; Mateus (22/ago)</h2>
+  <p class="section-subtitle">Como transformar a concorrência de sábado em aliada na sexta. Posicionamento estratégico, não confronto.</p>
+
+  <div class="alert alert-warning">
+    <div class="alert-icon">&#9888;</div>
+    <div>
+      <strong>Fato:</strong> Jorge &amp; Mateus (Allanbick Produções) fará show em Barreiras no sábado, 22 de agosto. Isso não é uma ameaça — é uma oportunidade.
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card" style="border-left:3px solid var(--verde);">
+      <div class="card-title" style="color:var(--verde);">Fazer (Sim)</div>
+      <ul class="checklist">
+        <li><span class="check-icon" style="border-color:var(--verde);"></span> <strong>Narrativa "Fim de semana histórico":</strong> "Sexta de forró com Malla 100 Alça, sábado de sertanejo com Jorge &amp; Mateus — Barreiras nunca viu um fim de semana assim!"</li>
+        <li><span class="check-icon" style="border-color:var(--verde);"></span> <strong>Complementar, não competir:</strong> Quem vai no sábado provavelmente também quer curtir na sexta. São públicos que se sobrepõem.</li>
+        <li><span class="check-icon" style="border-color:var(--verde);"></span> <strong>Usar o argumento de preço:</strong> "Dois shows num fim de semana e o de sexta é só R$40 — cabe no bolso tranquilo."</li>
+        <li><span class="check-icon" style="border-color:var(--verde);"></span> <strong>Criar conteúdo sobre o "combo":</strong> Post no estilo "Seu roteiro do fim de semana: Sexta = Forró / Sábado = Sertanejo"</li>
+        <li><span class="check-icon" style="border-color:var(--verde);"></span> <strong>Avaliar cross-promo:</strong> Se possível, conversar com a Allanbick para cross-promo (cada um divulga o outro). Ambos ganham.</li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--vermelho);">
+      <div class="card-title" style="color:var(--vermelho);">Não Fazer (Nunca)</div>
+      <ul class="checklist">
+        <li><span class="check-icon" style="border-color:var(--vermelho);"></span> <strong>Nunca falar mal</strong> do show de Jorge &amp; Mateus ou da Allanbick</li>
+        <li><span class="check-icon" style="border-color:var(--vermelho);"></span> <strong>Nunca comparar qualidade:</strong> "Nosso show é melhor" — isso gera repulsa</li>
+        <li><span class="check-icon" style="border-color:var(--vermelho);"></span> <strong>Nunca dizer "escolha o nosso":</strong> Forçar escolha polariza o público</li>
+        <li><span class="check-icon" style="border-color:var(--vermelho);"></span> <strong>Nunca ignorar:</strong> Fingir que não existe gera desconfiança. Reconheça e use a favor.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="#FF5C00" stroke-width="2"/><path d="M9 9h.01M15 9h.01M8 14s1.5 2 4 2 4-2 4-2" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      Exemplos de Copy para o "Combo"
+    </div>
+
+    <div class="script-block">
+      <div class="script-label">Post para Instagram/Facebook</div>
+      "Barreiras, se prepara! Fim de semana HISTÓRICO:<br><br>
+      Sexta (21/ago) — MALLA 100 ALÇA na Prime Hall<br>
+      Sábado (22/ago) — JORGE &amp; MATEUS<br><br>
+      Dois shows épicos em dois dias. E o de sexta? Só R$40 no 1º Lote. Garante o seu e faz o combo do fim de semana!"
+    </div>
+
+    <div class="script-block">
+      <div class="script-label">Story com enquete</div>
+      "Seu plano pro fim de semana:"<br>
+      [Enquete]<br>
+      - Sexta de forró + sábado de sertanejo &#127925;<br>
+      - Só um dos dois &#128557;
+    </div>
+
+    <div class="alert alert-success" style="margin-top:16px;">
+      <div class="alert-icon">&#9989;</div>
+      <div>
+        <strong>Possível parceria com a Allanbick:</strong> Se houver abertura, propor que a Allanbick mencione "esquente pro fim de semana na sexta" e a Prime Hall faça o mesmo para o sábado. Os dois eventos ganham com o aquecimento mútuo do público. Aborde via contato profissional — demonstre que é parceria, não pedido.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 10 · CRONOGRAMA DIÁRIO (14–21/ago) -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="cronograma">
+  <div class="section-number">Seção 10</div>
+  <h2 class="section-title">Cronograma Diário de Ações</h2>
+  <p class="section-subtitle">Dia a dia detalhado: todas as ações online e offline que precisam acontecer de 14 a 21 de agosto.</p>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th style="min-width:100px;">Data / Dia</th>
+          <th style="min-width:260px;">Ações Online</th>
+          <th style="min-width:220px;">Ações Offline</th>
+          <th style="min-width:120px;">Responsável</th>
+          <th style="min-width:120px;">Meta do Dia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- DIA 1 -->
+        <tr>
+          <td>
+            <strong>14/ago</strong><br>
+            <span class="badge badge-laranja">Quinta</span>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Ativar as 3 campanhas Meta Ads</li>
+              <li>Post de anúncio oficial no Instagram e Facebook</li>
+              <li>3 stories: arte + contagem regressiva + enquete</li>
+              <li>WhatsApp Status (4 horários)</li>
+              <li>Lista de transmissão: mensagem de anúncio</li>
+              <li>Criar evento no Facebook</li>
+            </ul>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Ligar para gráfica: encomendar cartazes, flyers, banners e faixas</li>
+              <li>Início de vendas nos pontos físicos</li>
+              <li>Enviar arte para influenciadores (DMs)</li>
+            </ul>
+          </td>
+          <td>Marketing + Vendas</td>
+          <td>
+            <strong>50 ingressos</strong><br>
+            <span style="font-size:0.75rem;color:var(--cinza-claro);">Lançamento + impacto inicial</span>
+          </td>
+        </tr>
+
+        <!-- DIA 2 -->
+        <tr>
+          <td>
+            <strong>15/ago</strong><br>
+            <span class="badge badge-azul">Sexta</span>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Post feed: carrossel com hits da banda</li>
+              <li>5 stories: trechos de músicas + prova social</li>
+              <li>Reel 1: compilação de shows da banda</li>
+              <li>Post Facebook + compartilhar em 5 grupos</li>
+              <li>WhatsApp Status (4 horários)</li>
+              <li>Monitorar métricas dos ads (1ª otimização)</li>
+            </ul>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Fechar parcerias com influenciadores</li>
+              <li>Visitar bares/restaurantes com proposta de parceria</li>
+              <li>Visitar 2 salões de beleza</li>
+            </ul>
+          </td>
+          <td>Marketing + Parcerias</td>
+          <td>
+            <strong>60 ingressos</strong><br>
+            <span style="font-size:0.75rem;color:var(--cinza-claro);">Acumulado: 110</span>
+          </td>
+        </tr>
+
+        <!-- DIA 3 -->
+        <tr>
+          <td>
+            <strong>16/ago</strong><br>
+            <span class="badge badge-roxo">Sábado</span>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Post feed: prova social (prints de pedidos)</li>
+              <li>5 stories: bastidores + enquete + música</li>
+              <li>Lista de transmissão: mensagem de prova social</li>
+              <li>Post Facebook + grupos</li>
+              <li>WhatsApp Status (4 horários)</li>
+            </ul>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Receber e instalar banners nos pontos de venda</li>
+              <li>Enviar arte final para gráfica (faixas, cartazes)</li>
+              <li>Confirmar influenciadores fechados</li>
+              <li>Contatar rádios locais</li>
+            </ul>
+          </td>
+          <td>Marketing + Parcerias</td>
+          <td>
+            <strong>70 ingressos</strong><br>
+            <span style="font-size:0.75rem;color:var(--cinza-claro);">Acumulado: 180</span>
+          </td>
+        </tr>
+
+        <!-- DIA 4 -->
+        <tr>
+          <td>
+            <strong>17/ago</strong><br>
+            <span class="badge badge-verde">Domingo</span>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Post feed: contagem regressiva "4 dias"</li>
+              <li>3 stories: contagem + música + CTA WhatsApp</li>
+              <li>WhatsApp Status (3 horários — domingo mais leve)</li>
+              <li>Monitorar ads e otimizar se necessário</li>
+            </ul>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Dia mais leve — operação de reposição</li>
+              <li>Revisar estoque de ingressos nos pontos de venda</li>
+            </ul>
+          </td>
+          <td>Marketing</td>
+          <td>
+            <strong>40 ingressos</strong><br>
+            <span style="font-size:0.75rem;color:var(--cinza-claro);">Acumulado: 220</span>
+          </td>
+        </tr>
+
+        <!-- DIA 5 -->
+        <tr>
+          <td>
+            <strong>18/ago</strong><br>
+            <span class="badge badge-laranja">Segunda</span>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Post feed: "1º Lote acaba quarta!" — urgência</li>
+              <li>5 stories: urgência + contagem + prova social</li>
+              <li>Reel 2: Prime Hall vazia + "Dia 21 aqui vai lotar"</li>
+              <li>Lista de transmissão: mensagem de urgência do lote</li>
+              <li>Influenciadores começam a publicar</li>
+              <li>Post Facebook + grupos</li>
+              <li>WhatsApp Status (4 horários)</li>
+            </ul>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Instalar faixas nos 4 pontos estratégicos</li>
+              <li>Distribuir cartazes nas faculdades</li>
+              <li>Distribuir flyers nas academias</li>
+              <li>Iniciar spot de rádio</li>
+            </ul>
+          </td>
+          <td>Marketing + Vendas + Parcerias</td>
+          <td>
+            <strong>100 ingressos</strong><br>
+            <span style="font-size:0.75rem;color:var(--cinza-claro);">Acumulado: 320</span>
+          </td>
+        </tr>
+
+        <!-- DIA 6 -->
+        <tr>
+          <td>
+            <strong>19/ago</strong><br>
+            <span class="badge badge-amarelo">Terça</span>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Post feed: "ÚLTIMO DIA do 1º Lote!" — máxima urgência</li>
+              <li>7 stories: urgência pesada, contagem, prints de vendas, enquete "já garantiu?"</li>
+              <li>Reel 3: reação de pessoas ao saber do show</li>
+              <li>Post Facebook: "1º Lote encerra HOJE"</li>
+              <li>Influenciadores publicando (dia 2)</li>
+              <li>WhatsApp Status (5 publicações — dia intenso)</li>
+              <li>Follow-up com quem perguntou e não comprou</li>
+            </ul>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Carro de som — Rota 1 e 2 (manhã: 9h–12h)</li>
+              <li>Carro de som — Rota 3 e 4 (tarde: 15h–18h)</li>
+              <li>Verificar estoque de ingressos nos pontos</li>
+              <li>Spot de rádio rodando</li>
+            </ul>
+          </td>
+          <td>Marketing + Vendas + Carro de Som</td>
+          <td>
+            <strong>130 ingressos</strong><br>
+            <span style="font-size:0.75rem;color:var(--cinza-claro);">Acumulado: 450</span>
+          </td>
+        </tr>
+
+        <!-- DIA 7 -->
+        <tr>
+          <td>
+            <strong>20/ago</strong><br>
+            <span class="badge badge-vermelho">Quarta</span>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Post feed: "É AMANHÃ! Últimos ingressos a R$40" — 2º Lote ativo</li>
+              <li>7 stories: contagem final, bastidores da montagem, "quem vem?"</li>
+              <li>Lista de transmissão: "Último dia pra R$40. Amanhã na porta é R$50"</li>
+              <li>Influenciadores publicando (dia 3)</li>
+              <li>Post Facebook + grupos: urgência máxima</li>
+              <li>WhatsApp Status (5 publicações)</li>
+              <li>Intensificar ads — aumentar orçamento se vendas abaixo da meta</li>
+            </ul>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Carro de som — rotas restantes + centro</li>
+              <li>Montagem do palco/estrutura (se começar hoje)</li>
+              <li>Spot de rádio intensivo (2–3x mais spots)</li>
+              <li>Última verificação dos pontos de venda</li>
+            </ul>
+          </td>
+          <td>Todos</td>
+          <td>
+            <strong>150 ingressos</strong><br>
+            <span style="font-size:0.75rem;color:var(--cinza-claro);">Acumulado: 600</span>
+          </td>
+        </tr>
+
+        <!-- DIA 8 -->
+        <tr style="background:rgba(255,92,0,0.04);">
+          <td>
+            <strong>21/ago</strong><br>
+            <span class="badge badge-laranja" style="animation: pulse 2s infinite;">SHOW</span>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Post feed: "HOJE! Prime Hall — Malla 100 Alça"</li>
+              <li>Stories durante o dia todo: montagem, soundcheck, abertura dos portões</li>
+              <li>Reel 4: montagem acelerada + música</li>
+              <li>Lista de transmissão: "HOJE! Ainda dá tempo. R$50 na porta"</li>
+              <li>WhatsApp Status: "É HOJE!"</li>
+              <li>Stories AO VIVO durante o show</li>
+              <li>Pausar ads (exceto se sobraram ingressos — manter WhatsApp)</li>
+            </ul>
+          </td>
+          <td>
+            <ul style="padding-left:16px;margin:0;">
+              <li>Bilheteria na porta: R$50 individual</li>
+              <li>Equipe de segurança e operação</li>
+              <li>Carro de som pela manhã (última passagem)</li>
+              <li>Conferência final de som, luz, estrutura</li>
+            </ul>
+          </td>
+          <td>Toda a equipe</td>
+          <td>
+            <strong>100 ingressos (porta)</strong><br>
+            <span style="font-size:0.75rem;color:var(--verde);">Total: 700 (LOTADO)</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-info">
+    <div class="alert-icon">&#128161;</div>
+    <div>
+      <strong>Nota sobre a distribuição:</strong> As metas diárias não são lineares. Os dias de maior venda são terça (19) e quarta (20) — momento de urgência do lote — e sexta (21) na porta. O início (quinta/sexta/sábado) é mais lento porque o público precisa de tempo para tomar a decisão. Não se desespere se os primeiros dias forem abaixo da meta.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 11 · TRACKER DE VENDAS -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="tracker">
+  <div class="section-number">Seção 11</div>
+  <h2 class="section-title">Tracker de Vendas</h2>
+  <p class="section-subtitle">Modelo de acompanhamento diário. Controle simples, visual e eficiente para saber se está no caminho certo.</p>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20v-6" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      Projeção de Vendas por Dia
+    </div>
+    <p style="margin-bottom:16px;">Meta total: 700 ingressos. Distribuição realista considerando o comportamento de compra de eventos locais.</p>
+
+    <div class="table-wrapper" style="border:none;margin:0;">
+      <table>
+        <thead>
+          <tr>
+            <th>Dia</th>
+            <th>Data</th>
+            <th>Meta do Dia</th>
+            <th>Acumulado</th>
+            <th>% do Total</th>
+            <th>Progresso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Quinta</td>
+            <td>14/ago</td>
+            <td>50</td>
+            <td>50</td>
+            <td>7%</td>
+            <td>
+              <div class="progress-track"><div class="progress-fill" style="width:7%;background:var(--laranja);"></div></div>
+            </td>
+          </tr>
+          <tr>
+            <td>Sexta</td>
+            <td>15/ago</td>
+            <td>60</td>
+            <td>110</td>
+            <td>16%</td>
+            <td>
+              <div class="progress-track"><div class="progress-fill" style="width:16%;background:var(--laranja);"></div></div>
+            </td>
+          </tr>
+          <tr>
+            <td>Sábado</td>
+            <td>16/ago</td>
+            <td>70</td>
+            <td>180</td>
+            <td>26%</td>
+            <td>
+              <div class="progress-track"><div class="progress-fill" style="width:26%;background:var(--laranja);"></div></div>
+            </td>
+          </tr>
+          <tr>
+            <td>Domingo</td>
+            <td>17/ago</td>
+            <td>40</td>
+            <td>220</td>
+            <td>31%</td>
+            <td>
+              <div class="progress-track"><div class="progress-fill" style="width:31%;background:var(--amarelo);"></div></div>
+            </td>
+          </tr>
+          <tr>
+            <td>Segunda</td>
+            <td>18/ago</td>
+            <td>100</td>
+            <td>320</td>
+            <td>46%</td>
+            <td>
+              <div class="progress-track"><div class="progress-fill" style="width:46%;background:var(--amarelo);"></div></div>
+            </td>
+          </tr>
+          <tr>
+            <td>Terça</td>
+            <td>19/ago</td>
+            <td>130</td>
+            <td>450</td>
+            <td>64%</td>
+            <td>
+              <div class="progress-track"><div class="progress-fill" style="width:64%;background:var(--laranja-light);"></div></div>
+            </td>
+          </tr>
+          <tr>
+            <td>Quarta</td>
+            <td>20/ago</td>
+            <td>150</td>
+            <td>600</td>
+            <td>86%</td>
+            <td>
+              <div class="progress-track"><div class="progress-fill" style="width:86%;background:var(--laranja);"></div></div>
+            </td>
+          </tr>
+          <tr style="background:rgba(34,197,94,0.04);">
+            <td><strong>Sexta (porta)</strong></td>
+            <td><strong>21/ago</strong></td>
+            <td><strong>100</strong></td>
+            <td><strong>700</strong></td>
+            <td><strong>100%</strong></td>
+            <td>
+              <div class="progress-track"><div class="progress-fill" style="width:100%;background:var(--verde);"></div></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:rgba(34,197,94,0.12);border-color:rgba(34,197,94,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#22C55E" stroke-width="2"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        Como Monitorar
+      </div>
+      <ul>
+        <li><strong>Google Sheets:</strong> Planilha compartilhada com todos os responsáveis. Atualizar a cada venda confirmada.</li>
+        <li><strong>Colunas sugeridas:</strong> Data | Nome do comprador | Tipo (individual/casadinha) | Valor | Canal (WhatsApp/ponto de venda) | Status (pago/pendente)</li>
+        <li><strong>Totalização automática:</strong> Somar ingressos vendidos e receita acumulada</li>
+        <li><strong>Alternativa simples:</strong> Grupo de WhatsApp "Vendas Prime Hall" onde cada vendedor envia o comprovante. No fim do dia, alguém totaliza.</li>
+        <li><strong>Frequência de checagem:</strong> 3x ao dia (manhã, tarde, noite)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#EF4444" stroke-width="2"/><path d="M12 9v4M12 17h.01" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        Sinais de Alerta
+      </div>
+      <ul>
+        <li><strong style="color:var(--verde);">Verde (no caminho):</strong> Vendas acumuladas dentro de +/-15% da meta diária</li>
+        <li><strong style="color:var(--amarelo);">Amarelo (atenção):</strong> Vendas 15–30% abaixo da meta acumulada. Ativar reforços.</li>
+        <li><strong style="color:var(--vermelho);">Vermelho (alerta):</strong> Vendas 30%+ abaixo da meta acumulada. Executar plano de contingência (seção 12).</li>
+      </ul>
+      <div style="margin-top:16px;">
+        <h4 style="color:var(--branco);font-size:0.9rem;margin-bottom:8px;">Marcos Críticos:</h4>
+        <ul>
+          <li><strong>Até sábado 16/ago:</strong> Se tiver &lt;100 vendidos → sinal amarelo</li>
+          <li><strong>Até terça 19/ago:</strong> Se tiver &lt;300 vendidos → sinal vermelho</li>
+          <li><strong>Até quarta 20/ago:</strong> Se tiver &lt;450 vendidos → contingência total</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 12 · PLANO DE CONTINGÊNCIA -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="contingencia">
+  <div class="section-number">Seção 12</div>
+  <h2 class="section-title">Plano de Contingência</h2>
+  <p class="section-subtitle">Ações de emergência se as vendas estiverem abaixo do esperado — e como agir se estiverem acima.</p>
+
+  <div class="grid-2">
+    <!-- ABAIXO -->
+    <div class="card" style="border-left:3px solid var(--vermelho);">
+      <div class="card-title" style="color:var(--vermelho);">
+        <div class="card-icon" style="background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12l7 7 7-7" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        Se vendas abaixo de 50% na quarta (19/ago)
+      </div>
+      <p style="margin-bottom:12px;color:var(--vermelho);font-weight:600;">Cenário: menos de 350 ingressos vendidos com 2 dias para o show.</p>
+
+      <h4 style="color:var(--branco);font-size:0.9rem;margin:16px 0 8px;">Ações imediatas:</h4>
+      <ul>
+        <li><strong>Aumentar orçamento de ads:</strong> Dobrar o investimento diário (de ~R$90/dia para ~R$180/dia). Focar na campanha de WhatsApp — é a que converte.</li>
+        <li><strong>Blitz de influenciadores:</strong> Contatar mais 5 influencers para stories de emergência. Oferecer 2 ingressos + foto no backstage.</li>
+        <li><strong>Promoção relâmpago:</strong> "Quem comprar HOJE leva 3 ingressos pelo preço de 2" ou "Grupo de 4 amigos: R$35 cada". Válido só por 24h.</li>
+        <li><strong>Carro de som intensivo:</strong> Contratar 2 carros de som (manhã e tarde) cobrindo todas as rotas em 1 dia.</li>
+        <li><strong>Mutirão de WhatsApp:</strong> Toda a equipe liga/manda mensagem para os contatos pessoais. Não é spam — é convite pessoal.</li>
+        <li><strong>Oferecer ingresso para revendedores:</strong> Pessoas que comprem 10+ ingressos ganham 2 cortesias. Incentiva venda em bloco.</li>
+        <li><strong>Acionar parcerias de última hora:</strong> Bares, restaurantes, rádios — qualquer canal que possa ajudar na reta final.</li>
+      </ul>
+    </div>
+
+    <!-- ACIMA -->
+    <div class="card" style="border-left:3px solid var(--verde);">
+      <div class="card-title" style="color:var(--verde);">
+        <div class="card-icon" style="background:rgba(34,197,94,0.12);border-color:rgba(34,197,94,0.3);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        Se vendas acima de 80% na quarta (19/ago)
+      </div>
+      <p style="margin-bottom:12px;color:var(--verde);font-weight:600;">Cenário: mais de 560 ingressos vendidos com 2 dias para o show.</p>
+
+      <h4 style="color:var(--branco);font-size:0.9rem;margin:16px 0 8px;">Ações de otimização:</h4>
+      <ul>
+        <li><strong>Reduzir ads:</strong> Diminuir orçamento diário pela metade. O orgânico e o boca a boca já estão fazendo o trabalho.</li>
+        <li><strong>Comunicar escassez REAL:</strong> "Restam apenas [X] ingressos antecipados!" — usar o número real, nunca inventar. Escassez real é a urgência mais poderosa que existe.</li>
+        <li><strong>Preparar comunicação de "ESGOTADO":</strong> Ter pronta a arte e legenda para quando esgotar a venda antecipada. "Antecipados ESGOTADOS. Restam poucos na porta (R$50, sujeito à disponibilidade)."</li>
+        <li><strong>Planejar a experiência:</strong> Se vai lotar, garantir que a operação (bar, segurança, banheiros, som) esteja preparada para casa cheia. Cliente satisfeito volta no próximo evento.</li>
+        <li><strong>Fotografar/gravar a lotação:</strong> Material para usar na divulgação de futuros eventos. "Esse foi o último. O próximo pode ser ainda maior."</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Cenário intermediário -->
+  <div class="card" style="border-left:3px solid var(--amarelo);">
+    <div class="card-title" style="color:var(--amarelo);">
+      <div class="card-icon" style="background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.3);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      Se vendas entre 50–80% na quarta (19/ago)
+    </div>
+    <p style="margin-bottom:12px;color:var(--amarelo);font-weight:600;">Cenário: entre 350 e 560 ingressos vendidos. Bom ritmo, mas precisa de empurrão.</p>
+    <ul>
+      <li><strong>Manter ads no mesmo ritmo</strong> — não aumentar nem diminuir</li>
+      <li><strong>Intensificar stories e WhatsApp Status</strong> — mais publicações com urgência</li>
+      <li><strong>Follow-up geral:</strong> Repassar lista de quem perguntou e não comprou. Mandar uma última mensagem personalizada.</li>
+      <li><strong>Carro de som:</strong> Garantir que rode na quarta (20/ago) de manhã e tarde</li>
+      <li><strong>Comunicar a mudança de lote:</strong> "2º Lote ativo — só hoje a R$40. Amanhã na porta é R$50"</li>
+    </ul>
+  </div>
+
+  <div class="alert alert-info">
+    <div class="alert-icon">&#128161;</div>
+    <div>
+      <strong>Lembrete final:</strong> No interior, a maioria das vendas acontece nos <strong>últimos 3 dias</strong> antes do evento. Não entre em pânico se os primeiros dias forem lentos. O padrão é: lançamento (pico pequeno) → período morno → véspera (pico grande) → porta (pico final). Monitore os sinais de alerta e aja conforme necessário.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- RESUMO FINAL -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-number">Visão Geral</div>
+  <h2 class="section-title">Resumo da Operação Completa</h2>
+  <p class="section-subtitle">Tudo que precisa acontecer, consolidado em uma visão única.</p>
+
+  <div class="kpi-row">
+    <div class="stat-tile">
+      <div class="stat-num" style="color:var(--laranja);">700</div>
+      <div class="stat-label">Ingressos</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-num" style="color:var(--verde);">R$640</div>
+      <div class="stat-label">Investimento Ads</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-num" style="color:var(--amarelo);">5–10</div>
+      <div class="stat-label">Influenciadores</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-num" style="color:var(--azul);">5+</div>
+      <div class="stat-label">Pontos de Venda</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-num" style="color:var(--roxo);">4</div>
+      <div class="stat-label">Faixas na Rua</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-num" style="color:var(--laranja);">R$35k</div>
+      <div class="stat-label">Receita Máxima</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="#FF5C00" stroke-width="2"/><path d="M22 4L12 14.01l-3-3" stroke="#FF5C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      Checklist de Prontidão — Antes de Lançar (13/ago)
+    </div>
+    <ul class="checklist">
+      <li><span class="check-icon"></span> Arte oficial do evento finalizada (feed, stories, WhatsApp, faixas, cartazes, flyers)</li>
+      <li><span class="check-icon"></span> Campanha Meta Ads configurada e pronta para ativar (3 campanhas)</li>
+      <li><span class="check-icon"></span> WhatsApp de vendas (77 99801-4490) configurado com mensagem automática de boas-vindas</li>
+      <li><span class="check-icon"></span> Pontos de venda confirmados e abastecidos com ingressos</li>
+      <li><span class="check-icon"></span> Lista de influenciadores identificados para contato</li>
+      <li><span class="check-icon"></span> Gráfica contatada para cartazes, flyers, banners e faixas</li>
+      <li><span class="check-icon"></span> Carro de som reservado para terça e quarta (19–20/ago)</li>
+      <li><span class="check-icon"></span> Rádios locais identificadas para contato</li>
+      <li><span class="check-icon"></span> Planilha de controle de vendas criada (Google Sheets ou WhatsApp)</li>
+      <li><span class="check-icon"></span> Listas de transmissão do WhatsApp organizadas</li>
+      <li><span class="check-icon"></span> Evento criado no Facebook</li>
+      <li><span class="check-icon"></span> Scripts de atendimento impressos/salvos para o time de vendas</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ═══════════════════════════════════════════════ -->
+<footer class="footer">
+  <p>Planejamento de Estratégias de Vendas — Malla 100 Alça na Prime Hall, Barreiras-BA</p>
+  <p style="margin-top:4px;">21 de agosto de 2026 &middot; Documento confidencial</p>
+  <p style="margin-top:16px;color:rgba(255,92,0,0.5);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;">Prime Hall &middot; Barreiras-BA</p>
+</footer>
+
+</div><!-- /.container -->
+
+<script>
+// Scroll to top button visibility
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('scrollTop');
+  if (window.scrollY > 400) {
+    btn.style.display = 'flex';
+  } else {
+    btn.style.display = 'none';
+  }
+});
+
+// Smooth scroll for TOC links
+document.querySelectorAll('.toc-list a').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

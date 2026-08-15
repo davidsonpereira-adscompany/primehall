@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planejamento de Trafego Pago &mdash; Malla 100 Alca | Prime Hall</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --laranja: #FF5C00;
+  --laranja-hover: #FF7A33;
+  --laranja-glow: rgba(255,92,0,0.15);
+  --laranja-subtle: rgba(255,92,0,0.08);
+  --preto: #060606;
+  --cinza-escuro: #111;
+  --cinza-card: #141414;
+  --cinza-card-hover: #1A1A1A;
+  --cinza-medio: #2A2A2A;
+  --cinza-claro: #888;
+  --cinza-border: rgba(255,255,255,0.06);
+  --branco: #F5F5F5;
+  --verde: #00C853;
+  --verde-bg: rgba(0,200,83,0.08);
+  --amarelo: #FFD600;
+  --amarelo-bg: rgba(255,214,0,0.08);
+  --vermelho: #FF3D00;
+  --vermelho-bg: rgba(255,61,0,0.08);
+  --azul: #448AFF;
+  --azul-bg: rgba(68,138,255,0.08);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+  --radius: 10px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --transition: all 0.25s ease;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--preto);
+  color: var(--branco);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--preto); }
+::-webkit-scrollbar-thumb { background: var(--cinza-medio); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--laranja); }
+
+/* ========== NAV LATERAL SUMARIO ========== */
+.side-nav {
+  position: fixed;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.side-nav a {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cinza-medio);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: var(--transition);
+  position: relative;
+}
+.side-nav a:hover,
+.side-nav a.active {
+  background: var(--laranja);
+  border-color: var(--laranja);
+  transform: scale(1.3);
+}
+.side-nav a .tooltip {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(6,6,6,0.95);
+  border: 1px solid rgba(255,92,0,0.3);
+  color: var(--branco);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.side-nav a:hover .tooltip { opacity: 1; }
+
+/* ========== HERO ========== */
+.hero {
+  padding: 120px 32px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0A0705 0%, var(--preto) 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,92,0,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--laranja);
+  background: var(--laranja-subtle);
+  border: 1px solid rgba(255,92,0,0.2);
+  padding: 8px 20px;
+  border-radius: 30px;
+  margin-bottom: 32px;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  color: var(--branco);
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--laranja);
+}
+.hero-sub {
+  font-size: 1rem;
+  color: var(--cinza-claro);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 24px;
+}
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+}
+.hero-meta-item svg { flex-shrink: 0; }
+.hero-meta-item strong { color: var(--branco); font-weight: 600; }
+
+/* ========== CONTAINER ========== */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ========== SECTIONS ========== */
+.section {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--cinza-border);
+}
+.section:last-child { border-bottom: none; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--laranja);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.section-title em { font-style: italic; color: var(--laranja); }
+.section-desc {
+  font-size: 0.92rem;
+  color: var(--cinza-claro);
+  max-width: 700px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+/* ========== CARDS ========== */
+.card {
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.card:hover {
+  border-color: rgba(255,92,0,0.15);
+  background: var(--cinza-card-hover);
+}
+.card-accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--laranja);
+  border-radius: 0 2px 2px 0;
+}
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--laranja-subtle);
+  border: 1px solid rgba(255,92,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.card-icon svg { width: 20px; height: 20px; }
+.card-title {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.card-subtitle {
+  font-size: 0.75rem;
+  color: var(--cinza-claro);
+  letter-spacing: 0.05em;
+}
+.card p, .card li {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+}
+.card ul { list-style: none; padding: 0; }
+.card ul li {
+  padding: 6px 0;
+  padding-left: 18px;
+  position: relative;
+}
+.card ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--laranja);
+  opacity: 0.6;
+}
+
+/* ========== KPI GRID ========== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.kpi-card {
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  transition: var(--transition);
+}
+.kpi-card:hover {
+  border-color: rgba(255,92,0,0.2);
+}
+.kpi-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--laranja-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+.kpi-icon svg { width: 18px; height: 18px; }
+.kpi-value {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--branco);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.kpi-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cinza-claro);
+}
+
+/* ========== TABLES ========== */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--cinza-border);
+  margin-bottom: 24px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  min-width: 600px;
+}
+thead th {
+  background: rgba(255,92,0,0.06);
+  color: var(--laranja);
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--cinza-border);
+  white-space: nowrap;
+}
+tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--cinza-border);
+  color: rgba(255,255,255,0.8);
+  vertical-align: top;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: rgba(255,92,0,0.02); }
+tbody tr.row-total {
+  background: rgba(255,92,0,0.06);
+  font-weight: 700;
+}
+tbody tr.row-total td { color: var(--branco); }
+
+/* ========== TAGS / BADGES ========== */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.tag-laranja { background: var(--laranja-subtle); color: var(--laranja); border: 1px solid rgba(255,92,0,0.2); }
+.tag-verde { background: var(--verde-bg); color: var(--verde); border: 1px solid rgba(0,200,83,0.2); }
+.tag-amarelo { background: var(--amarelo-bg); color: var(--amarelo); border: 1px solid rgba(255,214,0,0.2); }
+.tag-vermelho { background: var(--vermelho-bg); color: var(--vermelho); border: 1px solid rgba(255,61,0,0.2); }
+.tag-azul { background: var(--azul-bg); color: var(--azul); border: 1px solid rgba(68,138,255,0.2); }
+
+/* ========== TIMELINE ========== */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--laranja), var(--cinza-medio));
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 32px;
+}
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-dot {
+  position: absolute;
+  left: -28px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--preto);
+  border: 2px solid var(--laranja);
+}
+.timeline-dot.active {
+  background: var(--laranja);
+  box-shadow: 0 0 12px rgba(255,92,0,0.4);
+}
+.timeline-date {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--laranja);
+  margin-bottom: 6px;
+}
+.timeline-title {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.timeline-content {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+}
+.timeline-content ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 8px;
+}
+.timeline-content ul li {
+  padding: 3px 0 3px 16px;
+  position: relative;
+}
+.timeline-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--laranja);
+  opacity: 0.5;
+}
+
+/* ========== COPY BLOCKS ========== */
+.copy-block {
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+  position: relative;
+}
+.copy-block::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+}
+.copy-block.cb-alcance::before { background: var(--azul); }
+.copy-block.cb-engajamento::before { background: var(--verde); }
+.copy-block.cb-conversao::before { background: var(--laranja); }
+.copy-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cinza-claro);
+  margin-bottom: 4px;
+}
+.copy-field {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.copy-field:last-child { margin-bottom: 0; }
+.copy-field strong { color: var(--branco); }
+
+/* ========== CAMPAIGN HEADER ========== */
+.campaign-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--cinza-border);
+}
+.campaign-number {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.campaign-number.cn-1 { background: var(--azul-bg); color: var(--azul); border: 1px solid rgba(68,138,255,0.2); }
+.campaign-number.cn-2 { background: var(--verde-bg); color: var(--verde); border: 1px solid rgba(0,200,83,0.2); }
+.campaign-number.cn-3 { background: var(--laranja-subtle); color: var(--laranja); border: 1px solid rgba(255,92,0,0.2); }
+.campaign-info h3 {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.campaign-info p {
+  font-size: 0.78rem;
+  color: var(--cinza-claro);
+}
+
+/* ========== GRID ========== */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ========== ALERTA ========== */
+.alerta {
+  background: var(--vermelho-bg);
+  border: 1px solid rgba(255,61,0,0.25);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 24px 0;
+}
+.alerta-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255,61,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.alerta-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--vermelho);
+  margin-bottom: 4px;
+}
+.alerta-text {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+
+/* ========== DESTAQUE BOX ========== */
+.destaque {
+  background: var(--laranja-subtle);
+  border: 1px solid rgba(255,92,0,0.2);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+.destaque-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--laranja);
+  margin-bottom: 6px;
+}
+.destaque p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+}
+
+/* ========== PROGRESS BAR ========== */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--cinza-medio);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  text-align: center;
+  padding: 60px 32px;
+  border-top: 1px solid var(--cinza-border);
+}
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 8px;
+}
+.footer-brand em { font-style: italic; color: var(--laranja); opacity: 0.6; }
+.footer-copy {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.05em;
+}
+
+/* ========== SUMARIO/TOC ========== */
+.toc {
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-border);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin: 0 auto 32px;
+}
+.toc-title {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--laranja);
+}
+.toc-list { list-style: none; padding: 0; }
+.toc-list li { margin-bottom: 0; }
+.toc-list a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: var(--transition);
+}
+.toc-list a:hover {
+  background: rgba(255,92,0,0.06);
+  color: var(--branco);
+}
+.toc-num {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--laranja);
+  width: 24px;
+  flex-shrink: 0;
+}
+
+/* ========== SPEC GRID ========== */
+.spec-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0;
+  font-size: 0.85rem;
+}
+.spec-grid dt {
+  color: var(--cinza-claro);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--cinza-border);
+  font-weight: 500;
+}
+.spec-grid dd {
+  color: rgba(255,255,255,0.85);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--cinza-border);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .hero { padding: 100px 20px 60px; }
+  .container { padding: 0 16px; }
+  .section { padding: 60px 0; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-meta { gap: 16px; }
+  .campaign-header { flex-direction: column; gap: 10px; }
+  .spec-grid { grid-template-columns: 1fr; }
+  .spec-grid dt { border-bottom: none; padding-bottom: 2px; font-weight: 700; }
+  .spec-grid dd { padding-top: 0; margin-bottom: 8px; }
+  .side-nav { display: none; }
+  .card { padding: 20px; }
+  table { font-size: 0.75rem; }
+  thead th, tbody td { padding: 10px 10px; }
+}
+@media (max-width: 480px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.6rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- BOTAO VOLTAR CENTRAL -->
+<div id="back-central" style="position:fixed;top:20px;left:20px;z-index:99999;font-family:'Inter',sans-serif;">
+  <a href="../index.html"
+     style="display:flex;align-items:center;gap:8px;background:rgba(6,6,6,0.95);border:1px solid rgba(255,92,0,0.4);color:#FF5C00;text-decoration:none;font-size:10px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;padding:10px 16px;border-radius:6px;box-shadow:0 4px 20px rgba(0,0,0,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all 0.2s;"
+     onmouseover="this.style.borderColor='rgba(255,92,0,0.8)';this.style.boxShadow='0 4px 24px rgba(255,92,0,0.2)'"
+     onmouseout="this.style.borderColor='rgba(255,92,0,0.4)';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.5)'">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="flex-shrink:0"><path d="M8 2L4 6L8 10" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Central Prime Hall
+  </a>
+</div>
+
+<!-- NAV LATERAL -->
+<nav class="side-nav" id="sideNav">
+  <a href="#resumo"><span class="tooltip">Resumo Executivo</span></a>
+  <a href="#estrutura"><span class="tooltip">Estrutura de Campanhas</span></a>
+  <a href="#segmentacao"><span class="tooltip">Segmentacao</span></a>
+  <a href="#orcamento"><span class="tooltip">Orcamento</span></a>
+  <a href="#copies"><span class="tooltip">Copies</span></a>
+  <a href="#cronograma"><span class="tooltip">Cronograma</span></a>
+  <a href="#kpis"><span class="tooltip">KPIs e Metricas</span></a>
+  <a href="#otimizacao"><span class="tooltip">Otimizacao</span></a>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <div class="hero-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#FF5C00"/></svg>
+    Planejamento de Trafego Pago
+  </div>
+  <h1>Malla 100 Alca <em>ao Vivo</em></h1>
+  <p class="hero-sub">Plano completo de campanhas Meta Ads para vender 700 ingressos do show na Prime Hall, Barreiras-BA. Janela de 7 dias com estrategia de tres fases: aquecimento, engajamento e conversao.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#FF5C00" stroke-width="1.5"/><path d="M16 2V6M8 2V6M3 10H21" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span><strong>21 de agosto de 2026</strong> (sexta-feira)</span>
+    </div>
+    <div class="hero-meta-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2Z" stroke="#FF5C00" stroke-width="1.5"/><circle cx="12" cy="9" r="2.5" stroke="#FF5C00" stroke-width="1.5"/></svg>
+      <span><strong>Prime Hall</strong>, Barreiras-BA</span>
+    </div>
+    <div class="hero-meta-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#FF5C00" stroke-width="1.5"/><path d="M23 21V19C23 17.14 21.73 15.57 20 15.13" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/><path d="M16 3.13C17.73 3.57 19 5.14 19 7C19 8.86 17.73 10.43 16 10.87" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span><strong>700 ingressos</strong> (capacidade total)</span>
+    </div>
+    <div class="hero-meta-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 1V23M17 5H9.5C8.57 5 7.68 5.37 7.02 6.03C6.37 6.68 6 7.57 6 8.5C6 9.43 6.37 10.32 7.02 10.97C7.68 11.63 8.57 12 9.5 12H14.5C15.43 12 16.32 12.37 16.97 13.03C17.63 13.68 18 14.57 18 15.5C18 16.43 17.63 17.32 16.97 17.97C16.32 18.63 15.43 19 14.5 19H6" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Investimento total: <strong>R$640</strong></span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- SUMARIO -->
+  <div class="toc" style="margin-top:48px;">
+    <div class="toc-title">Sumario do Documento</div>
+    <ol class="toc-list">
+      <li><a href="#resumo"><span class="toc-num">01</span> Resumo Executivo</a></li>
+      <li><a href="#estrutura"><span class="toc-num">02</span> Estrutura de Campanhas</a></li>
+      <li><a href="#segmentacao"><span class="toc-num">03</span> Segmentacao Detalhada</a></li>
+      <li><a href="#orcamento"><span class="toc-num">04</span> Distribuicao de Orcamento</a></li>
+      <li><a href="#copies"><span class="toc-num">05</span> Copies dos Anuncios</a></li>
+      <li><a href="#cronograma"><span class="toc-num">06</span> Cronograma Operacional</a></li>
+      <li><a href="#kpis"><span class="toc-num">07</span> KPIs e Metricas</a></li>
+      <li><a href="#otimizacao"><span class="toc-num">08</span> Regras de Otimizacao</a></li>
+    </ol>
+  </div>
+
+  <!-- ==================== 01. RESUMO EXECUTIVO ==================== -->
+  <section class="section" id="resumo">
+    <div class="section-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2V8H20M16 13H8M16 17H8M10 9H8" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+      01 &mdash; Visao Geral
+    </div>
+    <h2 class="section-title">Resumo <em>Executivo</em></h2>
+    <p class="section-desc">Plano de trafego pago para o show da Malla 100 Alca na Prime Hall, Barreiras-BA, em 21 de agosto de 2026. Estrategia de 7 dias com tres campanhas complementares, orcamento total de R$640 e meta de lotacao maxima: 700 ingressos vendidos.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#FF5C00" stroke-width="1.5"/><path d="M16 2V6M8 2V6M3 10H21" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="kpi-value">7 dias</div>
+        <div class="kpi-label">Janela de veiculacao</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 20V10M18 20V4M6 20V16" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="kpi-value">3</div>
+        <div class="kpi-label">Campanhas ativas</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 1V23M17 5H9.5C7.01 5 5 7.01 5 9.5C5 11.99 7.01 14 9.5 14H14.5C16.99 14 19 16.01 19 18.5C19 20.99 16.99 23 14.5 23H6" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="kpi-value">R$640</div>
+        <div class="kpi-label">Investimento total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#FF5C00" stroke-width="1.5"/></svg>
+        </div>
+        <div class="kpi-value">700</div>
+        <div class="kpi-label">Ingressos (meta)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 12H18L15 21L9 3L6 12H2" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="kpi-value">~370 mil</div>
+        <div class="kpi-label">Alcance potencial</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M23 6L13.5 15.5L8.5 10.5L1 18" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 6H23V12" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="kpi-value">43x&ndash;54x</div>
+        <div class="kpi-label">ROAS estimado</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#FF5C00" stroke-width="1.5"/><path d="M12 8V12L15 15" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Contexto Estrategico</div>
+          <div class="card-subtitle">Por que este plano funciona</div>
+        </div>
+      </div>
+      <ul>
+        <li><strong>Janela curta, impacto concentrado:</strong> 7 dias de veiculacao com orcamento crescente &mdash; comeca aquecendo e termina em blitz de conversao.</li>
+        <li><strong>Tres fases complementares:</strong> Alcance (reconhecimento) &rarr; Engajamento (prova social) &rarr; Mensagens WhatsApp (venda direta). Cada fase alimenta a seguinte.</li>
+        <li><strong>Remarketing integrado:</strong> Quem assistiu ao video na Campanha 1 recebe o anuncio de conversao na Campanha 3 &mdash; funil fechado.</li>
+        <li><strong>Lotes como gatilho de urgencia:</strong> A estrutura de tres lotes (R$40 &rarr; R$40 s/ casadinha &rarr; R$50 na porta) cria escassez real, amplificada pelas copies.</li>
+        <li><strong>Malla 100 Alca tem forca de marca:</strong> 807 mil seguidores no Instagram, hits com centenas de milhoes de views. O nome da banda vende &mdash; o trafego pago amplifica.</li>
+        <li><strong>Competicao direta:</strong> Jorge &amp; Mateus toca no dia seguinte (22/ago) pela Allanbick Producoes. O plano antecipa o senso de urgencia para converter antes que o publico divida atencao e orcamento.</li>
+      </ul>
+    </div>
+
+    <div class="alerta">
+      <div class="alerta-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18C1.64 18.31 1.55 18.67 1.55 19.04C1.56 19.4 1.66 19.76 1.84 20.07C2.02 20.38 2.28 20.64 2.59 20.82C2.9 21 3.26 21.09 3.63 21.09H20.58C20.94 21.09 21.3 21 21.61 20.82C21.92 20.64 22.18 20.38 22.36 20.07C22.54 19.76 22.64 19.4 22.65 19.04C22.65 18.67 22.56 18.31 22.38 18L13.91 3.86C13.73 3.56 13.47 3.31 13.17 3.14C12.86 2.96 12.52 2.87 12.17 2.87C11.82 2.87 11.47 2.96 11.17 3.14C10.87 3.31 10.61 3.56 10.43 3.86H10.29Z" stroke="#FF3D00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 9V13M12 17H12.01" stroke="#FF3D00" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="alerta-title">Alerta de Concorrencia Direta</div>
+        <div class="alerta-text">A Allanbick Producoes confirmou <strong>Jorge &amp; Mateus em Barreiras no dia 22/08 (sabado)</strong>, um dia depois do show da Malla 100 Alca. Ambos os publicos se sobrepem (sertanejo/forro, classe B/C, 25-45 anos). Estrategia: <strong>converter cedo</strong> &mdash; quem compra primeiro, compra o nosso. As copies exploram a vantagem de sexta-feira ("comece o fim de semana com forro") e o preco mais acessivel.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 19C9 20.66 7.66 22 6 22C4.34 22 3 20.66 3 19C3 17.34 4.34 16 6 16C7.66 16 9 17.34 9 19Z" stroke="#FF5C00" stroke-width="1.5"/><path d="M21 5C21 6.66 19.66 8 18 8C16.34 8 15 6.66 15 5C15 3.34 16.34 2 18 2C19.66 2 21 3.34 21 5Z" stroke="#FF5C00" stroke-width="1.5"/><path d="M9 19V5C9 3.9 9.9 3 11 3H15" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Sobre a Banda</div>
+          <div class="card-subtitle">Malla 100 Alca &mdash; "A Boa do Forro"</div>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div>
+          <ul>
+            <li><strong>Origem:</strong> Araripina-PE, desde 2006</li>
+            <li><strong>Genero:</strong> Forro eletronico/romantico</li>
+            <li><strong>Instagram:</strong> 807 mil seguidores (@malla100alca)</li>
+            <li><strong>Facebook:</strong> ~979 mil curtidas</li>
+            <li><strong>YouTube:</strong> Centenas de milhoes de views</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><strong>Formacao atual:</strong> Rick Rocha, Lanni Nunes, Jessica Tavares, Carlinhos Caicara</li>
+            <li><strong>Hits principais:</strong></li>
+            <li>Enfermeira (~100M views)</li>
+            <li>Lagrimas Reais (~95M views)</li>
+            <li>Amor Fake (~93M views)</li>
+            <li>A Cura da Alma (~33M views)</li>
+            <li>Vamos Falar de Amor (~26M views)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 21V19C20 16.79 18.21 15 16 15H8C5.79 15 4 16.79 4 19V21" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="#FF5C00" stroke-width="1.5"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Conta Meta Ads</div>
+          <div class="card-subtitle">Dados da conta de anuncios</div>
+        </div>
+      </div>
+      <dl class="spec-grid">
+        <dt>Portfolio</dt>
+        <dd>Tabacaria do Cais <span class="tag tag-laranja">ID: 1913802599511449</span></dd>
+        <dt>Conta</dt>
+        <dd>CONTA 01 - TABACARIA <span class="tag tag-laranja">ID: 24484658354527580</span></dd>
+        <dt>Moeda</dt>
+        <dd>BRL (Real Brasileiro)</dd>
+        <dt>Orcamento min./dia</dt>
+        <dd>R$5,14</dd>
+        <dt>Pixel</dt>
+        <dd>Utilizar o pixel ja configurado na conta</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ==================== 02. ESTRUTURA DE CAMPANHAS ==================== -->
+  <section class="section" id="estrutura">
+    <div class="section-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 20V10M18 20V4M6 20V16" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+      02 &mdash; Arquitetura
+    </div>
+    <h2 class="section-title">Estrutura de <em>Campanhas</em></h2>
+    <p class="section-desc">Tres campanhas com objetivos complementares formam um funil completo: da descoberta a venda. Cada campanha alimenta a proxima, criando um ciclo de aquecimento, engajamento e conversao.</p>
+
+    <!-- CAMPANHA 1 -->
+    <div class="card" style="margin-bottom:32px;">
+      <div class="card-accent" style="background:var(--azul);"></div>
+      <div class="campaign-header">
+        <div class="campaign-number cn-1">01</div>
+        <div class="campaign-info">
+          <h3>Alcance + Video Views</h3>
+          <p>Fase de Aquecimento &mdash; Maximo de exposicao nos primeiros dias</p>
+        </div>
+        <span class="tag tag-azul">~30% do orcamento</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <dl class="spec-grid">
+            <dt>Objetivo</dt>
+            <dd>Reconhecimento da marca / Visualizacoes de video (ThruPlay)</dd>
+            <dt>Meta</dt>
+            <dd>Maximizar alcance e gerar base de remarketing (video views 75%+)</dd>
+            <dt>Periodo</dt>
+            <dd>15 a 19/ago (5 dias)</dd>
+            <dt>Orcamento</dt>
+            <dd>~R$192 (30% de R$640)</dd>
+          </dl>
+        </div>
+        <div>
+          <dl class="spec-grid">
+            <dt>Publico</dt>
+            <dd>Amplo &mdash; Barreiras + 90 km, 18-50 anos, interesses em forro e shows ao vivo</dd>
+            <dt>Posicionamentos</dt>
+            <dd>Feed Instagram, Stories, Reels, Feed Facebook</dd>
+            <dt>Criativos</dt>
+            <dd>Video da banda (trecho de musica + texto em motion graphics) &mdash; 15s para Stories/Reels, 30s para Feed</dd>
+            <dt>Otimizacao</dt>
+            <dd>ThruPlay (visualizacoes de 15s+)</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="destaque" style="margin-top:20px;">
+        <div class="destaque-title">Papel estrategico</div>
+        <p>Esta campanha nao vende &mdash; ela planta a semente. O video gera reconhecimento do evento, e quem assiste 75%+ entra na lista de remarketing para a Campanha 3 (conversao). Quanto maior o video view rate, maior o publico quente disponivel para conversao.</p>
+      </div>
+
+      <p style="font-size:0.82rem;color:var(--cinza-claro);margin-top:16px;"><strong style="color:var(--branco);">Estrutura no Gerenciador:</strong></p>
+      <div class="table-wrapper" style="margin-top:8px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Nivel</th>
+              <th>Nome sugerido</th>
+              <th>Configuracao</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-azul">Campanha</span></td>
+              <td>[PRIME HALL] Malla 100 Alca &mdash; Alcance + Video Views</td>
+              <td>Objetivo: Reconhecimento | Orcamento: CBO (orcamento a nivel de campanha)</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-azul">Conjunto 1</span></td>
+              <td>AQ &mdash; Amplo &mdash; Barreiras 90km &mdash; 18-50</td>
+              <td>Publico amplo, otimizacao ThruPlay, posicionamentos automaticos (Feed + Stories + Reels)</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-azul">Conjunto 2</span></td>
+              <td>AQ &mdash; Forro Fans &mdash; Barreiras 90km &mdash; 25-45</td>
+              <td>Interesses: Malla 100 Alca, Calcinha Preta, Avioes do Forro, forro</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-azul">Anuncio 1</span></td>
+              <td>[VIDEO] Malla 100 Alca &mdash; Trecho Hit &mdash; 15s</td>
+              <td>Video vertical 9:16 para Stories/Reels</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-azul">Anuncio 2</span></td>
+              <td>[VIDEO] Malla 100 Alca &mdash; Trecho Hit &mdash; 30s</td>
+              <td>Video 1:1 ou 4:5 para Feed</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CAMPANHA 2 -->
+    <div class="card" style="margin-bottom:32px;">
+      <div class="card-accent" style="background:var(--verde);"></div>
+      <div class="campaign-header">
+        <div class="campaign-number cn-2">02</div>
+        <div class="campaign-info">
+          <h3>Engajamento</h3>
+          <p>Fase de Buzz &mdash; Gerar prova social e viralizar o evento</p>
+        </div>
+        <span class="tag tag-verde">~20% do orcamento</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <dl class="spec-grid">
+            <dt>Objetivo</dt>
+            <dd>Engajamento (curtidas, comentarios, compartilhamentos)</dd>
+            <dt>Meta</dt>
+            <dd>Gerar buzz, prova social e compartilhamentos organicos</dd>
+            <dt>Periodo</dt>
+            <dd>16 a 20/ago (5 dias)</dd>
+            <dt>Orcamento</dt>
+            <dd>~R$128 (20% de R$640)</dd>
+          </dl>
+        </div>
+        <div>
+          <dl class="spec-grid">
+            <dt>Publico</dt>
+            <dd>25-45 anos, interesses Malla 100 Alca + artistas similares</dd>
+            <dt>Posicionamentos</dt>
+            <dd>Feed Instagram, Feed Facebook, Stories</dd>
+            <dt>Criativos</dt>
+            <dd>Carrossel interativo "Qual musica voce quer ouvir ao vivo?" + Arte de divulgacao com lineup</dd>
+            <dt>Otimizacao</dt>
+            <dd>Engajamento com a publicacao</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="destaque" style="margin-top:20px;background:var(--verde-bg);border-color:rgba(0,200,83,0.2);">
+        <div class="destaque-title" style="color:var(--verde);">Papel estrategico</div>
+        <p>Engajamento gera prova social &mdash; quando o publico ve centenas de curtidas e comentarios, o evento parece imperdivel. Os compartilhamentos estendem o alcance organicamente (gratuito). Quem engaja tambem entra no remarketing da Campanha 3.</p>
+      </div>
+
+      <p style="font-size:0.82rem;color:var(--cinza-claro);margin-top:16px;"><strong style="color:var(--branco);">Estrutura no Gerenciador:</strong></p>
+      <div class="table-wrapper" style="margin-top:8px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Nivel</th>
+              <th>Nome sugerido</th>
+              <th>Configuracao</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-verde">Campanha</span></td>
+              <td>[PRIME HALL] Malla 100 Alca &mdash; Engajamento</td>
+              <td>Objetivo: Engajamento | Orcamento: CBO</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-verde">Conjunto 1</span></td>
+              <td>ENG &mdash; Fas Forro &mdash; Barreiras 90km &mdash; 25-45</td>
+              <td>Interesses: Malla 100 Alca, Calcinha Preta, Avioes do Forro, Wesley Safadao, Joao Gomes</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-verde">Conjunto 2</span></td>
+              <td>ENG &mdash; Shows e Eventos &mdash; Barreiras 90km &mdash; 18-40</td>
+              <td>Interesses: shows ao vivo, vaquejada, festas, musica brasileira</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-verde">Anuncio 1</span></td>
+              <td>[CARROSSEL] Qual musica voce quer ouvir ao vivo?</td>
+              <td>5 cards com capas de hits + enquete nos comentarios</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-verde">Anuncio 2</span></td>
+              <td>[IMAGEM] Arte Divulgacao &mdash; Malla 100 Alca Prime Hall</td>
+              <td>Arte oficial do evento com data, local e logo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CAMPANHA 3 -->
+    <div class="card" style="margin-bottom:32px;">
+      <div class="card-accent"></div>
+      <div class="campaign-header">
+        <div class="campaign-number cn-3">03</div>
+        <div class="campaign-info">
+          <h3>Mensagens WhatsApp (Conversao)</h3>
+          <p>Motor de Vendas &mdash; Gerar leads diretos e fechar ingressos</p>
+        </div>
+        <span class="tag tag-laranja">~50% do orcamento</span>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <dl class="spec-grid">
+            <dt>Objetivo</dt>
+            <dd>Mensagens (Clique para WhatsApp)</dd>
+            <dt>Meta</dt>
+            <dd>Gerar conversas no WhatsApp e converter em vendas de ingressos</dd>
+            <dt>Periodo</dt>
+            <dd>15 a 21/ago (7 dias &mdash; toda a janela)</dd>
+            <dt>Orcamento</dt>
+            <dd>~R$320 (50% de R$640)</dd>
+            <dt>WhatsApp</dt>
+            <dd><strong>(77) 99801-4490</strong></dd>
+          </dl>
+        </div>
+        <div>
+          <dl class="spec-grid">
+            <dt>Publico Frio</dt>
+            <dd>Barreiras + 90 km, 18-50, interesses em forro e shows</dd>
+            <dt>Publico Quente</dt>
+            <dd>Remarketing: assistiu 75%+ do video (Camp. 1) + engajou com publicacoes (Camp. 2)</dd>
+            <dt>Posicionamentos</dt>
+            <dd>Feed Instagram, Stories, Feed Facebook, Reels</dd>
+            <dt>Criativos</dt>
+            <dd>Arte com preco do ingresso + CTA direto para WhatsApp. Variacao por lote.</dd>
+            <dt>Otimizacao</dt>
+            <dd>Conversas iniciadas</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="destaque" style="margin-top:20px;">
+        <div class="destaque-title">Papel estrategico &mdash; Motor principal de vendas</div>
+        <p>Esta e a campanha que vende. Recebe 50% do orcamento porque cada conversa no WhatsApp e um lead quente com intencao de compra. O remarketing (quem ja viu o video ou engajou) tem custo por mensagem significativamente menor &mdash; publico que ja conhece o evento converte mais rapido. Nos ultimos 2 dias (20-21/ago), o orcamento intensifica aqui.</p>
+      </div>
+
+      <p style="font-size:0.82rem;color:var(--cinza-claro);margin-top:16px;"><strong style="color:var(--branco);">Estrutura no Gerenciador:</strong></p>
+      <div class="table-wrapper" style="margin-top:8px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Nivel</th>
+              <th>Nome sugerido</th>
+              <th>Configuracao</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-laranja">Campanha</span></td>
+              <td>[PRIME HALL] Malla 100 Alca &mdash; WhatsApp Vendas</td>
+              <td>Objetivo: Mensagens | Orcamento: ABO (orcamento a nivel de conjunto)</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-laranja">Conjunto 1</span></td>
+              <td>WPP &mdash; Frio &mdash; Amplo &mdash; Barreiras 90km &mdash; 18-50</td>
+              <td>Publico amplo com interesses em forro, shows, eventos</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-laranja">Conjunto 2</span></td>
+              <td>WPP &mdash; Frio &mdash; Fas Forro &mdash; Barreiras 90km &mdash; 25-45</td>
+              <td>Interesses especificos: Malla 100 Alca, Calcinha Preta, Avioes, Safadao</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-laranja">Conjunto 3</span></td>
+              <td>WPP &mdash; Quente &mdash; Video Viewers 75%</td>
+              <td>Publico personalizado: assistiu 75%+ do video da Campanha 1</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-laranja">Conjunto 4</span></td>
+              <td>WPP &mdash; Quente &mdash; Engajamento IG/FB</td>
+              <td>Publico personalizado: engajou com pagina/perfil nos ultimos 7 dias</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-laranja">Anuncio 1</span></td>
+              <td>[IMAGEM] 1o Lote R$40 &mdash; Garanta Agora</td>
+              <td>Arte com preco do 1o lote + CTA "Fale conosco no WhatsApp"</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-laranja">Anuncio 2</span></td>
+              <td>[IMAGEM] Casadinha R$70 &mdash; Traga Seu Par</td>
+              <td>Arte com preco da casadinha + CTA direto</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-laranja">Anuncio 3</span></td>
+              <td>[IMAGEM] 2o Lote &mdash; Ultimo Lote Online</td>
+              <td>Arte com urgencia de 2o lote (ativa dia 20/ago)</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-laranja">Anuncio 4</span></td>
+              <td>[IMAGEM] Dia do Show &mdash; Ultimos Ingressos</td>
+              <td>Arte com urgencia maxima, 3o lote R$50 (ativa dia 21/ago)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DIAGRAMA DO FUNIL -->
+    <div class="card">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Funil Integrado</div>
+          <div class="card-subtitle">Como as tres campanhas se conectam</div>
+        </div>
+      </div>
+      <div style="text-align:center;padding:20px 0;">
+        <div style="display:inline-flex;flex-direction:column;align-items:center;gap:4px;">
+          <div style="background:var(--azul-bg);border:1px solid rgba(68,138,255,0.2);border-radius:8px;padding:14px 48px;font-size:0.82rem;font-weight:600;color:var(--azul);width:340px;">CAMPANHA 1: Alcance + Video Views<br><span style="font-weight:400;font-size:0.72rem;opacity:0.7;">~370 mil pessoas impactadas</span></div>
+          <svg width="20" height="24" viewBox="0 0 20 24" fill="none"><path d="M10 0V20M5 15L10 20L15 15" stroke="#555" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div style="background:var(--verde-bg);border:1px solid rgba(0,200,83,0.2);border-radius:8px;padding:14px 40px;font-size:0.82rem;font-weight:600;color:var(--verde);width:300px;">CAMPANHA 2: Engajamento<br><span style="font-weight:400;font-size:0.72rem;opacity:0.7;">Prova social + compartilhamentos</span></div>
+          <svg width="20" height="24" viewBox="0 0 20 24" fill="none"><path d="M10 0V20M5 15L10 20L15 15" stroke="#555" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div style="background:var(--laranja-subtle);border:1px solid rgba(255,92,0,0.2);border-radius:8px;padding:14px 32px;font-size:0.82rem;font-weight:600;color:var(--laranja);width:260px;">CAMPANHA 3: WhatsApp<br><span style="font-weight:400;font-size:0.72rem;opacity:0.7;">Vendas diretas (remarketing)</span></div>
+          <svg width="20" height="24" viewBox="0 0 20 24" fill="none"><path d="M10 0V20M5 15L10 20L15 15" stroke="#555" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div style="background:rgba(255,214,0,0.1);border:1px solid rgba(255,214,0,0.25);border-radius:8px;padding:14px 24px;font-size:0.85rem;font-weight:700;color:var(--amarelo);width:220px;">700 INGRESSOS VENDIDOS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 03. SEGMENTACAO DETALHADA ==================== -->
+  <section class="section" id="segmentacao">
+    <div class="section-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#FF5C00" stroke-width="1.5"/><path d="M2 12H22M12 2C14.5 4.73 16 8.18 16 12C16 15.82 14.5 19.27 12 22C9.5 19.27 8 15.82 8 12C8 8.18 9.5 4.73 12 2Z" stroke="#FF5C00" stroke-width="1.5"/></svg>
+      03 &mdash; Audiencia
+    </div>
+    <h2 class="section-title">Segmentacao <em>Detalhada</em></h2>
+    <p class="section-desc">Cada conjunto de anuncios tem uma segmentacao precisa. O objetivo e cobrir o publico potencial de ~370 mil pessoas no raio de 90 km de Barreiras, priorizando fas de forro e frequentadores de shows.</p>
+
+    <!-- MAPA DE CIDADES -->
+    <div class="card" style="margin-bottom:24px;">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2Z" stroke="#FF5C00" stroke-width="1.5"/><circle cx="12" cy="9" r="2.5" stroke="#FF5C00" stroke-width="1.5"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Cobertura Geografica</div>
+          <div class="card-subtitle">Barreiras + raio de 90 km &mdash; 6 municipios</div>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Cidade</th>
+              <th>Populacao</th>
+              <th>Distancia</th>
+              <th>Prioridade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Barreiras-BA</strong></td>
+              <td>174 mil hab.</td>
+              <td>Centro</td>
+              <td><span class="tag tag-laranja">Primaria</span></td>
+            </tr>
+            <tr>
+              <td>Luis Eduardo Magalhaes-BA</td>
+              <td>118 mil hab.</td>
+              <td>~90 km</td>
+              <td><span class="tag tag-laranja">Primaria</span></td>
+            </tr>
+            <tr>
+              <td>Sao Desiderio-BA</td>
+              <td>34 mil hab.</td>
+              <td>~45 km</td>
+              <td><span class="tag tag-verde">Secundaria</span></td>
+            </tr>
+            <tr>
+              <td>Angical-BA</td>
+              <td>14 mil hab.</td>
+              <td>~60 km</td>
+              <td><span class="tag tag-verde">Secundaria</span></td>
+            </tr>
+            <tr>
+              <td>Baianopolis-BA</td>
+              <td>14 mil hab.</td>
+              <td>~80 km</td>
+              <td><span class="tag tag-azul">Terciaria</span></td>
+            </tr>
+            <tr>
+              <td>Cristopolis-BA</td>
+              <td>14,5 mil hab.</td>
+              <td>~70 km</td>
+              <td><span class="tag tag-azul">Terciaria</span></td>
+            </tr>
+            <tr class="row-total">
+              <td>Total</td>
+              <td>~370 mil hab.</td>
+              <td>&mdash;</td>
+              <td>&mdash;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TABELA DE CONJUNTOS -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Conjunto</th>
+            <th>Campanha</th>
+            <th>Geografia</th>
+            <th>Idade</th>
+            <th>Genero</th>
+            <th>Interesses</th>
+            <th>Exclusoes</th>
+            <th>Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>AQ &mdash; Amplo</strong></td>
+            <td><span class="tag tag-azul">Alcance</span></td>
+            <td>Barreiras + 90 km</td>
+            <td>18-50</td>
+            <td>Todos</td>
+            <td>Forro, shows ao vivo, musica brasileira, entretenimento</td>
+            <td>&mdash;</td>
+            <td>Frio</td>
+          </tr>
+          <tr>
+            <td><strong>AQ &mdash; Forro Fans</strong></td>
+            <td><span class="tag tag-azul">Alcance</span></td>
+            <td>Barreiras + 90 km</td>
+            <td>25-45</td>
+            <td>Todos</td>
+            <td>Malla 100 Alca, Calcinha Preta, Avioes do Forro, forro</td>
+            <td>&mdash;</td>
+            <td>Frio</td>
+          </tr>
+          <tr>
+            <td><strong>ENG &mdash; Fas Forro</strong></td>
+            <td><span class="tag tag-verde">Engajamento</span></td>
+            <td>Barreiras + 90 km</td>
+            <td>25-45</td>
+            <td>Todos</td>
+            <td>Malla 100 Alca, Calcinha Preta, Avioes do Forro, Wesley Safadao, Joao Gomes</td>
+            <td>&mdash;</td>
+            <td>Frio</td>
+          </tr>
+          <tr>
+            <td><strong>ENG &mdash; Shows</strong></td>
+            <td><span class="tag tag-verde">Engajamento</span></td>
+            <td>Barreiras + 90 km</td>
+            <td>18-40</td>
+            <td>Todos</td>
+            <td>Shows ao vivo, vaquejada, festas, Taty Girl, Leo Magalhaes</td>
+            <td>&mdash;</td>
+            <td>Frio</td>
+          </tr>
+          <tr>
+            <td><strong>WPP &mdash; Frio Amplo</strong></td>
+            <td><span class="tag tag-laranja">WhatsApp</span></td>
+            <td>Barreiras + 90 km</td>
+            <td>18-50</td>
+            <td>Todos</td>
+            <td>Forro, shows ao vivo, eventos, musica brasileira</td>
+            <td>Engajados (evitar sobreposicao)</td>
+            <td>Frio</td>
+          </tr>
+          <tr>
+            <td><strong>WPP &mdash; Frio Fas</strong></td>
+            <td><span class="tag tag-laranja">WhatsApp</span></td>
+            <td>Barreiras + 90 km</td>
+            <td>25-45</td>
+            <td>Todos</td>
+            <td>Malla 100 Alca, Calcinha Preta, Avioes do Forro, Wesley Safadao</td>
+            <td>Engajados (evitar sobreposicao)</td>
+            <td>Frio</td>
+          </tr>
+          <tr>
+            <td><strong>WPP &mdash; Video 75%</strong></td>
+            <td><span class="tag tag-laranja">WhatsApp</span></td>
+            <td>Barreiras + 90 km</td>
+            <td>18-50</td>
+            <td>Todos</td>
+            <td>&mdash; (publico personalizado)</td>
+            <td>Compradores</td>
+            <td><span class="tag tag-vermelho">Quente</span></td>
+          </tr>
+          <tr>
+            <td><strong>WPP &mdash; Engajados</strong></td>
+            <td><span class="tag tag-laranja">WhatsApp</span></td>
+            <td>Barreiras + 90 km</td>
+            <td>18-50</td>
+            <td>Todos</td>
+            <td>&mdash; (publico personalizado)</td>
+            <td>Compradores</td>
+            <td><span class="tag tag-vermelho">Quente</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="destaque" style="margin-top:24px;">
+      <div class="destaque-title">Como criar os publicos personalizados</div>
+      <p><strong>Video Viewers 75%:</strong> No Gerenciador de Anuncios &rarr; Publicos &rarr; Criar Publico Personalizado &rarr; Video &rarr; Selecionar "Pessoas que assistiram 75% do video" &rarr; Escolher os videos da Campanha 1 &rarr; Ultimos 7 dias.<br><br>
+      <strong>Engajados IG/FB:</strong> Publico Personalizado &rarr; Conta do Instagram / Pagina do Facebook &rarr; "Todas as pessoas que interagiram com sua conta profissional" &rarr; Ultimos 7 dias.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 04. DISTRIBUICAO DE ORCAMENTO ==================== -->
+  <section class="section" id="orcamento">
+    <div class="section-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 1V23M17 5H9.5C7.01 5 5 7.01 5 9.5C5 11.99 7.01 14 9.5 14H14.5C16.99 14 19 16.01 19 18.5C19 20.99 16.99 23 14.5 23H6" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+      04 &mdash; Investimento
+    </div>
+    <h2 class="section-title">Distribuicao de <em>Orcamento</em></h2>
+    <p class="section-desc">Orcamento total de R$640 distribuido ao longo de 7 dias, com crescimento progressivo. Os ultimos 2 dias recebem R$120/dia &mdash; o pico de investimento coincide com a maior urgencia de compra.</p>
+
+    <!-- KPIs DE ORCAMENTO -->
+    <div class="kpi-grid" style="margin-bottom:32px;">
+      <div class="kpi-card">
+        <div class="kpi-value" style="color:var(--azul);">R$192</div>
+        <div class="kpi-label">Campanha 1 (30%)</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:30%;background:var(--azul);"></div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value" style="color:var(--verde);">R$128</div>
+        <div class="kpi-label">Campanha 2 (20%)</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:20%;background:var(--verde);"></div></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value" style="color:var(--laranja);">R$320</div>
+        <div class="kpi-label">Campanha 3 (50%)</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:50%;background:var(--laranja);"></div></div>
+      </div>
+    </div>
+
+    <!-- TABELA DIA A DIA -->
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Dia</th>
+            <th>Lote Ativo</th>
+            <th>Camp. 1 (Alcance)</th>
+            <th>Camp. 2 (Engajamento)</th>
+            <th>Camp. 3 (WhatsApp)</th>
+            <th>Total/Dia</th>
+            <th>Observacao</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>15/ago</strong></td>
+            <td>Sex</td>
+            <td><span class="tag tag-verde">1o Lote</span></td>
+            <td>R$30</td>
+            <td>&mdash;</td>
+            <td>R$50</td>
+            <td><strong>R$80</strong></td>
+            <td>Lancamento: subir Camp. 1 e 3. Primeiro impacto do publico.</td>
+          </tr>
+          <tr>
+            <td><strong>16/ago</strong></td>
+            <td>Sab</td>
+            <td><span class="tag tag-verde">1o Lote</span></td>
+            <td>R$30</td>
+            <td>R$20</td>
+            <td>R$30</td>
+            <td><strong>R$80</strong></td>
+            <td>Ativar Camp. 2. Fim de semana = maior consumo de redes.</td>
+          </tr>
+          <tr>
+            <td><strong>17/ago</strong></td>
+            <td>Dom</td>
+            <td><span class="tag tag-verde">1o Lote</span></td>
+            <td>R$28</td>
+            <td>R$22</td>
+            <td>R$30</td>
+            <td><strong>R$80</strong></td>
+            <td>Domingo de analise. Ajustar publicos e criativos fracos.</td>
+          </tr>
+          <tr>
+            <td><strong>18/ago</strong></td>
+            <td>Seg</td>
+            <td><span class="tag tag-verde">1o Lote</span></td>
+            <td>R$24</td>
+            <td>R$22</td>
+            <td>R$34</td>
+            <td><strong>R$80</strong></td>
+            <td>Intensificar Camp. 3. Testar novo criativo se CTR baixo.</td>
+          </tr>
+          <tr>
+            <td><strong>19/ago</strong></td>
+            <td>Ter</td>
+            <td><span class="tag tag-amarelo">1o Lote (ultimo dia)</span></td>
+            <td>R$20</td>
+            <td>R$24</td>
+            <td>R$36</td>
+            <td><strong>R$80</strong></td>
+            <td>Ultimo dia do 1o lote &mdash; copy de urgencia: "Hoje e o ultimo dia a R$40".</td>
+          </tr>
+          <tr>
+            <td><strong>20/ago</strong></td>
+            <td>Qua</td>
+            <td><span class="tag tag-vermelho">2o Lote</span></td>
+            <td>R$30</td>
+            <td>R$20</td>
+            <td>R$70</td>
+            <td><strong>R$120</strong></td>
+            <td>Virada de lote. Atualizar copies e criativos. Sem casadinha.</td>
+          </tr>
+          <tr>
+            <td><strong>21/ago</strong></td>
+            <td>Qui</td>
+            <td><span class="tag tag-vermelho">3o Lote (porta)</span></td>
+            <td>R$30</td>
+            <td>R$20</td>
+            <td>R$70</td>
+            <td><strong>R$120</strong></td>
+            <td>DIA DO SHOW. Ultimo push. CTA "Ultimos ingressos". Manha ate 17h.</td>
+          </tr>
+          <tr class="row-total">
+            <td colspan="3"><strong>TOTAL</strong></td>
+            <td><strong>R$192</strong></td>
+            <td><strong>R$128</strong></td>
+            <td><strong>R$320</strong></td>
+            <td><strong>R$640</strong></td>
+            <td>&mdash;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="destaque">
+        <div class="destaque-title">Logica do orcamento crescente</div>
+        <p>Dias 15-19: R$80/dia (aquecimento). Dias 20-21: R$120/dia (blitz final). O aumento de 50% nos ultimos 2 dias coincide com a maior urgencia &mdash; lotes mais caros, menos tempo, prova social ja construida.</p>
+      </div>
+      <div class="destaque" style="background:var(--verde-bg);border-color:rgba(0,200,83,0.2);">
+        <div class="destaque-title" style="color:var(--verde);">Pontos de venda fisicos</div>
+        <p>Lembrar: alem do WhatsApp, os ingressos estao a venda na <strong>Tabacaria do Cais</strong>, <strong>Emporio</strong>, <strong>Carro de Som</strong> e <strong>Acougues do Cais</strong>. Mencionar nos criativos quando aplicavel.</p>
+      </div>
+    </div>
+
+    <!-- LOTES -->
+    <div class="card" style="margin-top:24px;">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20.59 13.41L13.42 20.58C13.23 20.77 13.02 20.92 12.78 21.03C12.55 21.14 12.29 21.19 12.03 21.19C11.77 21.19 11.51 21.14 11.28 21.03C11.04 20.92 10.83 20.77 10.64 20.58L2 12V2H12L20.59 10.59C20.95 10.96 21.16 11.46 21.16 11.98C21.16 12.51 20.95 13.01 20.59 13.37V13.41Z" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="7" r="1" fill="#FF5C00"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Estrutura de Lotes</div>
+          <div class="card-subtitle">Precos e periodos de cada lote de ingressos</div>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Lote</th>
+              <th>Periodo</th>
+              <th>Individual</th>
+              <th>Casadinha</th>
+              <th>Observacao</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-verde">1o Lote</span></td>
+              <td>Ate quarta 19/ago</td>
+              <td><strong>R$40</strong></td>
+              <td><strong>R$70</strong> (2 ingressos)</td>
+              <td>Melhor preco + opcao casadinha. Explorar nos criativos.</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-amarelo">2o Lote</span></td>
+              <td>Quinta 20/ago</td>
+              <td><strong>R$40</strong></td>
+              <td><span style="color:var(--vermelho);">Indisponivel</span></td>
+              <td>Mesmo preco, sem casadinha. Copy: "Ultimo dia a R$40".</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-vermelho">3o Lote</span></td>
+              <td>Na porta &mdash; sexta 21/ago</td>
+              <td><strong>R$50</strong></td>
+              <td><span style="color:var(--vermelho);">Indisponivel</span></td>
+              <td>Preco cheio na porta. Copy de urgencia maxima.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 05. COPIES DOS ANUNCIOS ==================== -->
+  <section class="section" id="copies">
+    <div class="section-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M11 4H4C3.47 4 2.96 4.21 2.59 4.59C2.21 4.96 2 5.47 2 6V20C2 20.53 2.21 21.04 2.59 21.41C2.96 21.79 3.47 22 4 22H18C18.53 22 19.04 21.79 19.41 21.41C19.79 21.04 20 20.53 20 20V13" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5C18.89 2.11 19.42 1.89 19.97 1.89C20.52 1.89 21.05 2.11 21.44 2.5C21.83 2.89 22.05 3.42 22.05 3.97C22.05 4.52 21.83 5.05 21.44 5.44L12 14.88L8 15.88L9 11.88L18.5 2.5Z" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      05 &mdash; Copies
+    </div>
+    <h2 class="section-title">Copies dos <em>Anuncios</em></h2>
+    <p class="section-desc">Textos prontos para cada campanha e cada lote. Copie e cole direto no Gerenciador de Anuncios. Cada copy e adaptada ao momento do funil e ao gatilho de urgencia do lote ativo.</p>
+
+    <!-- CAMPANHA 1 COPIES -->
+    <h3 style="font-family:var(--serif);font-size:1.1rem;margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+      <span style="width:28px;height:28px;border-radius:6px;background:var(--azul-bg);border:1px solid rgba(68,138,255,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:var(--azul);">01</span>
+      Campanha 1 &mdash; Alcance + Video Views
+    </h3>
+
+    <div class="copy-block cb-alcance">
+      <div style="margin-bottom:16px;"><span class="tag tag-azul">Anuncio de Video &mdash; Aquecimento</span></div>
+      <div class="copy-label">Texto Principal (Primary Text)</div>
+      <div class="copy-field">Sexta-feira, 21 de agosto, Barreiras vai tremer.<br><br>Malla 100 Alca ao vivo na Prime Hall com os maiores hits: Enfermeira, Lagrimas Reais, Amor Fake e muito mais.<br><br>Ingressos a partir de R$40 (1o lote). Garanta o seu antes que acabe.<br><br>Pontos de venda: Tabacaria do Cais, Emporio, Acougues do Cais, Carro de Som ou pelo WhatsApp.</div>
+      <div class="copy-label">Titulo (Headline)</div>
+      <div class="copy-field"><strong>Malla 100 Alca ao vivo em Barreiras</strong></div>
+      <div class="copy-label">Descricao</div>
+      <div class="copy-field">21/ago &mdash; Prime Hall. Ingressos a partir de R$40. A Boa do Forro na sua cidade.</div>
+      <div class="copy-label">CTA (Botao)</div>
+      <div class="copy-field"><strong>Saiba Mais</strong></div>
+    </div>
+
+    <!-- CAMPANHA 2 COPIES -->
+    <h3 style="font-family:var(--serif);font-size:1.1rem;margin:32px 0 16px;display:flex;align-items:center;gap:10px;">
+      <span style="width:28px;height:28px;border-radius:6px;background:var(--verde-bg);border:1px solid rgba(0,200,83,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:var(--verde);">02</span>
+      Campanha 2 &mdash; Engajamento
+    </h3>
+
+    <div class="copy-block cb-engajamento">
+      <div style="margin-bottom:16px;"><span class="tag tag-verde">Carrossel &mdash; Qual musica voce quer ouvir ao vivo?</span></div>
+      <div class="copy-label">Texto Principal (Primary Text)</div>
+      <div class="copy-field">Dia 21 de agosto, a Malla 100 Alca sobe ao palco da Prime Hall em Barreiras.<br><br>Mas a gente quer saber: qual hit voce nao pode deixar de ouvir ao vivo?<br><br>Comenta aqui embaixo e marca quem vai com voce!<br><br>Ingressos a partir de R$40 &mdash; 1o lote por tempo limitado.</div>
+      <div class="copy-label">Titulo (Headline)</div>
+      <div class="copy-field"><strong>Qual musica voce quer ouvir ao vivo?</strong></div>
+      <div class="copy-label">Descricao</div>
+      <div class="copy-field">Comenta e marca quem vai com voce. Malla 100 Alca na Prime Hall &mdash; 21/ago.</div>
+      <div class="copy-label">CTA (Botao)</div>
+      <div class="copy-field"><strong>Saiba Mais</strong></div>
+    </div>
+
+    <div class="copy-block cb-engajamento">
+      <div style="margin-bottom:16px;"><span class="tag tag-verde">Arte de Divulgacao &mdash; Engajamento Geral</span></div>
+      <div class="copy-label">Texto Principal (Primary Text)</div>
+      <div class="copy-field">A espera acabou. Malla 100 Alca confirmada em Barreiras!<br><br>Data: Sexta, 21 de agosto<br>Local: Prime Hall<br>Horario: A partir das 22h<br><br>Ingressos:<br>1o Lote: R$40 (individual) | R$70 (casadinha)<br><br>Marca nos comentarios quem vai curtir esse show com voce!</div>
+      <div class="copy-label">Titulo (Headline)</div>
+      <div class="copy-field"><strong>Malla 100 Alca &mdash; Prime Hall &mdash; 21/ago</strong></div>
+      <div class="copy-label">Descricao</div>
+      <div class="copy-field">A Boa do Forro ao vivo em Barreiras. Ingressos a partir de R$40.</div>
+      <div class="copy-label">CTA (Botao)</div>
+      <div class="copy-field"><strong>Saiba Mais</strong></div>
+    </div>
+
+    <!-- CAMPANHA 3 COPIES - POR LOTE -->
+    <h3 style="font-family:var(--serif);font-size:1.1rem;margin:32px 0 16px;display:flex;align-items:center;gap:10px;">
+      <span style="width:28px;height:28px;border-radius:6px;background:var(--laranja-subtle);border:1px solid rgba(255,92,0,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:var(--laranja);">03</span>
+      Campanha 3 &mdash; WhatsApp (Conversao)
+    </h3>
+
+    <!-- 1o LOTE -->
+    <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--verde);margin-bottom:12px;">1o Lote &mdash; 15 a 19 de agosto (R$40 / R$70 casadinha)</p>
+
+    <div class="copy-block cb-conversao">
+      <div style="margin-bottom:16px;"><span class="tag tag-laranja">Anuncio WhatsApp &mdash; 1o Lote (Individual)</span></div>
+      <div class="copy-label">Texto Principal (Primary Text)</div>
+      <div class="copy-field">Malla 100 Alca ao vivo na Prime Hall, Barreiras!<br><br>Sexta, 21 de agosto. Os maiores hits do forro numa noite so.<br><br>1o Lote: R$40 (individual) ou R$70 (casadinha &mdash; 2 ingressos).<br><br>Garanta agora pelo WhatsApp antes que o 1o lote esgote. Tambem disponivel na Tabacaria do Cais, Emporio, Acougues do Cais e Carro de Som.</div>
+      <div class="copy-label">Titulo (Headline)</div>
+      <div class="copy-field"><strong>Ingresso a R$40 &mdash; Garanta pelo WhatsApp</strong></div>
+      <div class="copy-label">Descricao</div>
+      <div class="copy-field">1o Lote por tempo limitado. Malla 100 Alca &mdash; Prime Hall &mdash; 21/ago.</div>
+      <div class="copy-label">CTA (Botao)</div>
+      <div class="copy-field"><strong>Enviar Mensagem no WhatsApp</strong></div>
+    </div>
+
+    <div class="copy-block cb-conversao">
+      <div style="margin-bottom:16px;"><span class="tag tag-laranja">Anuncio WhatsApp &mdash; 1o Lote (Casadinha)</span></div>
+      <div class="copy-label">Texto Principal (Primary Text)</div>
+      <div class="copy-field">Vai curtir Malla 100 Alca com alguem especial?<br><br>Casadinha no 1o lote: R$70 (2 ingressos). Sai R$35 cada &mdash; melhor preco do evento.<br><br>Prime Hall, Barreiras &mdash; sexta, 21 de agosto.<br><br>Chama no WhatsApp e garanta sua casadinha agora. So ate quarta (19/ago)!</div>
+      <div class="copy-label">Titulo (Headline)</div>
+      <div class="copy-field"><strong>Casadinha R$70 (2 ingressos) &mdash; So no 1o Lote</strong></div>
+      <div class="copy-label">Descricao</div>
+      <div class="copy-field">R$35 por pessoa. Melhor preco. Valido so ate 19/ago.</div>
+      <div class="copy-label">CTA (Botao)</div>
+      <div class="copy-field"><strong>Enviar Mensagem no WhatsApp</strong></div>
+    </div>
+
+    <div class="copy-block cb-conversao">
+      <div style="margin-bottom:16px;"><span class="tag tag-amarelo">Anuncio WhatsApp &mdash; 1o Lote (Urgencia &mdash; dia 19/ago)</span></div>
+      <div class="copy-label">Texto Principal (Primary Text)</div>
+      <div class="copy-field">Hoje e o ultimo dia do 1o lote.<br><br>Malla 100 Alca ao vivo na Prime Hall, Barreiras &mdash; sexta, 21 de agosto.<br><br>Individual: R$40 | Casadinha: R$70 (2 ingressos).<br><br>A partir de amanha, acabou a casadinha. E o preco na porta vai pra R$50.<br><br>Chama agora no WhatsApp e garanta o seu. Nao deixe pra depois.</div>
+      <div class="copy-label">Titulo (Headline)</div>
+      <div class="copy-field"><strong>Ultimo dia a R$40 com casadinha &mdash; Corra!</strong></div>
+      <div class="copy-label">Descricao</div>
+      <div class="copy-field">Amanha o preco muda. Garanta hoje pelo WhatsApp.</div>
+      <div class="copy-label">CTA (Botao)</div>
+      <div class="copy-field"><strong>Enviar Mensagem no WhatsApp</strong></div>
+    </div>
+
+    <!-- 2o LOTE -->
+    <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--amarelo);margin:32px 0 12px;">2o Lote &mdash; 20 de agosto (R$40 individual, sem casadinha)</p>
+
+    <div class="copy-block cb-conversao">
+      <div style="margin-bottom:16px;"><span class="tag tag-amarelo">Anuncio WhatsApp &mdash; 2o Lote</span></div>
+      <div class="copy-label">Texto Principal (Primary Text)</div>
+      <div class="copy-field">Amanha e o show. Hoje e sua ultima chance de pagar R$40.<br><br>Malla 100 Alca ao vivo na Prime Hall, Barreiras &mdash; sexta, 21 de agosto.<br><br>2o Lote: R$40 (individual). Casadinha ja esgotou.<br><br>Na porta amanha: R$50. Quem garantir hoje economiza R$10.<br><br>Chama no WhatsApp agora. Pontos fisicos: Tabacaria do Cais, Emporio, Acougues do Cais.</div>
+      <div class="copy-label">Titulo (Headline)</div>
+      <div class="copy-field"><strong>Ultimo dia a R$40 &mdash; Amanha e R$50 na porta</strong></div>
+      <div class="copy-label">Descricao</div>
+      <div class="copy-field">Malla 100 Alca amanha na Prime Hall. Garanta agora e economize.</div>
+      <div class="copy-label">CTA (Botao)</div>
+      <div class="copy-field"><strong>Enviar Mensagem no WhatsApp</strong></div>
+    </div>
+
+    <!-- 3o LOTE -->
+    <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--vermelho);margin:32px 0 12px;">3o Lote &mdash; 21 de agosto &mdash; Dia do Show (R$50 na porta)</p>
+
+    <div class="copy-block cb-conversao">
+      <div style="margin-bottom:16px;"><span class="tag tag-vermelho">Anuncio WhatsApp &mdash; Dia do Show (manha/tarde)</span></div>
+      <div class="copy-label">Texto Principal (Primary Text)</div>
+      <div class="copy-field">HOJE TEM Malla 100 Alca na Prime Hall!<br><br>Barreiras vai viver uma noite de forro com Enfermeira, Lagrimas Reais, Amor Fake e todos os hits ao vivo.<br><br>Ultimos ingressos: R$50 na porta ou pelo WhatsApp.<br><br>Nao fique de fora. A lotacao e limitada a 700 pessoas. Chama agora e garanta sua entrada.</div>
+      <div class="copy-label">Titulo (Headline)</div>
+      <div class="copy-field"><strong>HOJE &mdash; Malla 100 Alca ao Vivo &mdash; Ultimos Ingressos</strong></div>
+      <div class="copy-label">Descricao</div>
+      <div class="copy-field">R$50 na porta. Lotacao limitada. Garanta agora pelo WhatsApp.</div>
+      <div class="copy-label">CTA (Botao)</div>
+      <div class="copy-field"><strong>Enviar Mensagem no WhatsApp</strong></div>
+    </div>
+
+    <div class="copy-block cb-conversao">
+      <div style="margin-bottom:16px;"><span class="tag tag-vermelho">Anuncio WhatsApp &mdash; Dia do Show (remarketing &mdash; quem viu video/engajou)</span></div>
+      <div class="copy-label">Texto Principal (Primary Text)</div>
+      <div class="copy-field">Voce viu, curtiu, e agora chegou a hora.<br><br>Malla 100 Alca sobe ao palco da Prime Hall HOJE a noite. Os maiores hits do forro ao vivo em Barreiras.<br><br>Nao deixe pra contar depois que perdeu. Garanta seu ingresso agora pelo WhatsApp &mdash; R$50.<br><br>700 lugares. Quando acabar, acabou.</div>
+      <div class="copy-label">Titulo (Headline)</div>
+      <div class="copy-field"><strong>Voce viu. Agora vem sentir ao vivo.</strong></div>
+      <div class="copy-label">Descricao</div>
+      <div class="copy-field">Hoje, Prime Hall. Ultimos ingressos a R$50. Malla 100 Alca ao vivo.</div>
+      <div class="copy-label">CTA (Botao)</div>
+      <div class="copy-field"><strong>Enviar Mensagem no WhatsApp</strong></div>
+    </div>
+
+    <div class="destaque" style="margin-top:24px;">
+      <div class="destaque-title">Mensagem automatica do WhatsApp (sugestao)</div>
+      <p>Configurar a mensagem pre-preenchida no anuncio:<br><br><em>"Oi! Quero garantir meu ingresso para o show da Malla 100 Alca na Prime Hall, dia 21/ago. Como faco?"</em><br><br>Isso facilita o atendimento e padroniza o inicio da conversa.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 06. CRONOGRAMA OPERACIONAL ==================== -->
+  <section class="section" id="cronograma">
+    <div class="section-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#FF5C00" stroke-width="1.5"/><path d="M12 6V12L16 14" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+      06 &mdash; Operacao
+    </div>
+    <h2 class="section-title">Cronograma <em>Operacional</em></h2>
+    <p class="section-desc">Timeline dia a dia com todas as acoes necessarias. Siga rigorosamente &mdash; cada acao esta vinculada a uma fase do funil e a um lote de ingressos.</p>
+
+    <div class="timeline">
+      <!-- DIA 1 -->
+      <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div class="timeline-date">15/ago (sexta-feira) &mdash; D-6</div>
+        <div class="timeline-title">Lancamento das Campanhas</div>
+        <div class="timeline-content">
+          <ul>
+            <li>Subir <strong>Campanha 1 (Alcance + Video Views)</strong> com 2 conjuntos e 2 anuncios de video</li>
+            <li>Subir <strong>Campanha 3 (WhatsApp)</strong> com conjuntos frios (WPP Amplo + WPP Fas Forro)</li>
+            <li>Publicar primeiro anuncio de video nos perfis organicos (Instagram + Facebook)</li>
+            <li>Verificar se o pixel esta disparando corretamente</li>
+            <li>Testar se o botao de WhatsApp direciona para o numero correto: (77) 99801-4490</li>
+            <li>Orcamento do dia: <strong>R$80</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIA 2 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">16/ago (sabado) &mdash; D-5</div>
+        <div class="timeline-title">Ativacao do Engajamento</div>
+        <div class="timeline-content">
+          <ul>
+            <li>Ativar <strong>Campanha 2 (Engajamento)</strong> com carrossel "Qual musica voce quer ouvir ao vivo?"</li>
+            <li>Monitorar metricas iniciais de todas as campanhas (CPM, CTR, custo por ThruPlay)</li>
+            <li>Responder comentarios nos anuncios de engajamento (prova social)</li>
+            <li>Sabado = alto consumo de redes sociais &mdash; otimo para impacto inicial</li>
+            <li>Orcamento do dia: <strong>R$80</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIA 3 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">17/ago (domingo) &mdash; D-4</div>
+        <div class="timeline-title">Analise e Ajuste Fino</div>
+        <div class="timeline-content">
+          <ul>
+            <li>Analisar metricas de 48h: CPM, CTR, custo por ThruPlay, custo por conversa WhatsApp</li>
+            <li>Pausar conjuntos com CPM acima de R$25 ou CTR abaixo de 0,8%</li>
+            <li>Redistribuir orcamento dos conjuntos fracos para os mais eficientes</li>
+            <li>Verificar volume de mensagens no WhatsApp &mdash; comparar com meta diaria</li>
+            <li>Orcamento do dia: <strong>R$80</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIA 4 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">18/ago (segunda) &mdash; D-3</div>
+        <div class="timeline-title">Intensificacao da Conversao</div>
+        <div class="timeline-content">
+          <ul>
+            <li>Aumentar peso da Campanha 3 (WhatsApp) &mdash; R$34 do dia vai para conversao</li>
+            <li>Testar novo criativo se CTR da Campanha 3 estiver abaixo de 1,5%</li>
+            <li>Criar publico personalizado "Video Viewers 75%" (se ainda nao criado)</li>
+            <li>Ativar conjunto de remarketing WPP &mdash; Video 75% na Campanha 3</li>
+            <li>Monitorar concorrencia &mdash; verificar se Jorge &amp; Mateus intensificou comunicacao</li>
+            <li>Orcamento do dia: <strong>R$80</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIA 5 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">19/ago (terca) &mdash; D-2</div>
+        <div class="timeline-title">Ultimo Dia do 1o Lote &mdash; Urgencia Maxima</div>
+        <div class="timeline-content">
+          <ul>
+            <li><strong>Trocar copies da Campanha 3 para versao de urgencia:</strong> "Hoje e o ultimo dia a R$40"</li>
+            <li>Trocar criativos da Campanha 2 para arte com contador "Ultimo dia do 1o Lote"</li>
+            <li>Publicar stories organicos reforçando: "Amanha o preco muda"</li>
+            <li>Ativar conjunto WPP &mdash; Engajados IG/FB (remarketing)</li>
+            <li>Preparar criativos do 2o lote para ativar no dia seguinte</li>
+            <li>Orcamento do dia: <strong>R$80</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIA 6 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">20/ago (quarta) &mdash; D-1</div>
+        <div class="timeline-title">Virada para 2o Lote &mdash; Blitz Final (Parte 1)</div>
+        <div class="timeline-content">
+          <ul>
+            <li><strong>Atualizar TODOS os criativos e copies para 2o Lote:</strong> R$40 individual, sem casadinha</li>
+            <li>Subir anuncio novo: "Ultimo dia a R$40 &mdash; Amanha e R$50 na porta"</li>
+            <li>Aumentar orcamento total para <strong>R$120</strong> (+50% vs dias anteriores)</li>
+            <li>Campanha 3 recebe R$70 &mdash; motor de vendas em capacidade maxima</li>
+            <li>Preparar criativos do dia do show para ativar as 00h01 do dia 21</li>
+            <li>Orcamento do dia: <strong>R$120</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIA 7 -->
+      <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div class="timeline-date">21/ago (quinta) &mdash; DIA DO SHOW</div>
+        <div class="timeline-title">Dia do Evento &mdash; Blitz Final (Parte 2)</div>
+        <div class="timeline-content">
+          <ul>
+            <li><strong>Ativar criativos de 3o Lote:</strong> R$50 na porta, "HOJE TEM", "Ultimos ingressos"</li>
+            <li>Orcamento maximo: <strong>R$120</strong> &mdash; Campanha 3 com R$70</li>
+            <li>Focar em remarketing (Video 75% + Engajados) &mdash; menor custo por conversa</li>
+            <li>Manter anuncios rodando ate as <strong>17h</strong> (depois disso, quem vai ja decidiu)</li>
+            <li>As 17h: pausar todas as campanhas</li>
+            <li>Publicar stories ao vivo dos bastidores/montagem do palco (organico)</li>
+            <li>Responder todas as mensagens no WhatsApp com prioridade maxima</li>
+            <li>Orcamento do dia: <strong>R$120</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta" style="margin-top:32px;">
+      <div class="alerta-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#FF3D00" stroke-width="1.5"/><path d="M12 8V12M12 16H12.01" stroke="#FF3D00" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="alerta-title">Checklist pre-lancamento (fazer ANTES de 15/ago)</div>
+        <div class="alerta-text">
+          1. Verificar se a conta Meta Ads esta ativa e sem restricoes<br>
+          2. Configurar numero de WhatsApp (77) 99801-4490 como destino dos anuncios<br>
+          3. Preparar todos os criativos (videos + imagens) antes de subir as campanhas<br>
+          4. Criar os publicos personalizados no Gerenciador (Video Viewers + Engajados)<br>
+          5. Testar mensagem pre-preenchida do WhatsApp<br>
+          6. Definir quem respondera as mensagens no WhatsApp (disponibilidade 8h-22h)
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 07. KPIs E METRICAS ==================== -->
+  <section class="section" id="kpis">
+    <div class="section-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M22 12H18L15 21L9 3L6 12H2" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      07 &mdash; Metricas
+    </div>
+    <h2 class="section-title">KPIs e <em>Metricas</em></h2>
+    <p class="section-desc">Indicadores-chave para monitorar diariamente. Estes benchmarks sao baseados em campanhas similares de eventos regionais no interior do Nordeste/Centro-Oeste.</p>
+
+    <!-- KPIs PRINCIPAIS -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="#FF5C00" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke="#FF5C00" stroke-width="1.5"/></svg>
+        </div>
+        <div class="kpi-value">R$8-15</div>
+        <div class="kpi-label">CPM Esperado</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 15L21 21M10 17C6.13 17 3 13.87 3 10C3 6.13 6.13 3 10 3C13.87 3 17 6.13 17 10C17 13.87 13.87 17 10 17Z" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="kpi-value">1,5%-3%</div>
+        <div class="kpi-label">CTR Esperado</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 15C21 15.55 20.78 16.05 20.41 16.41C20.05 16.78 19.55 17 19 17H7L3 21V5C3 4.45 3.22 3.95 3.59 3.59C3.95 3.22 4.45 3 5 3H19C19.55 3 20.05 3.22 20.41 3.59C20.78 3.95 21 4.45 21 5V15Z" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="kpi-value">R$1,50-4</div>
+        <div class="kpi-label">Custo por Mensagem WPP</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 21V5C16 4.45 15.78 3.95 15.41 3.59C15.05 3.22 14.55 3 14 3H10C9.45 3 8.95 3.22 8.59 3.59C8.22 3.95 8 4.45 8 5V21M4 7H20C21.1 7 22 7.9 22 9V19C22 20.1 21.1 21 20 21H4C2.9 21 2 20.1 2 19V9C2 7.9 2.9 7 4 7Z" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="kpi-value">R$0,02-0,06</div>
+        <div class="kpi-label">Custo por ThruPlay</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="#FF5C00" stroke-width="1.5"/></svg>
+        </div>
+        <div class="kpi-value">43x-54x</div>
+        <div class="kpi-label">ROAS Estimado</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#FF5C00" stroke-width="1.5"/></svg>
+        </div>
+        <div class="kpi-value">15-30/dia</div>
+        <div class="kpi-label">Meta de Mensagens/Dia</div>
+      </div>
+    </div>
+
+    <!-- TABELA DETALHADA DE KPIs -->
+    <div class="card" style="margin-top:24px;">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 20V10M18 20V4M6 20V16" stroke="#FF5C00" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Benchmarks por Campanha</div>
+          <div class="card-subtitle">Metricas esperadas para cada objetivo</div>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Metrica</th>
+              <th>Camp. 1 (Alcance)</th>
+              <th>Camp. 2 (Engajamento)</th>
+              <th>Camp. 3 (WhatsApp)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CPM</td>
+              <td>R$8-12</td>
+              <td>R$10-15</td>
+              <td>R$12-18</td>
+            </tr>
+            <tr>
+              <td>CTR</td>
+              <td>1,5%-3%</td>
+              <td>2%-5%</td>
+              <td>1,5%-3%</td>
+            </tr>
+            <tr>
+              <td>Alcance estimado</td>
+              <td>15.000-25.000 pessoas</td>
+              <td>8.000-12.000 pessoas</td>
+              <td>15.000-25.000 pessoas</td>
+            </tr>
+            <tr>
+              <td>Custo por resultado</td>
+              <td>R$0,02-0,06/ThruPlay</td>
+              <td>R$0,05-0,15/engajamento</td>
+              <td>R$1,50-4,00/conversa</td>
+            </tr>
+            <tr>
+              <td>Volume estimado</td>
+              <td>3.000-9.000 ThruPlays</td>
+              <td>800-2.500 engajamentos</td>
+              <td>80-200 conversas</td>
+            </tr>
+            <tr>
+              <td>Meta diaria</td>
+              <td>500-1.500 ThruPlays</td>
+              <td>160-500 engajamentos</td>
+              <td>15-30 conversas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ROAS -->
+    <div class="card" style="margin-top:24px;">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M23 6L13.5 15.5L8.5 10.5L1 18" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 6H23V12" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Projecao de ROAS</div>
+          <div class="card-subtitle">Retorno sobre investimento em anuncios</div>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Cenario</th>
+              <th>Ingressos Vendidos</th>
+              <th>Ticket Medio</th>
+              <th>Receita Bruta</th>
+              <th>Investimento</th>
+              <th>ROAS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-vermelho">Pessimista</span></td>
+              <td>350 ingressos (50%)</td>
+              <td>R$42</td>
+              <td>R$14.700</td>
+              <td>R$640</td>
+              <td><strong>22,9x</strong></td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-amarelo">Moderado</span></td>
+              <td>550 ingressos (79%)</td>
+              <td>R$43</td>
+              <td>R$23.650</td>
+              <td>R$640</td>
+              <td><strong>36,9x</strong></td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-verde">Otimista</span></td>
+              <td>700 ingressos (100%)</td>
+              <td>R$44</td>
+              <td>R$30.800</td>
+              <td>R$640</td>
+              <td><strong>48,1x</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="destaque" style="margin-top:16px;">
+        <div class="destaque-title">Nota sobre o ROAS</div>
+        <p>O ROAS elevado e tipico de eventos regionais com banda conhecida e preco acessivel. O trafego pago e apenas um dos canais de venda &mdash; os pontos fisicos, o boca a boca e o alcance organico da banda tambem contribuem significativamente. O trafego pago funciona como amplificador e acelerador das vendas, nao como unica fonte.</p>
+      </div>
+    </div>
+
+    <!-- META DE MENSAGENS -->
+    <div class="card" style="margin-top:24px;">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 11.5C21.02 12.88 20.67 14.23 19.99 15.43C19.2 16.84 18.03 17.99 16.6 18.74C15.18 19.5 13.56 19.82 11.95 19.67C10.34 19.52 8.81 18.9 7.55 17.9L2 20L4.09 14.63C3.21 13.35 2.74 11.84 2.75 10.3C2.76 8.7 3.23 7.13 4.11 5.79C4.99 4.45 6.24 3.4 7.71 2.76C9.17 2.12 10.79 1.93 12.36 2.2" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Meta de Mensagens WhatsApp por Dia</div>
+          <div class="card-subtitle">Volume necessario para atingir a meta de 700 ingressos</div>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Mensagens (Meta)</th>
+              <th>Taxa Conv. Estimada</th>
+              <th>Vendas Estimadas</th>
+              <th>Acumulado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>15/ago</td>
+              <td>12-18</td>
+              <td>40%</td>
+              <td>5-7</td>
+              <td>5-7</td>
+            </tr>
+            <tr>
+              <td>16/ago</td>
+              <td>10-15</td>
+              <td>40%</td>
+              <td>4-6</td>
+              <td>9-13</td>
+            </tr>
+            <tr>
+              <td>17/ago</td>
+              <td>10-15</td>
+              <td>40%</td>
+              <td>4-6</td>
+              <td>13-19</td>
+            </tr>
+            <tr>
+              <td>18/ago</td>
+              <td>12-18</td>
+              <td>45%</td>
+              <td>5-8</td>
+              <td>18-27</td>
+            </tr>
+            <tr>
+              <td>19/ago</td>
+              <td>15-22</td>
+              <td>50%</td>
+              <td>8-11</td>
+              <td>26-38</td>
+            </tr>
+            <tr>
+              <td>20/ago</td>
+              <td>20-30</td>
+              <td>55%</td>
+              <td>11-17</td>
+              <td>37-55</td>
+            </tr>
+            <tr>
+              <td>21/ago</td>
+              <td>25-35</td>
+              <td>60%</td>
+              <td>15-21</td>
+              <td>52-76</td>
+            </tr>
+            <tr class="row-total">
+              <td><strong>Total</strong></td>
+              <td><strong>104-153</strong></td>
+              <td>~47%</td>
+              <td><strong>52-76</strong></td>
+              <td>&mdash;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="destaque" style="margin-top:16px;">
+        <div class="destaque-title">Vendas via trafego pago vs. total</div>
+        <p>A projecao de 52-76 vendas via WhatsApp (trafego pago) representa apenas parte das 700 metas. O restante vira de: <strong>pontos de venda fisicos</strong> (Tabacaria do Cais, Emporio, Acougues do Cais, Carro de Som), <strong>boca a boca</strong>, <strong>organico da banda</strong> (807 mil seguidores) e <strong>carro de som</strong>. O trafego pago e o acelerador digital &mdash; nao a unica fonte.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 08. REGRAS DE OTIMIZACAO ==================== -->
+  <section class="section" id="otimizacao">
+    <div class="section-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15Z" stroke="#FF5C00" stroke-width="1.5"/><path d="M19.4 15C19.13 15.63 19.08 16.34 19.26 17C19.44 17.67 19.83 18.25 20.37 18.65L20.42 18.7C20.86 19.05 21.2 19.51 21.4 20.03C21.6 20.55 21.66 21.12 21.56 21.67C21.47 22.22 21.22 22.73 20.85 23.14C20.48 23.55 20 23.85 19.46 24L19.4 24C18.71 23.87 18 23.98 17.39 24.3C16.78 24.62 16.3 25.13 16.03 25.75" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round"/></svg>
+      08 &mdash; Otimizacao
+    </div>
+    <h2 class="section-title">Regras de <em>Otimizacao</em></h2>
+    <p class="section-desc">Protocolo de decisoes para manter as campanhas performando. Siga estas regras para saber quando pausar, escalar, trocar criativos ou ajustar publicos.</p>
+
+    <!-- QUANDO PAUSAR -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--vermelho);"></div>
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--vermelho-bg);border-color:rgba(255,61,0,0.15);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="6" y="4" width="4" height="16" rx="1" fill="#FF3D00"/><rect x="14" y="4" width="4" height="16" rx="1" fill="#FF3D00"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Quando Pausar um Conjunto</div>
+          <div class="card-subtitle">Sinais de que o conjunto nao esta performando</div>
+        </div>
+      </div>
+      <ul>
+        <li><strong>CPM acima de R$25:</strong> O publico esta muito restrito ou saturado. Pausar e testar segmentacao mais ampla.</li>
+        <li><strong>CTR abaixo de 0,8% apos 48h:</strong> O criativo nao esta gerando interesse. Trocar a imagem/video e testar nova copy.</li>
+        <li><strong>Custo por mensagem WhatsApp acima de R$6:</strong> O conjunto esta ineficiente. Pausar e redistribuir o orcamento para conjuntos mais baratos.</li>
+        <li><strong>Zero mensagens em 24h com gasto acima de R$15:</strong> Algo esta errado (publico, criativo ou botao). Pausar e investigar.</li>
+        <li><strong>Frequencia acima de 3:</strong> O mesmo publico esta vendo o anuncio muitas vezes. Pausar para evitar fadiga.</li>
+      </ul>
+    </div>
+
+    <!-- QUANDO AUMENTAR -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--verde);"></div>
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--verde-bg);border-color:rgba(0,200,83,0.15);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M23 6L13.5 15.5L8.5 10.5L1 18" stroke="#00C853" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 6H23V12" stroke="#00C853" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Quando Aumentar Orcamento</div>
+          <div class="card-subtitle">Sinais de performance acima da media</div>
+        </div>
+      </div>
+      <ul>
+        <li><strong>Custo por mensagem abaixo de R$2:</strong> Conjunto eficiente. Aumentar orcamento em 20-30% (nunca mais que 30% por dia para nao sair da fase de aprendizado).</li>
+        <li><strong>CTR acima de 3%:</strong> O criativo esta ressonando. Aumentar orcamento e considerar duplicar o conjunto com publico similar.</li>
+        <li><strong>CPM abaixo de R$8:</strong> O alcance esta barato. Aproveitar para maximizar exposicao.</li>
+        <li><strong>Taxa de conversao WhatsApp acima de 50%:</strong> As mensagens estao virando vendas. Priorizar este conjunto.</li>
+      </ul>
+    </div>
+
+    <!-- QUANDO TROCAR CRIATIVO -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--amarelo);"></div>
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--amarelo-bg);border-color:rgba(255,214,0,0.15);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M1 4V10H7" stroke="#FFD600" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 20V14H17" stroke="#FFD600" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20.49 9C19.9 7.56 18.93 6.32 17.68 5.41C16.43 4.51 14.95 3.97 13.4 3.87C11.85 3.76 10.31 4.09 8.94 4.82C7.58 5.55 6.45 6.65 5.68 7.99L1 10M23 14L18.32 16.01C17.55 17.35 16.42 18.45 15.06 19.18C13.69 19.91 12.15 20.24 10.6 20.13C9.05 20.03 7.57 19.49 6.32 18.59C5.07 17.68 4.1 16.44 3.51 15" stroke="#FFD600" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Quando Trocar Criativo</div>
+          <div class="card-subtitle">Sinais de fadiga criativa</div>
+        </div>
+      </div>
+      <ul>
+        <li><strong>CTR caindo por 2 dias consecutivos:</strong> O publico ja viu o criativo demais. Substituir por uma variacao (mesma mensagem, visual diferente).</li>
+        <li><strong>Frequencia acima de 2,5:</strong> O mesmo publico esta recebendo o anuncio repetidamente. Novo criativo renova o interesse.</li>
+        <li><strong>Virada de lote:</strong> OBRIGATORIO trocar criativo e copy a cada virada de lote (19/ago &rarr; 2o lote, 21/ago &rarr; 3o lote).</li>
+        <li><strong>Engajamento negativo (ocultar anuncio):</strong> Se muitas pessoas estao ocultando o anuncio, o criativo esta gerando rejeicao. Trocar imediatamente.</li>
+      </ul>
+    </div>
+
+    <!-- QUANDO EXPANDIR/RESTRINGIR -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--azul);"></div>
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--azul-bg);border-color:rgba(68,138,255,0.15);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="#448AFF" stroke-width="1.5"/><path d="M21 21L16.65 16.65M11 8V14M8 11H14" stroke="#448AFF" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Quando Expandir ou Restringir Publico</div>
+          <div class="card-subtitle">Ajustes de segmentacao durante a campanha</div>
+        </div>
+      </div>
+      <ul>
+        <li><strong>Expandir se CPM alto (>R$20) com CTR bom (>2%):</strong> O criativo funciona, mas o publico e pequeno. Remover 1-2 interesses para ampliar.</li>
+        <li><strong>Restringir se CPM baixo (<R$8) com CTR ruim (<1%):</strong> O alcance esta alto mas irrelevante. Adicionar interesses mais especificos (ex: "Malla 100 Alca" em vez de "forro").</li>
+        <li><strong>Expandir idade se publico esgotado:</strong> Se a frequencia sobe rapido, considerar expandir de 25-45 para 20-50.</li>
+        <li><strong>Nunca restringir remarketing:</strong> Publicos personalizados (Video 75%, Engajados) ja sao filtrados. Deixar abertos.</li>
+      </ul>
+    </div>
+
+    <!-- SINAIS DE ALERTA -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--vermelho);"></div>
+      <div class="card-header">
+        <div class="card-icon" style="background:var(--vermelho-bg);border-color:rgba(255,61,0,0.15);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18C1.64 18.31 1.55 18.67 1.55 19.04C1.56 19.4 1.66 19.76 1.84 20.07C2.02 20.38 2.28 20.64 2.59 20.82C2.9 21 3.26 21.09 3.63 21.09H20.58C20.94 21.09 21.3 21 21.61 20.82C21.92 20.64 22.18 20.38 22.36 20.07C22.54 19.76 22.64 19.4 22.65 19.04C22.65 18.67 22.56 18.31 22.38 18L13.91 3.86C13.73 3.56 13.47 3.31 13.17 3.14C12.86 2.96 12.52 2.87 12.17 2.87C11.82 2.87 11.47 2.96 11.17 3.14C10.87 3.31 10.61 3.56 10.43 3.86H10.29Z" stroke="#FF3D00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 9V13M12 17H12.01" stroke="#FF3D00" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Sinais de Alerta &mdash; Acao Imediata</div>
+          <div class="card-subtitle">Situacoes que exigem intervencao urgente</div>
+        </div>
+      </div>
+      <div class="table-wrapper" style="margin-top:16px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Sinal</th>
+              <th>Diagnostico</th>
+              <th>Acao</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag tag-vermelho">Conta restrita</span></td>
+              <td>Anuncio reprovado ou conta com restricao</td>
+              <td>Verificar politicas. Se necessario, editar o anuncio e reenviar para revisao. Nunca subir conteudo que mencione IPTV pirata.</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-vermelho">WhatsApp sem resposta</span></td>
+              <td>Mensagens chegam mas ninguem responde</td>
+              <td>Escalar para o responsavel imediatamente. Cada mensagem nao respondida e uma venda perdida.</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-vermelho">Gasto sem resultado</span></td>
+              <td>R$50+ gastos sem nenhuma conversa WhatsApp</td>
+              <td>Pausar tudo. Verificar: botao funciona? Numero correto? Publico faz sentido? Criativo atraente?</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-amarelo">Custo subindo rapido</span></td>
+              <td>CPM ou custo/mensagem dobrando em 24h</td>
+              <td>Provavelmente saturacao. Trocar criativo e/ou expandir publico. Se for dia 20-21, aceitar custo mais alto (urgencia natural).</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-amarelo">Concorrencia intensificou</span></td>
+              <td>Jorge &amp; Mateus lancou campanha forte</td>
+              <td>Aumentar urgencia na copy. Focar na vantagem: sexta-feira (comeca o fim de semana) + preco menor. Nao atacar o concorrente &mdash; valorizar o proprio evento.</td>
+            </tr>
+            <tr>
+              <td><span class="tag tag-verde">Esgotando rapido</span></td>
+              <td>Vendas acima do esperado, risco de lotacao antes do show</td>
+              <td>Reduzir orcamento das campanhas 1 e 2. Manter apenas remarketing na campanha 3. Comunicar "ultimos ingressos" no organico.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CHECKLIST DIARIO -->
+    <div class="card" style="margin-top:24px;">
+      <div class="card-accent"></div>
+      <div class="card-header">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 11L12 14L22 4" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12V19C21 19.53 20.79 20.04 20.41 20.41C20.04 20.79 19.53 21 19 21H5C4.47 21 3.96 20.79 3.59 20.41C3.21 20.04 3 19.53 3 19V5C3 4.47 3.21 3.96 3.59 3.59C3.96 3.21 4.47 3 5 3H16" stroke="#FF5C00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Checklist Diario de Otimizacao</div>
+          <div class="card-subtitle">Fazer todos os dias entre 10h e 12h</div>
+        </div>
+      </div>
+      <ul>
+        <li>Verificar CPM, CTR e custo por resultado de cada conjunto</li>
+        <li>Pausar conjuntos fora dos benchmarks (ver regras acima)</li>
+        <li>Redistribuir orcamento para conjuntos mais eficientes</li>
+        <li>Conferir volume de mensagens no WhatsApp vs. meta diaria</li>
+        <li>Verificar se todas as mensagens foram respondidas</li>
+        <li>Checar frequencia &mdash; se acima de 2,5, trocar criativo</li>
+        <li>Monitorar comentarios nos anuncios (responder duvidas, remover spam)</li>
+        <li>Anotar custo por venda real (perguntar ao atendente quantas vendas fechou)</li>
+        <li>Comparar gasto acumulado vs. orcamento planejado</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">Prime Hall <em>&times;</em> ADS Company</div>
+  <div class="footer-copy">Planejamento de Trafego Pago &mdash; Malla 100 Alca &mdash; 21 de Agosto de 2026</div>
+</footer>
+
+<!-- SCRIPT: Navegacao lateral ativa -->
+<script>
+(function(){
+  const sections = document.querySelectorAll('.section[id]');
+  const dots = document.querySelectorAll('.side-nav a');
+
+  function updateNav(){
+    let current = '';
+    sections.forEach(function(s){
+      const top = s.offsetTop - 200;
+      if(window.scrollY >= top) current = s.getAttribute('id');
+    });
+    dots.forEach(function(d){
+      d.classList.remove('active');
+      if(d.getAttribute('href') === '#' + current) d.classList.add('active');
+    });
+  }
+
+  window.addEventListener('scroll', updateNav);
+  updateNav();
+})();
+</script>
+
+</body>
+</html>

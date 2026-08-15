@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central de Documentos &mdash; [NOME DO PROJETO] | ADS Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ===== CORES — altere aqui para cada projeto ===== */
+    --laranja: #FF5C00;              /* cor de destaque principal */
+    --laranja-hover: #FF7A33;        /* hover da cor principal */
+    --preto: #060606;                /* fundo principal */
+    --cinza-escuro: #111;
+    --cinza-card: #141414;
+    --cinza-card-hover: #1A1A1A;
+    --cinza-medio: #2A2A2A;
+    --cinza-claro: #888;
+    --cinza-border: rgba(255,255,255,0.06);
+    --branco: #F5F5F5;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--preto);
+    color: var(--branco);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ===== TOP BAR ===== */
+  .top-bar {
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--cinza-border);
+    padding: 14px 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .top-bar-left { display: flex; align-items: center; gap: 14px; }
+  .top-bar img { height: 36px; opacity: 0.9; }
+  .top-bar-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+  }
+  .top-bar-name em { font-style: italic; color: var(--laranja); }
+  .top-bar-badge {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--laranja);
+    background: rgba(255,92,0,0.08);
+    border: 1px solid rgba(255,92,0,0.15);
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 100px 32px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #0A0705 0%, var(--preto) 100%);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(255,92,0,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--laranja);
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: var(--branco);
+  }
+  .hero h1 em { font-style: italic; color: var(--laranja); }
+  .hero-line { width: 60px; height: 2px; background: var(--laranja); margin: 24px auto; }
+  .hero p {
+    font-size: 1rem;
+    color: var(--cinza-claro);
+    font-weight: 300;
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ===== INFO STRIP ===== */
+  .info-strip {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 0 32px;
+    margin-top: 48px;
+  }
+  .info-item { text-align: center; }
+  .info-label {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cinza-claro);
+    margin-bottom: 4px;
+  }
+  .info-value { font-size: 0.95rem; font-weight: 500; color: var(--branco); }
+
+  /* ===== CONTAINER ===== */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+
+  /* ===== SECTION ===== */
+  .section { padding: 72px 0 48px; }
+  .section-header { text-align: center; margin-bottom: 48px; }
+  .section-tag {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--laranja);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--branco);
+  }
+  .section-title em { font-style: italic; color: var(--laranja); }
+
+  /* ===== DOCUMENT CARDS ===== */
+  .doc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 700px) { .doc-grid { grid-template-columns: 1fr; } }
+
+  .doc-card {
+    background: var(--cinza-card);
+    border: 1px solid var(--cinza-border);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--branco);
+    cursor: pointer;
+  }
+  .doc-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--laranja);
+    transition: height 0.35s ease;
+  }
+  .doc-card:hover {
+    background: var(--cinza-card-hover);
+    border-color: rgba(255,92,0,0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  .doc-card:hover::before { height: 100%; }
+
+  .doc-card-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255,92,0,0.08);
+    border: 1px solid rgba(255,92,0,0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .doc-card-tag {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--laranja);
+  }
+  .doc-card h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+  .doc-card h3 em { font-style: italic; color: var(--laranja); }
+  .doc-card p {
+    font-size: 0.82rem;
+    color: var(--cinza-claro);
+    font-weight: 300;
+    line-height: 1.6;
+    flex: 1;
+  }
+  .doc-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--cinza-border);
+    margin-top: auto;
+  }
+  .doc-card-status {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 12px;
+  }
+  .status-ready { background: rgba(34,197,94,0.1); color: #22C55E; border: 1px solid rgba(34,197,94,0.2); }
+  .status-pending { background: rgba(255,203,5,0.1); color: #FFCB05; border: 1px solid rgba(255,203,5,0.2); }
+  .status-progress { background: rgba(59,139,255,0.1); color: #3B8BFF; border: 1px solid rgba(59,139,255,0.2); }
+
+  .doc-card-arrow {
+    width: 32px;
+    height: 32px;
+    background: rgba(255,92,0,0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+  .doc-card:hover .doc-card-arrow {
+    background: var(--laranja);
+  }
+  .doc-card-arrow svg { width: 14px; height: 14px; stroke: var(--laranja); stroke-width: 2; fill: none; transition: stroke 0.3s; }
+  .doc-card:hover .doc-card-arrow svg { stroke: #fff; }
+
+  /* ===== FULL-WIDTH CARD ===== */
+  .doc-card-full {
+    grid-column: 1 / -1;
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,92,0,0.15), transparent);
+    margin: 0;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 48px 32px 32px;
+    border-top: 1px solid var(--cinza-border);
+    margin-top: 48px;
+  }
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+  }
+  .footer-brand em { font-style: italic; color: var(--laranja); }
+  .footer-sub {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.3);
+    font-weight: 300;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    .top-bar { padding: 12px 16px; }
+    .top-bar-name { display: none; }
+    .hero { padding: 64px 20px 48px; }
+    .info-strip { gap: 24px; }
+    .container { padding: 0 16px; }
+    .section { padding: 48px 0 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     INSTRUCOES DE USO DO TEMPLATE
+
+     Substitua os placeholders abaixo para cada novo projeto:
+
+     [NOME DO PROJETO]     → Nome do cliente/projeto (ex: CAFF Engenharia)
+     [NOME EM DESTAQUE]    → Parte em italico laranja (ex: Engenharia)
+     [DESCRICAO DO HERO]   → Descricao curta do projeto
+     [TAG DO HERO]         → Categoria do projeto (ex: Projeto de Marketing)
+     [NOME DO CLIENTE]     → Nome do responsavel no cliente
+     [REGIAO]              → Cidade/estado do cliente
+     [DATA INICIO]         → Mes e ano de inicio
+     [DATA RODAPE]         → Mes e ano para rodape
+     [LOGO]                → Caminho para ads-logo.png
+
+     Para cada card:
+     - Altere o href para o arquivo correto
+     - Altere tag, titulo, descricao
+     - Use status-ready, status-pending ou status-progress
+     - Cards desabilitados: adicione style="opacity:0.5; pointer-events:none; cursor:default;"
+
+     Icones SVG disponiveis nos cards de exemplo abaixo:
+     - Lupa (pesquisa), Documento (briefing), Calendario (conteudo)
+     - Estrela (identidade), Funil (vendas), Grafico (trafego)
+     - Engrenagem (automacao), Play (video), Megafone (campanha)
+     ============================================================ -->
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-left">
+    <img src="ads-logo.png" alt="ADS Company">
+    <span class="top-bar-name">ADS <em>Company</em></span>
+  </div>
+  <span class="top-bar-badge">Central de Documentos</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">[TAG DO HERO &mdash; Ex: Projeto de Marketing &amp; Tr&aacute;fego Pago]</div>
+  <h1>[NOME DO PROJETO] <em>[NOME EM DESTAQUE]</em></h1>
+  <div class="hero-line"></div>
+  <p>[DESCRICAO DO HERO &mdash; Central de documentos estrat&eacute;gicos do projeto...]</p>
+
+  <div class="info-strip">
+    <div class="info-item">
+      <div class="info-label">Cliente</div>
+      <div class="info-value">[NOME DO CLIENTE]</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Regi&atilde;o</div>
+      <div class="info-value">[REGIAO]</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Respons&aacute;vel</div>
+      <div class="info-value">Davidson Pereira</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">In&iacute;cio</div>
+      <div class="info-value">[DATA INICIO]</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DOCUMENTOS -->
+<div class="container">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">Documentos do Projeto</div>
+      <div class="section-title">Acesse cada <em>entrega</em></div>
+    </div>
+
+    <div class="doc-grid">
+
+      <!-- ========== CARD 1: PESQUISAS DE MERCADO ========== -->
+      <a href="01-PESQUISA/index.html" class="doc-card">
+        <div class="doc-card-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="doc-card-tag">[N] Documentos</div>
+        <h3>Pesquisas de <em>Mercado</em></h3>
+        <p>An&aacute;lise completa dos canais digitais, concorr&ecirc;ncia, p&uacute;blico-alvo e oportunidades do mercado.</p>
+        <div class="doc-card-footer">
+          <span class="doc-card-status status-ready">Conclu&iacute;do</span>
+          <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ========== CARD 2: BRIEFING ========== -->
+      <a href="briefing-[projeto].html" class="doc-card">
+        <div class="doc-card-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="doc-card-tag">Estrat&eacute;gia</div>
+        <h3>Briefing <em>Completo</em></h3>
+        <p>Briefing estrat&eacute;gico com vis&atilde;o geral, p&uacute;blico, oferta, obje&ccedil;&otilde;es, concorr&ecirc;ncia, &acirc;ngulos e tom de comunica&ccedil;&atilde;o.</p>
+        <div class="doc-card-footer">
+          <span class="doc-card-status status-ready">Conclu&iacute;do</span>
+          <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ========== CARD 3: PLANEJAMENTO DE CONTEUDO ========== -->
+      <a href="#" class="doc-card" style="opacity:0.5; pointer-events:none; cursor:default;">
+        <div class="doc-card-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="doc-card-tag">Em breve</div>
+        <h3>Planejamento de <em>Conte&uacute;do</em></h3>
+        <p>Plano de conte&uacute;do para redes sociais com temas, ganchos, formatos e objetivos.</p>
+        <div class="doc-card-footer">
+          <span class="doc-card-status status-pending">Pendente</span>
+          <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ========== CARD 4: IDENTIDADE VISUAL ========== -->
+      <a href="#" class="doc-card" style="opacity:0.5; pointer-events:none; cursor:default;">
+        <div class="doc-card-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="doc-card-tag">Em breve</div>
+        <h3>Identidade <em>Visual</em></h3>
+        <p>Paletas de cores, tipografia, brandbook e aplica&ccedil;&otilde;es da marca para todos os canais.</p>
+        <div class="doc-card-footer">
+          <span class="doc-card-status status-pending">Pendente</span>
+          <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ========== CARD 5: FUNIL DE VENDAS ========== -->
+      <a href="#" class="doc-card" style="opacity:0.5; pointer-events:none; cursor:default;">
+        <div class="doc-card-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </div>
+        <div class="doc-card-tag">Em breve</div>
+        <h3>Funil de <em>Vendas</em></h3>
+        <p>P&aacute;ginas de captura, vendas e obrigado. Landing pages otimizadas para convers&atilde;o.</p>
+        <div class="doc-card-footer">
+          <span class="doc-card-status status-pending">Pendente</span>
+          <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ========== CARD 6: TRAFEGO PAGO ========== -->
+      <a href="#" class="doc-card" style="opacity:0.5; pointer-events:none; cursor:default;">
+        <div class="doc-card-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="doc-card-tag">Em breve</div>
+        <h3>Campanhas de <em>Tr&aacute;fego</em></h3>
+        <p>Campanhas Meta Ads e Google Ads com criativos, segmenta&ccedil;&atilde;o e estrat&eacute;gia de lances.</p>
+        <div class="doc-card-footer">
+          <span class="doc-card-status status-pending">Pendente</span>
+          <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ========== CARDS EXTRAS (copie e cole conforme necessario) ==========
+
+      ICONE: Engrenagem (automacao)
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+
+      ICONE: Play (video)
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+
+      ICONE: Megafone (campanha)
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+
+      ICONE: Dashboard (metricas)
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+
+      ========== -->
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">ADS <em>Company</em> &mdash; Assessoria de Marketing e Performance</div>
+  <div class="footer-sub">Central de Documentos &mdash; [NOME DO PROJETO] &mdash; [DATA RODAPE]</div>
+</div>
+
+</body>
+</html>
