@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malla 100 Al&ccedil;a &mdash; 21/Ago | Prime Hall</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --laranja: #FF5C00;
+    --laranja-hover: #FF7A33;
+    --preto: #060606;
+    --cinza-escuro: #111;
+    --cinza-card: #141414;
+    --cinza-card-hover: #1A1A1A;
+    --cinza-medio: #2A2A2A;
+    --cinza-claro: #888;
+    --cinza-border: rgba(255,255,255,0.06);
+    --branco: #F5F5F5;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--preto); color: var(--branco); font-family: var(--sans);
+    font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh;
+  }
+  .top-bar {
+    background: rgba(10,10,10,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--cinza-border); padding: 14px 32px;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .top-bar-left { display: flex; align-items: center; gap: 14px; }
+  .top-bar img { height: 36px; opacity: 0.9; }
+  .top-bar-name {
+    font-family: var(--serif); font-size: 0.95rem; font-weight: 400;
+    letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.8);
+  }
+  .top-bar-name em { font-style: italic; color: var(--laranja); }
+  .top-bar-badge {
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--laranja); background: rgba(255,92,0,0.08); border: 1px solid rgba(255,92,0,0.15);
+    padding: 5px 14px; border-radius: 20px;
+  }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--laranja); text-decoration: none; padding: 10px 20px;
+    background: rgba(255,92,0,0.06); border: 1px solid rgba(255,92,0,0.18);
+    border-radius: 6px; transition: all 0.3s; margin-bottom: 0;
+  }
+  .back-btn:hover { background: rgba(255,92,0,0.12); border-color: rgba(255,92,0,0.35); }
+  .back-btn svg { width: 14px; height: 14px; stroke: var(--laranja); stroke-width: 2; fill: none; }
+  .hero {
+    padding: 60px 32px 50px; text-align: center; position: relative; overflow: hidden;
+    background: linear-gradient(180deg, #0A0705 0%, var(--preto) 100%);
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(255,92,0,0.06) 0%, transparent 65%); pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block; font-size: 0.6rem; font-weight: 600;
+    letter-spacing: 0.4em; text-transform: uppercase; color: var(--laranja); margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: var(--serif); font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 400; line-height: 1.2; margin-bottom: 12px;
+  }
+  .hero h1 em { font-style: italic; color: var(--laranja); }
+  .hero-line { width: 60px; height: 2px; background: var(--laranja); margin: 20px auto; }
+  .hero p { font-size: 0.95rem; color: var(--cinza-claro); font-weight: 300; max-width: 580px; margin: 0 auto; line-height: 1.7; }
+  .info-strip { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; padding: 0 32px; margin-top: 36px; }
+  .info-item { text-align: center; }
+  .info-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cinza-claro); margin-bottom: 4px; }
+  .info-value { font-size: 0.95rem; font-weight: 500; color: var(--branco); }
+  .event-highlight {
+    margin-top: 28px; display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(255,92,0,0.06); border: 1px solid rgba(255,92,0,0.18);
+    border-radius: 8px; padding: 10px 20px;
+  }
+  .event-highlight-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--laranja); }
+  .event-highlight-value { font-family: var(--serif); font-size: 1rem; color: var(--branco); }
+  .badge-realizado {
+    display: inline-block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 4px 14px; border-radius: 12px; margin-top: 20px;
+    background: rgba(34,197,94,0.1); color: #22C55E; border: 1px solid rgba(34,197,94,0.2);
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+  .section { padding: 64px 0 48px; }
+  .section-header { text-align: center; margin-bottom: 48px; }
+  .section-tag { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--laranja); margin-bottom: 12px; }
+  .section-title { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; }
+  .section-title em { font-style: italic; color: var(--laranja); }
+  .divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,92,0,0.15), transparent); }
+  .doc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 700px) { .doc-grid { grid-template-columns: 1fr; } }
+  .doc-card {
+    background: var(--cinza-card); border: 1px solid var(--cinza-border);
+    padding: 32px 28px; display: flex; flex-direction: column; gap: 16px;
+    transition: all 0.35s ease; position: relative; overflow: hidden;
+    text-decoration: none; color: var(--branco); cursor: pointer;
+  }
+  .doc-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0;
+    background: var(--laranja); transition: height 0.35s ease;
+  }
+  .doc-card:hover { background: var(--cinza-card-hover); border-color: rgba(255,92,0,0.2); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .doc-card:hover::before { height: 100%; }
+  .doc-card-icon {
+    width: 48px; height: 48px; background: rgba(255,92,0,0.08); border: 1px solid rgba(255,92,0,0.15);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .doc-card-tag { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--laranja); }
+  .doc-card h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; line-height: 1.3; }
+  .doc-card h3 em { font-style: italic; color: var(--laranja); }
+  .doc-card p { font-size: 0.82rem; color: var(--cinza-claro); font-weight: 300; line-height: 1.6; flex: 1; }
+  .doc-card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--cinza-border); margin-top: auto; }
+  .doc-card-status { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 12px; }
+  .status-ready { background: rgba(34,197,94,0.1); color: #22C55E; border: 1px solid rgba(34,197,94,0.2); }
+  .doc-card-arrow { width: 32px; height: 32px; background: rgba(255,92,0,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+  .doc-card:hover .doc-card-arrow { background: var(--laranja); }
+  .doc-card-arrow svg { width: 14px; height: 14px; stroke: var(--laranja); stroke-width: 2; fill: none; transition: stroke 0.3s; }
+  .doc-card:hover .doc-card-arrow svg { stroke: #fff; }
+  .doc-card-full { grid-column: 1 / -1; }
+  .footer { text-align: center; padding: 48px 32px 32px; border-top: 1px solid var(--cinza-border); margin-top: 48px; }
+  .footer-brand { font-family: var(--serif); font-size: 1rem; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+  .footer-brand em { font-style: italic; color: var(--laranja); }
+  .footer-sub { font-size: 0.72rem; color: rgba(255,255,255,0.3); font-weight: 300; }
+  @media (max-width: 600px) {
+    .top-bar { padding: 12px 16px; }
+    .top-bar-name { display: none; }
+    .hero { padding: 48px 20px 36px; }
+    .info-strip { gap: 20px; }
+    .container { padding: 0 16px; }
+    .section { padding: 48px 0 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-left">
+    <img src="ads-logo.png" alt="ADS Company">
+    <span class="top-bar-name">ADS <em>Company</em></span>
+  </div>
+  <span class="top-bar-badge">Evento Anterior</span>
+</div>
+
+<div class="hero">
+  <a href="index.html" class="back-btn">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Voltar &agrave; Central Principal
+  </a>
+
+  <div style="margin-top: 32px;">
+    <div class="hero-tag">Evento Realizado &mdash; Agosto 2026</div>
+    <h1>Malla 100 <em>Al&ccedil;a</em></h1>
+    <div class="hero-line"></div>
+    <p>Todos os documentos estrat&eacute;gicos produzidos para o show da Malla 100 Al&ccedil;a na Prime Hall.</p>
+
+    <div class="info-strip">
+      <div class="info-item">
+        <div class="info-label">Artista</div>
+        <div class="info-value">Malla 100 Al&ccedil;a</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Local</div>
+        <div class="info-value">Prime Hall &mdash; Barreiras, BA</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Data</div>
+        <div class="info-value">21 de Agosto de 2026</div>
+      </div>
+    </div>
+
+    <div class="badge-realizado">Evento Realizado</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="container">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">Documentos do Evento</div>
+      <div class="section-title">Acesse cada <em>planejamento</em></div>
+    </div>
+
+    <div class="doc-grid">
+
+      <a href="05-TRAFEGO-PAGO/planejamento-trafego-pago.html" class="doc-card doc-card-full">
+        <div class="doc-card-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="doc-card-tag">Motor de Vendas</div>
+        <h3>Planejamento de <em>Tr&aacute;fego Pago</em></h3>
+        <p>Estrutura completa das campanhas Meta Ads &mdash; objetivos, segmenta&ccedil;&atilde;o, or&ccedil;amento, distribui&ccedil;&atilde;o por lote, copies e cronograma de 7 dias para vender 700 ingressos.</p>
+        <div class="doc-card-footer">
+          <span class="doc-card-status status-ready">Conclu&iacute;do</span>
+          <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </a>
+
+      <a href="04-CONTEUDO-ORGANICO/planejamento-criativos.html" class="doc-card">
+        <div class="doc-card-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="doc-card-tag">Produ&ccedil;&atilde;o</div>
+        <h3>Planejamento de <em>Criativos</em></h3>
+        <p>Formatos de v&iacute;deo, carross&eacute;is e stories com copies prontas, rota&ccedil;&atilde;o por lote e checklist de produ&ccedil;&atilde;o.</p>
+        <div class="doc-card-footer">
+          <span class="doc-card-status status-ready">Conclu&iacute;do</span>
+          <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </a>
+
+      <a href="01-ESTRATEGIA/planejamento-estrategias-vendas.html" class="doc-card">
+        <div class="doc-card-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="doc-card-tag">Vendas</div>
+        <h3>Estrat&eacute;gias de <em>Vendas</em></h3>
+        <p>Plano completo para lotar a casa &mdash; org&acirc;nico, offline, influenciadores, WhatsApp, parcerias e cronograma di&aacute;rio.</p>
+        <div class="doc-card-footer">
+          <span class="doc-card-status status-ready">Conclu&iacute;do</span>
+          <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-brand">ADS <em>Company</em> &mdash; Assessoria de Marketing e Performance</div>
+  <div class="footer-sub">Malla 100 Al&ccedil;a &mdash; Prime Hall &mdash; 21 de Agosto de 2026</div>
+</div>
+
+</body>
+</html>

@@ -260,30 +260,19 @@
 
   .doc-card-full { grid-column: 1 / -1; }
 
+  /* CARD EVENTO ANTERIOR */
+  .doc-card-anterior {
+    background: #0D0D0D;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .doc-card-anterior .doc-card-tag { color: var(--cinza-claro); }
+  .doc-card-anterior:hover { border-color: rgba(255,255,255,0.12); }
+
   .divider {
     width: 100%;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(255,92,0,0.15), transparent);
     margin: 0;
-  }
-
-  .footer {
-    text-align: center;
-    padding: 48px 32px 32px;
-    border-top: 1px solid var(--cinza-border);
-    margin-top: 48px;
-  }
-  .footer-brand {
-    font-family: var(--serif);
-    font-size: 1rem;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 8px;
-  }
-  .footer-brand em { font-style: italic; color: var(--laranja); }
-  .footer-sub {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.3);
-    font-weight: 300;
   }
 
   .event-highlight {
@@ -307,6 +296,25 @@
     font-family: var(--serif);
     font-size: 1.1rem;
     color: var(--branco);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 48px 32px 32px;
+    border-top: 1px solid var(--cinza-border);
+    margin-top: 48px;
+  }
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+  }
+  .footer-brand em { font-style: italic; color: var(--laranja); }
+  .footer-sub {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.3);
+    font-weight: 300;
   }
 
   @media (max-width: 600px) {
@@ -348,27 +356,24 @@
       <div class="info-label">Respons&aacute;vel</div>
       <div class="info-value">Davidson Pereira</div>
     </div>
-    <div class="info-item">
-      <div class="info-label">In&iacute;cio</div>
-      <div class="info-value">Agosto 2026</div>
-    </div>
   </div>
 
   <div class="event-highlight">
     <div>
-      <div class="event-highlight-label">Data do Evento</div>
-      <div class="event-highlight-value">Sexta, 21 de agosto de 2026</div>
+      <div class="event-highlight-label">Pr&oacute;ximo Evento</div>
+      <div class="event-highlight-value">Quinta, 09 de outubro de 2026 &mdash; Ceian Muniz &amp; Toinho</div>
     </div>
   </div>
 </div>
 
 <div class="divider"></div>
 
+<!-- EVENTO ATUAL -->
 <div class="container">
   <div class="section">
     <div class="section-header">
-      <div class="section-tag">Planejamentos do Evento</div>
-      <div class="section-title">Acesse cada <em>planejamento</em></div>
+      <div class="section-tag">Evento Atual &mdash; Ceian Muniz &amp; Toinho</div>
+      <div class="section-title">Documentos do <em>pr&oacute;ximo evento</em></div>
     </div>
 
     <div class="doc-grid">
@@ -377,50 +382,40 @@
         <div class="doc-card-icon">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-        <div class="doc-card-tag">Ceian Muniz &amp; Toinho &mdash; 09/Out</div>
+        <div class="doc-card-tag">09 de Outubro &mdash; Direcionamento Completo</div>
         <h3>Direcionamento de M&iacute;dias e <em>Estrat&eacute;gia de Vendas</em></h3>
-        <p>Ajustes nas m&iacute;dias existentes, roteiros de novos criativos para produ&ccedil;&atilde;o, 10 estrat&eacute;gias de vendas e cronograma di&aacute;rio de a&ccedil;&otilde;es at&eacute; o dia do evento.</p>
+        <p>Ajustes nas m&iacute;dias existentes, roteiros de 10 novos criativos para produ&ccedil;&atilde;o, 10 estrat&eacute;gias de vendas e cronograma di&aacute;rio de a&ccedil;&otilde;es at&eacute; o dia do evento.</p>
         <div class="doc-card-footer">
           <span class="doc-card-status status-ready">Conclu&iacute;do</span>
           <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
       </a>
 
-      <a href="05-TRAFEGO-PAGO/planejamento-trafego-pago.html" class="doc-card doc-card-full">
-        <div class="doc-card-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <div class="doc-card-tag">Malla 100 Al&ccedil;a &mdash; 21/Ago</div>
-        <h3>Planejamento de <em>Tr&aacute;fego Pago</em></h3>
-        <p>Estrutura das campanhas Meta Ads do show da Malla 100 Al&ccedil;a &mdash; objetivos, segmenta&ccedil;&atilde;o, or&ccedil;amento e cronograma de 7 dias.</p>
-        <div class="doc-card-footer">
-          <span class="doc-card-status status-ready">Conclu&iacute;do</span>
-          <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
-        </div>
-      </a>
+    </div>
+  </div>
+</div>
 
-      <a href="04-CONTEUDO-ORGANICO/planejamento-criativos.html" class="doc-card">
-        <div class="doc-card-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-        <div class="doc-card-tag">Produ&ccedil;&atilde;o</div>
-        <h3>Planejamento de <em>Criativos</em></h3>
-        <p>Formatos de v&iacute;deo, carross&eacute;is e stories com copies prontas, rota&ccedil;&atilde;o por lote e checklist de produ&ccedil;&atilde;o para o cliente.</p>
-        <div class="doc-card-footer">
-          <span class="doc-card-status status-ready">Conclu&iacute;do</span>
-          <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
-        </div>
-      </a>
+<div class="divider"></div>
 
-      <a href="01-ESTRATEGIA/planejamento-estrategias-vendas.html" class="doc-card">
-        <div class="doc-card-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--laranja)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+<!-- EVENTOS ANTERIORES -->
+<div class="container">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">Hist&oacute;rico</div>
+      <div class="section-title">Eventos <em>anteriores</em></div>
+    </div>
+
+    <div class="doc-grid">
+
+      <a href="evento-malla100alca.html" class="doc-card doc-card-full doc-card-anterior">
+        <div class="doc-card-icon" style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08);">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--cinza-claro)"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </div>
-        <div class="doc-card-tag">Vendas</div>
-        <h3>Estrat&eacute;gias de <em>Vendas</em></h3>
-        <p>Plano completo para lotar a casa &mdash; org&acirc;nico, offline, influenciadores, WhatsApp, parcerias e cronograma di&aacute;rio de a&ccedil;&otilde;es.</p>
+        <div class="doc-card-tag" style="color:var(--cinza-claro)">21 de Agosto de 2026 &mdash; Evento Realizado</div>
+        <h3>Malla 100 <em>Al&ccedil;a</em></h3>
+        <p>Planejamento de tr&aacute;fego pago, criativos e estrat&eacute;gias de vendas do primeiro evento da Prime Hall. 3 documentos completos.</p>
         <div class="doc-card-footer">
-          <span class="doc-card-status status-ready">Conclu&iacute;do</span>
+          <span class="doc-card-status status-ready">3 Documentos</span>
           <div class="doc-card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
       </a>
@@ -431,7 +426,7 @@
 
 <div class="footer">
   <div class="footer-brand">ADS <em>Company</em> &mdash; Assessoria de Marketing e Performance</div>
-  <div class="footer-sub">Central de Documentos &mdash; Prime Hall &mdash; Agosto 2026</div>
+  <div class="footer-sub">Central de Documentos &mdash; Prime Hall &mdash; Outubro 2026</div>
 </div>
 
 </body>
