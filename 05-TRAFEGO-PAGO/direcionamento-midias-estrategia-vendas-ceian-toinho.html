@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direcionamento de M&iacute;dias e Estrat&eacute;gia de Vendas &mdash; Ceian Muniz &amp; Toinho | Prime Hall</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --laranja: #FF5C00;
+    --laranja-hover: #FF7A33;
+    --laranja-soft: rgba(255,92,0,0.08);
+    --laranja-border: rgba(255,92,0,0.18);
+    --preto: #060606;
+    --cinza-escuro: #0E0E0E;
+    --cinza-card: #131313;
+    --cinza-card-hover: #1A1A1A;
+    --cinza-medio: #2A2A2A;
+    --cinza-claro: #888;
+    --cinza-border: rgba(255,255,255,0.06);
+    --branco: #F5F5F5;
+    --branco-70: rgba(245,245,245,0.7);
+    --verde: #22C55E;
+    --verde-bg: rgba(34,197,94,0.08);
+    --verde-border: rgba(34,197,94,0.2);
+    --amarelo: #FFCB05;
+    --amarelo-bg: rgba(255,203,5,0.08);
+    --amarelo-border: rgba(255,203,5,0.2);
+    --vermelho: #EF4444;
+    --vermelho-bg: rgba(239,68,68,0.08);
+    --vermelho-border: rgba(239,68,68,0.2);
+    --azul: #3B8BFF;
+    --azul-bg: rgba(59,139,255,0.08);
+    --azul-border: rgba(59,139,255,0.2);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--preto);
+    color: var(--branco);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--cinza-border);
+    padding: 14px 32px;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .top-bar-left { display: flex; align-items: center; gap: 14px; }
+  .top-bar img { height: 36px; opacity: 0.9; }
+  .top-bar-name {
+    font-family: var(--serif); font-size: 0.95rem; font-weight: 400;
+    letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.8);
+  }
+  .top-bar-name em { font-style: italic; color: var(--laranja); }
+  .top-bar-badge {
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--laranja); background: var(--laranja-soft); border: 1px solid var(--laranja-border);
+    padding: 5px 14px; border-radius: 20px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 80px 32px 60px; text-align: center; position: relative; overflow: hidden;
+    background: linear-gradient(180deg, #0A0705 0%, var(--preto) 100%);
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(255,92,0,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block; font-size: 0.6rem; font-weight: 600;
+    letter-spacing: 0.4em; text-transform: uppercase; color: var(--laranja); margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: var(--serif); font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+    font-weight: 400; line-height: 1.25; margin-bottom: 12px;
+  }
+  .hero h1 em { font-style: italic; color: var(--laranja); }
+  .hero-line { width: 60px; height: 2px; background: var(--laranja); margin: 20px auto; }
+  .hero p { font-size: 0.95rem; color: var(--cinza-claro); font-weight: 300; max-width: 600px; margin: 0 auto; }
+
+  .hero-meta {
+    display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+    margin-top: 36px;
+  }
+  .hero-meta-item { text-align: center; }
+  .hero-meta-label {
+    font-size: 0.55rem; font-weight: 600; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--cinza-claro); margin-bottom: 4px;
+  }
+  .hero-meta-value { font-size: 0.95rem; font-weight: 600; }
+
+  /* NAV SUMÁRIO */
+  .nav-sumario {
+    background: var(--cinza-escuro); border-bottom: 1px solid var(--cinza-border);
+    padding: 20px 32px;
+  }
+  .nav-sumario-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  }
+  .nav-sumario a {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--branco); background: var(--cinza-card); border: 1px solid var(--cinza-border);
+    padding: 8px 18px; border-radius: 6px; text-decoration: none; transition: all 0.3s;
+  }
+  .nav-sumario a:hover { background: var(--laranja-soft); border-color: var(--laranja-border); color: var(--laranja); }
+
+  /* CONTAINER */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 32px; }
+
+  /* SECTIONS */
+  .section { padding: 64px 0 40px; }
+  .section-header { margin-bottom: 40px; }
+  .section-number {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--laranja); margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: 1.5rem; font-weight: 400; line-height: 1.3;
+  }
+  .section-title em { font-style: italic; color: var(--laranja); }
+  .section-desc {
+    font-size: 0.88rem; color: var(--cinza-claro); font-weight: 300; margin-top: 8px; max-width: 700px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,92,0,0.15), transparent);
+  }
+
+  /* ALERT CARDS */
+  .alert {
+    padding: 20px 24px; border-radius: 8px; margin-bottom: 20px;
+    border-left: 3px solid;
+  }
+  .alert-urgente { background: var(--vermelho-bg); border-color: var(--vermelho); }
+  .alert-atencao { background: var(--amarelo-bg); border-color: var(--amarelo); }
+  .alert-ok { background: var(--verde-bg); border-color: var(--verde); }
+  .alert-info { background: var(--azul-bg); border-color: var(--azul); }
+  .alert-tag {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .alert-urgente .alert-tag { color: var(--vermelho); }
+  .alert-atencao .alert-tag { color: var(--amarelo); }
+  .alert-ok .alert-tag { color: var(--verde); }
+  .alert-info .alert-tag { color: var(--azul); }
+  .alert h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+  .alert p, .alert li { font-size: 0.85rem; color: var(--branco-70); line-height: 1.6; }
+  .alert ul { padding-left: 18px; margin-top: 6px; }
+  .alert li { margin-bottom: 4px; }
+
+  /* CONTENT CARDS */
+  .card {
+    background: var(--cinza-card); border: 1px solid var(--cinza-border);
+    border-radius: 8px; padding: 28px 24px; margin-bottom: 20px;
+    transition: border-color 0.3s;
+  }
+  .card:hover { border-color: rgba(255,255,255,0.1); }
+  .card-tag {
+    font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--laranja); margin-bottom: 10px;
+  }
+  .card h3 {
+    font-family: var(--serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 12px;
+  }
+  .card h3 em { font-style: italic; color: var(--laranja); }
+  .card p, .card li { font-size: 0.85rem; color: var(--branco-70); line-height: 1.7; }
+  .card ul, .card ol { padding-left: 18px; margin-top: 8px; }
+  .card li { margin-bottom: 6px; }
+  .card strong { color: var(--branco); font-weight: 600; }
+
+  /* ROTEIRO BOX */
+  .roteiro {
+    background: rgba(255,92,0,0.04); border: 1px solid var(--laranja-border);
+    border-radius: 6px; padding: 20px; margin-top: 16px;
+  }
+  .roteiro-label {
+    font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--laranja); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .roteiro p, .roteiro li {
+    font-size: 0.85rem; color: var(--branco); line-height: 1.8; font-style: italic;
+  }
+  .roteiro ul { padding-left: 18px; list-style: none; }
+  .roteiro ul li::before { content: '\25B8'; color: var(--laranja); margin-right: 8px; }
+  .roteiro .nota {
+    font-size: 0.78rem; color: var(--cinza-claro); font-style: normal;
+    margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* SPECS BOX */
+  .specs {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;
+  }
+  .spec {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em;
+    background: var(--cinza-medio); padding: 4px 12px; border-radius: 4px; color: var(--branco-70);
+  }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin-top: 16px; }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 0.82rem;
+  }
+  th {
+    text-align: left; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--laranja); padding: 10px 14px;
+    border-bottom: 1px solid var(--cinza-medio); white-space: nowrap;
+  }
+  td {
+    padding: 12px 14px; border-bottom: 1px solid var(--cinza-border);
+    color: var(--branco-70); vertical-align: top;
+  }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* STATUS BADGES */
+  .badge {
+    display: inline-block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 10px;
+  }
+  .badge-pronto { background: var(--verde-bg); color: var(--verde); border: 1px solid var(--verde-border); }
+  .badge-pendente { background: var(--amarelo-bg); color: var(--amarelo); border: 1px solid var(--amarelo-border); }
+  .badge-urgente { background: var(--vermelho-bg); color: var(--vermelho); border: 1px solid var(--vermelho-border); }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; padding: 0; margin-top: 12px; }
+  .checklist li {
+    font-size: 0.85rem; padding: 8px 0; border-bottom: 1px solid var(--cinza-border);
+    display: flex; align-items: flex-start; gap: 10px; color: var(--branco-70);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+  .check-done { color: var(--verde); }
+  .check-pending { color: var(--amarelo); }
+  .check-missing { color: var(--vermelho); }
+
+  /* STRATEGY CARD */
+  .strat-card {
+    background: var(--cinza-card); border: 1px solid var(--cinza-border);
+    border-radius: 8px; overflow: hidden; margin-bottom: 20px;
+  }
+  .strat-header {
+    background: var(--laranja-soft); border-bottom: 1px solid var(--laranja-border);
+    padding: 16px 24px; display: flex; align-items: center; gap: 14px;
+  }
+  .strat-number {
+    width: 36px; height: 36px; background: var(--laranja); color: #fff;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 700; flex-shrink: 0;
+  }
+  .strat-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; }
+  .strat-title em { font-style: italic; color: var(--laranja); }
+  .strat-body { padding: 24px; }
+  .strat-body p, .strat-body li { font-size: 0.85rem; color: var(--branco-70); line-height: 1.7; }
+  .strat-body ul, .strat-body ol { padding-left: 18px; margin-top: 8px; }
+  .strat-body li { margin-bottom: 6px; }
+  .strat-body strong { color: var(--branco); }
+  .strat-body h4 {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--laranja); margin: 20px 0 8px 0;
+  }
+  .strat-body h4:first-child { margin-top: 0; }
+
+  /* CRONOGRAMA */
+  .crono-day {
+    background: var(--cinza-card); border: 1px solid var(--cinza-border);
+    border-radius: 8px; margin-bottom: 12px; overflow: hidden;
+  }
+  .crono-day-header {
+    padding: 12px 20px; display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid var(--cinza-border);
+  }
+  .crono-date {
+    font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--laranja);
+    min-width: 60px;
+  }
+  .crono-label { font-size: 0.82rem; font-weight: 500; }
+  .crono-day-body { padding: 16px 20px; }
+  .crono-day-body li {
+    font-size: 0.82rem; color: var(--branco-70); margin-bottom: 6px; line-height: 1.6;
+  }
+  .crono-day-body ul { padding-left: 16px; }
+  .crono-day-body strong { color: var(--branco); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center; padding: 48px 32px 32px;
+    border-top: 1px solid var(--cinza-border); margin-top: 48px;
+  }
+  .footer-brand { font-family: var(--serif); font-size: 1rem; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+  .footer-brand em { font-style: italic; color: var(--laranja); }
+  .footer-sub { font-size: 0.72rem; color: rgba(255,255,255,0.3); font-weight: 300; }
+
+  @media (max-width: 600px) {
+    .top-bar { padding: 12px 16px; }
+    .top-bar-name { display: none; }
+    .hero { padding: 56px 20px 40px; }
+    .hero-meta { gap: 20px; }
+    .container { padding: 0 16px; }
+    .section { padding: 48px 0 32px; }
+    .nav-sumario { padding: 16px; }
+    .nav-sumario a { font-size: 0.65rem; padding: 6px 12px; }
+    .card { padding: 20px 16px; }
+    .strat-body { padding: 16px; }
+    .crono-day-header { padding: 10px 14px; }
+    .crono-day-body { padding: 12px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-left">
+    <img src="../ads-logo.png" alt="ADS Company">
+    <span class="top-bar-name">ADS <em>Company</em></span>
+  </div>
+  <span class="top-bar-badge">Direcionamento Estrat&eacute;gico</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Evento &mdash; 09 de Outubro de 2026</div>
+  <h1>Ceian Muniz &amp; <em>Toinho</em></h1>
+  <div class="hero-line"></div>
+  <p>Direcionamento completo de m&iacute;dias e estrat&eacute;gia de vendas para o show na Prime Hall &mdash; ajustes necess&aacute;rios, novos criativos e a&ccedil;&otilde;es para lotarmos a casa.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Evento</div>
+      <div class="hero-meta-value">Ceian Muniz &amp; Toinho</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Local</div>
+      <div class="hero-meta-value">Prime Hall &mdash; Barreiras, BA</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Data</div>
+      <div class="hero-meta-value" style="color:var(--laranja)">Quinta, 09 de Outubro</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Dias Restantes</div>
+      <div class="hero-meta-value" style="color:var(--laranja)">8 dias</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUMÁRIO -->
+<div class="nav-sumario">
+  <div class="nav-sumario-inner">
+    <a href="#secao1">Ajustes nas M&iacute;dias</a>
+    <a href="#secao2">Novos Criativos</a>
+    <a href="#secao3">Estrat&eacute;gias de Vendas</a>
+    <a href="#cronograma">Cronograma Di&aacute;rio</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ============================== -->
+<!-- SEÇÃO 1 — AJUSTES NAS MÍDIAS  -->
+<!-- ============================== -->
+<div class="container">
+  <div class="section" id="secao1">
+    <div class="section-header">
+      <div class="section-number">Se&ccedil;&atilde;o 01</div>
+      <div class="section-title">Ajustes a Serem Realizados nas <em>M&iacute;dias</em></div>
+      <div class="section-desc">Corre&ccedil;&otilde;es que precisam ser feitas antes de qualquer publica&ccedil;&atilde;o ou an&uacute;ncio. Nada pode ir ao ar com informa&ccedil;&atilde;o errada.</div>
+    </div>
+
+    <!-- ALERTA 1: DATA ERRADA -->
+    <div class="alert alert-urgente">
+      <div class="alert-tag">Corre&ccedil;&atilde;o Urgente</div>
+      <h4>Duas pe&ccedil;as est&atilde;o com a data do evento anterior (21 de Agosto)</h4>
+      <p>As artes abaixo foram reaproveitadas do show da Malla 100 Al&ccedil;a, mas a data n&atilde;o foi atualizada. Precisam ser corrigidas <strong>imediatamente</strong> para &ldquo;09 de Outubro&rdquo; antes de qualquer publica&ccedil;&atilde;o.</p>
+      <ul>
+        <li><strong>IMG-01</strong> &mdash; Flyer formato feed (quadrado) com pre&ccedil;os e todos os pontos de venda &rarr; mostra &ldquo;21 de Agosto&rdquo;</li>
+        <li><strong>IMG-04</strong> &mdash; Flyer formato story (vertical) com pre&ccedil;os, pontos de venda e WhatsApp &rarr; mostra &ldquo;21 de Agosto&rdquo;</li>
+      </ul>
+      <p style="margin-top:10px"><strong>O que fazer:</strong> Abrir os arquivos originais no editor (Photoshop, Canva ou CapCut) e trocar &ldquo;21 DE AGOSTO&rdquo; por &ldquo;09 DE OUTUBRO&rdquo;. Manter todo o restante da arte igual.</p>
+    </div>
+
+    <!-- ALERTA 2: CONTAGEM REGRESSIVA -->
+    <div class="alert alert-atencao">
+      <div class="alert-tag">Produ&ccedil;&atilde;o Pendente</div>
+      <h4>Contagem regressiva incompleta &mdash; faltam 3 v&iacute;deos</h4>
+      <p>A contagem vai de <strong>08 dias at&eacute; HOJE</strong> (dia do evento). De 9 v&iacute;deos necess&aacute;rios, 6 j&aacute; est&atilde;o prontos. Faltam 3.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-tag">Status da Contagem Regressiva</div>
+      <h3>Quadro completo &mdash; o que j&aacute; temos e o que <em>falta</em></h3>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>V&iacute;deo</th>
+            <th>Data de Postagem</th>
+            <th>Conte&uacute;do do V&iacute;deo</th>
+            <th>Status</th>
+          </tr>
+          <tr>
+            <td><strong>Faltam 08 Dias</strong></td>
+            <td>01/out (quarta)</td>
+            <td>Ce&atilde; Muniz close, chap&eacute;u, 22 segundos</td>
+            <td><span class="badge badge-pronto">Pronto</span></td>
+          </tr>
+          <tr>
+            <td><strong>Faltam 07 Dias</strong></td>
+            <td>02/out (quinta)</td>
+            <td>&mdash;</td>
+            <td><span class="badge badge-urgente">Produzir</span></td>
+          </tr>
+          <tr>
+            <td><strong>Faltam 06 Dias</strong></td>
+            <td>03/out (sexta)</td>
+            <td>Palco com ilumina&ccedil;&atilde;o vermelha, banda, 22 segundos</td>
+            <td><span class="badge badge-pronto">Pronto</span></td>
+          </tr>
+          <tr>
+            <td><strong>Faltam 05 Dias</strong></td>
+            <td>04/out (s&aacute;bado)</td>
+            <td>Ce&atilde; Muniz cantando ao vivo, palco aberto, 21 segundos</td>
+            <td><span class="badge badge-pronto">Pronto</span></td>
+          </tr>
+          <tr>
+            <td><strong>Faltam 04 Dias</strong></td>
+            <td>05/out (domingo)</td>
+            <td>Guitarrista da banda ao vivo, ilumina&ccedil;&atilde;o quente, 21 segundos</td>
+            <td><span class="badge badge-pronto">Pronto</span></td>
+          </tr>
+          <tr>
+            <td><strong>Faltam 03 Dias</strong></td>
+            <td>06/out (segunda)</td>
+            <td>Ce&atilde; Muniz close rosto, bon&eacute;, 21 segundos</td>
+            <td><span class="badge badge-pronto">Pronto</span></td>
+          </tr>
+          <tr>
+            <td><strong>Faltam 02 Dias</strong></td>
+            <td>07/out (ter&ccedil;a)</td>
+            <td>Artista cantando no palco, 21 segundos</td>
+            <td><span class="badge badge-pronto">Pronto</span></td>
+          </tr>
+          <tr>
+            <td><strong>Faltam 01 Dia</strong></td>
+            <td>08/out (quarta)</td>
+            <td>&mdash;</td>
+            <td><span class="badge badge-urgente">Produzir</span></td>
+          </tr>
+          <tr>
+            <td><strong>&Eacute; HOJE!</strong></td>
+            <td>09/out (quinta)</td>
+            <td>&mdash;</td>
+            <td><span class="badge badge-urgente">Produzir</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ARTES DE LOTE -->
+    <div class="alert alert-atencao">
+      <div class="alert-tag">Produ&ccedil;&atilde;o Pendente</div>
+      <h4>Artes de virada de lote &mdash; 2.&ordm; e 3.&ordm; lote</h4>
+      <p>N&atilde;o existe nenhuma arte pronta para o <strong>2.&ordm; lote</strong> nem para o <strong>3.&ordm; lote</strong>. Assim que os pre&ccedil;os forem definidos, o designer precisa criar:</p>
+      <ul>
+        <li>Arte para feed (1:1) anunciando a virada para o 2.&ordm; lote com os novos pre&ccedil;os</li>
+        <li>Arte para story (9:16) com a mesma informa&ccedil;&atilde;o</li>
+        <li>Arte para feed (1:1) anunciando o 3.&ordm; lote / &ldquo;na porta&rdquo;</li>
+        <li>Arte para story (9:16) do 3.&ordm; lote</li>
+      </ul>
+      <p style="margin-top:10px"><strong>Padr&atilde;o visual:</strong> Manter a mesma identidade das artes existentes (tons dourados, fundo claro, tipografia em preto e dourado). Apenas trocar a faixa de lote e os valores.</p>
+    </div>
+
+    <!-- TOINHO -->
+    <div class="alert alert-atencao">
+      <div class="alert-tag">Produ&ccedil;&atilde;o Pendente</div>
+      <h4>Material de v&iacute;deo com Toinho &mdash; aus&ecirc;ncia total</h4>
+      <p>Todos os v&iacute;deos de contagem regressiva e teasers usam imagens e clipes do <strong>Ce&atilde; Muniz</strong>. O <strong>Toinho</strong> aparece apenas na foto est&aacute;tica do flyer principal. Isso precisa ser equilibrado.</p>
+      <ul>
+        <li>Se houver clipes do Toinho cantando ao vivo, us&aacute;-los nos v&iacute;deos pendentes (07 dias, 01 dia ou HOJE)</li>
+        <li>Se n&atilde;o houver clipes, usar a foto dele com efeito de zoom lento (Ken Burns) + m&uacute;sica dele de fundo</li>
+        <li>O Toinho tamb&eacute;m pode gravar um v&iacute;deo curto fazendo a chamada para o evento</li>
+      </ul>
+    </div>
+
+    <!-- RESUMO VISUAL -->
+    <div class="card">
+      <div class="card-tag">Resumo Geral</div>
+      <h3>Checklist de <em>todas</em> as pend&ecirc;ncias</h3>
+      <ul class="checklist">
+        <li><span class="check-icon check-missing">&#10006;</span> Corrigir data nas 2 artes (21/ago &rarr; 09/out)</li>
+        <li><span class="check-icon check-missing">&#10006;</span> Produzir v&iacute;deo &ldquo;Faltam 07 Dias&rdquo;</li>
+        <li><span class="check-icon check-missing">&#10006;</span> Produzir v&iacute;deo &ldquo;Falta 01 Dia&rdquo;</li>
+        <li><span class="check-icon check-missing">&#10006;</span> Produzir v&iacute;deo &ldquo;&Eacute; HOJE!&rdquo;</li>
+        <li><span class="check-icon check-missing">&#10006;</span> Criar artes de virada de lote (2.&ordm; e 3.&ordm;)</li>
+        <li><span class="check-icon check-missing">&#10006;</span> Incluir material do Toinho nos v&iacute;deos</li>
+        <li><span class="check-icon check-missing">&#10006;</span> Gravar v&iacute;deo do dono fazendo chamada</li>
+        <li><span class="check-icon check-done">&#10004;</span> 6 v&iacute;deos de contagem regressiva prontos</li>
+        <li><span class="check-icon check-done">&#10004;</span> 2 teasers &ldquo;Vem A&iacute;&rdquo; prontos</li>
+        <li><span class="check-icon check-done">&#10004;</span> V&iacute;deo do banner animado pronto</li>
+        <li><span class="check-icon check-done">&#10004;</span> V&iacute;deo de ambi&ecirc;ncia (fogo/vermelho) pronto</li>
+        <li><span class="check-icon check-done">&#10004;</span> Flyer principal (story) com data correta pronto</li>
+        <li><span class="check-icon check-done">&#10004;</span> Logo tipogr&aacute;fica com fundo transparente pronta</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ======================================= -->
+<!-- SEÇÃO 2 — IDEIAS DE NOVOS CRIATIVOS     -->
+<!-- ======================================= -->
+<div class="container">
+  <div class="section" id="secao2">
+    <div class="section-header">
+      <div class="section-number">Se&ccedil;&atilde;o 02</div>
+      <div class="section-title">Ideias de Novos <em>Criativos</em> para Produzir</div>
+      <div class="section-desc">Al&eacute;m de completar o que est&aacute; pendente, esses s&atilde;o criativos extras que v&atilde;o fortalecer a divulga&ccedil;&atilde;o e ajudar a vender mais ingressos. Cada ideia vem com roteiro completo para a equipe conseguir produzir.</div>
+    </div>
+
+    <!-- CRIATIVO 1: VIDEO DO DONO -->
+    <div class="card">
+      <div class="card-tag">Criativo 01 &mdash; V&iacute;deo do Dono</div>
+      <h3>Chamada pessoal do dono da <em>Prime Hall</em></h3>
+      <p>O dono falando direto com o p&uacute;blico gera confian&ccedil;a e proximidade. As pessoas de Barreiras conhecem ele &mdash; quando ele aparece convidando, o impacto &eacute; muito maior do que qualquer arte gr&aacute;fica.</p>
+      <div class="specs">
+        <span class="spec">Formato: Story 9:16</span>
+        <span class="spec">Dura&ccedil;&atilde;o: 20&ndash;30 segundos</span>
+        <span class="spec">Local: Na pr&oacute;pria Prime Hall ou ambiente iluminado</span>
+      </div>
+      <div class="roteiro">
+        <div class="roteiro-label">Roteiro Sugerido</div>
+        <p>&ldquo;Fala, Barreiras! Quem fala aqui &eacute; [nome], da Prime Hall. Dia 9 de outubro vai rolar o show do Ceian Muniz e Toinho aqui na casa. Se voc&ecirc; curtiu o show da Malla 100 Al&ccedil;a, pode se preparar &mdash; esse vai ser t&atilde;o bom quanto ou melhor. O primeiro lote ainda t&aacute; dispon&iacute;vel: quarenta reais o individual, setenta a casadinha. Corre pra garantir o seu na Tabacaria do Cais, Emp&oacute;rio Prime ou pelo WhatsApp. A casa vai lotar &mdash; n&atilde;o fica de fora!&rdquo;</p>
+        <div class="nota">
+          <strong>Dicas de grava&ccedil;&atilde;o:</strong> Gravar de dia com luz natural ou em ambiente bem iluminado. Olhar direto na c&acirc;mera. Falar com energia e naturalidade, sem parecer que est&aacute; lendo. Pode gravar 2 ou 3 vezes e escolher a melhor. N&atilde;o precisa de cen&aacute;rio elaborado &mdash; o que importa &eacute; o rosto dele aparecendo.
+        </div>
+      </div>
+    </div>
+
+    <!-- CRIATIVO 2: CONTAGEM 07 DIAS -->
+    <div class="card">
+      <div class="card-tag">Criativo 02 &mdash; Contagem Regressiva</div>
+      <h3>V&iacute;deo &ldquo;Faltam <em>07 Dias</em>&rdquo;</h3>
+      <p>Esse &eacute; o v&iacute;deo que falta para completar a sequ&ecirc;ncia. Precisa ser postado no dia <strong>02 de outubro (quinta-feira)</strong>.</p>
+      <div class="specs">
+        <span class="spec">Formato: Story/Reels 9:16</span>
+        <span class="spec">Dura&ccedil;&atilde;o: 18&ndash;22 segundos</span>
+        <span class="spec">Padr&atilde;o: Mesmo dos outros v&iacute;deos da contagem</span>
+      </div>
+      <div class="roteiro">
+        <div class="roteiro-label">Como Produzir</div>
+        <ul>
+          <li>Usar um clipe do <strong>Toinho</strong> cantando ao vivo (se tiver). Se n&atilde;o tiver, usar um clipe diferente do Ce&atilde; que ainda n&atilde;o foi usado</li>
+          <li>Aplicar o mesmo padr&atilde;o visual: texto &ldquo;Faltam&rdquo; em amarelo, n&uacute;mero &ldquo;07&rdquo; grande em branco com degradê, &ldquo;Dias&rdquo; abaixo</li>
+          <li>Mesma m&uacute;sica de fundo, mesma transi&ccedil;&atilde;o, mesma fonte &mdash; s&oacute; trocar o clipe e o n&uacute;mero</li>
+          <li>Pode usar o CapCut, InShot ou o editor que j&aacute; foi usado nos outros v&iacute;deos</li>
+        </ul>
+        <div class="nota">
+          <strong>Sugest&atilde;o:</strong> Este &eacute; o v&iacute;deo ideal para apresentar o Toinho. At&eacute; agora todos os v&iacute;deos mostram o Ce&atilde;. Colocar o Toinho aqui d&aacute; equil&iacute;brio e mostra que s&atilde;o dois shows pelo pre&ccedil;o de um.
+        </div>
+      </div>
+    </div>
+
+    <!-- CRIATIVO 3: CONTAGEM 01 DIA -->
+    <div class="card">
+      <div class="card-tag">Criativo 03 &mdash; Contagem Regressiva</div>
+      <h3>V&iacute;deo &ldquo;Falta <em>01 Dia</em>&rdquo;</h3>
+      <p>Pen&uacute;ltimo v&iacute;deo da contagem. Postagem no dia <strong>08 de outubro (quarta-feira)</strong>. Esse &eacute; o v&iacute;deo de maior urg&ecirc;ncia &mdash; quem n&atilde;o comprou ainda precisa sentir que &eacute; agora ou nunca.</p>
+      <div class="specs">
+        <span class="spec">Formato: Story/Reels 9:16</span>
+        <span class="spec">Dura&ccedil;&atilde;o: 18&ndash;22 segundos</span>
+        <span class="spec">Tom: Urg&ecirc;ncia m&aacute;xima</span>
+      </div>
+      <div class="roteiro">
+        <div class="roteiro-label">Como Produzir</div>
+        <ul>
+          <li>Usar o clipe mais emocionante que tiver &mdash; momento de palco com p&uacute;blico cantando junto, fog&atilde;o de energia</li>
+          <li>Texto &ldquo;Falta&rdquo; (singular) em amarelo, &ldquo;01&rdquo; gigante, &ldquo;Dia&rdquo; (singular) abaixo</li>
+          <li>Acrescentar na parte inferior: &ldquo;&Uacute;ltimos ingressos dispon&iacute;veis&rdquo; em texto menor</li>
+          <li>M&uacute;sica de fundo pode ter um ritmo mais acelerado para transmitir urg&ecirc;ncia</li>
+        </ul>
+        <div class="nota">
+          <strong>Aten&ccedil;&atilde;o:</strong> Se o 1.&ordm; lote j&aacute; tiver esgotado at&eacute; essa data, esse v&iacute;deo pode trazer &ldquo;2.&ordm; lote &mdash; &uacute;ltimas unidades&rdquo; em vez de s&oacute; o countdown.
+        </div>
+      </div>
+    </div>
+
+    <!-- CRIATIVO 4: É HOJE -->
+    <div class="card">
+      <div class="card-tag">Criativo 04 &mdash; D-Day</div>
+      <h3>V&iacute;deo &ldquo;&Eacute; <em>HOJE!</em>&rdquo;</h3>
+      <p>O v&iacute;deo mais importante. Postagem no dia <strong>09 de outubro (quinta-feira)</strong>, de manh&atilde; cedo. Esse v&iacute;deo encerra a contagem e funciona como &uacute;ltimo chamado para quem ainda n&atilde;o comprou.</p>
+      <div class="specs">
+        <span class="spec">Formato: Story/Reels 9:16</span>
+        <span class="spec">Dura&ccedil;&atilde;o: 20&ndash;30 segundos</span>
+        <span class="spec">Tom: Celebra&ccedil;&atilde;o + urg&ecirc;ncia</span>
+      </div>
+      <div class="roteiro">
+        <div class="roteiro-label">Como Produzir</div>
+        <ul>
+          <li>Abrir com um corte r&aacute;pido dos melhores momentos dos artistas (3&ndash;4 clipes de 2 segundos cada)</li>
+          <li>Texto &ldquo;&Eacute; HOJE!&rdquo; grande, centralizado, com efeito de pulso ou brilho</li>
+          <li>Mostrar a informa&ccedil;&atilde;o do evento: &ldquo;Ceian Muniz &amp; Toinho &mdash; Prime Hall &mdash; Hoje &agrave; noite&rdquo;</li>
+          <li>Se ainda tiver ingresso: &ldquo;&Uacute;ltimos ingressos na porta&rdquo; ou &ldquo;Garanta no WhatsApp&rdquo;</li>
+          <li>Fechar com o logo da Prime Hall</li>
+        </ul>
+        <div class="nota">
+          <strong>Alternativa:</strong> Se for poss&iacute;vel, gravar o espa&ccedil;o j&aacute; montado (palco, som, luzes) de manh&atilde; e usar como fundo do v&iacute;deo. Mostra que &eacute; real e gera ansiedade em quem vai.
+        </div>
+      </div>
+    </div>
+
+    <!-- CRIATIVO 5: BASTIDORES -->
+    <div class="card">
+      <div class="card-tag">Criativo 05 &mdash; Bastidores</div>
+      <h3>Stories de <em>bastidores</em> da montagem</h3>
+      <p>Nos dias que antecedem o evento, mostrar a prepara&ccedil;&atilde;o gera um efeito poderoso: as pessoas veem que o evento &eacute; real, que est&aacute; sendo preparado com cuidado, e sentem vontade de estar l&aacute;.</p>
+      <div class="specs">
+        <span class="spec">Formato: Stories 9:16</span>
+        <span class="spec">Quantidade: 3&ndash;5 stories por dia nos &uacute;ltimos 3 dias</span>
+        <span class="spec">Quem grava: O pr&oacute;prio dono ou algu&eacute;m da equipe</span>
+      </div>
+      <div class="roteiro">
+        <div class="roteiro-label">O Que Gravar</div>
+        <ul>
+          <li><strong>Montagem do palco:</strong> Equipe montando treliças, posicionando caixas de som, testando ilumina&ccedil;&atilde;o</li>
+          <li><strong>Decora&ccedil;&atilde;o:</strong> Mesa de bebidas sendo organizada, banner sendo pendurado, detalhes do ambiente</li>
+          <li><strong>Passagem de som:</strong> Se houver, gravar um trecho r&aacute;pido da band test&aacute;ndo som &mdash; &eacute; ouro puro para stories</li>
+          <li><strong>Dono falando:</strong> &ldquo;Olha como t&aacute; ficando a casa pra voc&ecirc;s&rdquo; &mdash; 10 segundos, simples e direto</li>
+          <li><strong>Time-lapse:</strong> Se poss&iacute;vel, deixar o celular gravando a montagem do palco em time-lapse &mdash; 15 segundos</li>
+        </ul>
+        <div class="nota">
+          <strong>Importante:</strong> N&atilde;o precisa ser produzido profissionalmente. Stories de bastidores funcionam melhor quando parecem espont&acirc;neos &mdash; gravados com celular, sem filtro, sem edi&ccedil;&atilde;o. A autenticidade &eacute; o que gera engajamento.
+        </div>
+      </div>
+    </div>
+
+    <!-- CRIATIVO 6: DEPOIMENTOS -->
+    <div class="card">
+      <div class="card-tag">Criativo 06 &mdash; Prova Social</div>
+      <h3>Depoimentos e prints de quem j&aacute; <em>comprou</em></h3>
+      <p>Nada vende mais ingresso do que ver que outras pessoas j&aacute; compraram. Quando algu&eacute;m v&ecirc; o amigo postando &ldquo;eu vou&rdquo;, a press&atilde;o social faz o trabalho sozinha.</p>
+      <div class="specs">
+        <span class="spec">Formato: Stories 9:16</span>
+        <span class="spec">Quantidade: 2&ndash;3 por dia</span>
+        <span class="spec">Quem produz: Equipe de vendas / dono</span>
+      </div>
+      <div class="roteiro">
+        <div class="roteiro-label">Como Fazer</div>
+        <ul>
+          <li><strong>Print de conversa:</strong> Quando algu&eacute;m comprar pelo WhatsApp, pedir autoriza&ccedil;&atilde;o para printar e postar. Borrar o n&uacute;mero de telefone, manter s&oacute; a mensagem de confirma&ccedil;&atilde;o</li>
+          <li><strong>Repost:</strong> Quando algu&eacute;m postar que comprou ingresso nos stories, repostar no perfil da Prime Hall com um &ldquo;Mais um confirmado!&rdquo;</li>
+          <li><strong>Contagem p&uacute;blica:</strong> Stories com &ldquo;J&aacute; vendemos X ingressos &mdash; restam poucos do 1.&ordm; lote&rdquo; (n&uacute;mero n&atilde;o precisa ser exato, mas precisa ser real)</li>
+        </ul>
+        <div class="nota">
+          <strong>Cuidado:</strong> Nunca postar dados pessoais (nome completo, telefone vis&iacute;vel, CPF). Borrar ou cortar o que for necess&aacute;rio.
+        </div>
+      </div>
+    </div>
+
+    <!-- CRIATIVO 7: STORIES INTERATIVOS -->
+    <div class="card">
+      <div class="card-tag">Criativo 07 &mdash; Engajamento</div>
+      <h3>Stories <em>interativos</em> com enquete e quiz</h3>
+      <p>Stories com enquete e quiz geram intera&ccedil;&atilde;o direta. Cada voto ou resposta faz o algoritmo entregar o conte&uacute;do para mais gente. Quanto mais intera&ccedil;&atilde;o, mais alcance org&acirc;nico.</p>
+      <div class="specs">
+        <span class="spec">Formato: Stories 9:16</span>
+        <span class="spec">Ferramentas: Enquete, Quiz, Contagem (nativo do Instagram)</span>
+      </div>
+      <div class="roteiro">
+        <div class="roteiro-label">Modelos Prontos</div>
+        <ul>
+          <li><strong>Enquete 1:</strong> Fundo com foto do Ce&atilde; + texto &ldquo;Qual m&uacute;sica do Ce&atilde; voc&ecirc; quer ouvir dia 09?&rdquo; &rarr; Op&ccedil;&otilde;es: [Nome de uma m&uacute;sica] / [Nome de outra]</li>
+          <li><strong>Enquete 2:</strong> &ldquo;Voc&ecirc; j&aacute; garantiu seu ingresso?&rdquo; &rarr; Op&ccedil;&otilde;es: J&aacute; garanti / Vou garantir agora</li>
+          <li><strong>Enquete 3:</strong> &ldquo;Vai sozinho ou vai levar a galera?&rdquo; &rarr; Op&ccedil;&otilde;es: Sozinho / Com a galera toda</li>
+          <li><strong>Quiz:</strong> &ldquo;Quanto custa o ingresso individual no 1.&ordm; lote?&rdquo; &rarr; R$30 / R$40 (correta) / R$50 / R$60</li>
+          <li><strong>Contagem regressiva:</strong> Usar o sticker de contagem regressiva do Instagram com data 09/10 para que as pessoas ativem o lembrete</li>
+        </ul>
+        <div class="nota">
+          <strong>Quando postar:</strong> Intercalar entre os v&iacute;deos de contagem regressiva. Ideal &eacute; 1 story interativo por dia, em hor&aacute;rio de pico (entre 18h e 21h).
+        </div>
+      </div>
+    </div>
+
+    <!-- CRIATIVO 8: ARTE EU VOU -->
+    <div class="card">
+      <div class="card-tag">Criativo 08 &mdash; M&iacute;dia Espont&acirc;nea</div>
+      <h3>Arte &ldquo;Eu vou! E <em>voc&ecirc;</em>?&rdquo; para repost</h3>
+      <p>Criar uma arte bonita e simples que as pessoas compartilhem nos pr&oacute;prios stories depois de comprar o ingresso. Funciona como publicidade gratuita &mdash; cada pessoa que posta se torna um divulgador.</p>
+      <div class="specs">
+        <span class="spec">Formato: Story 9:16</span>
+        <span class="spec">1 arte &uacute;nica</span>
+        <span class="spec">Quem produz: Designer</span>
+      </div>
+      <div class="roteiro">
+        <div class="roteiro-label">Especifica&ccedil;&otilde;es da Arte</div>
+        <ul>
+          <li>Fundo com a identidade visual do evento (tons dourados, mesma est&eacute;tica do flyer)</li>
+          <li>Texto principal: &ldquo;EU VOU!&rdquo; grande e centralizado</li>
+          <li>Abaixo: &ldquo;Ceian Muniz &amp; Toinho &mdash; Prime Hall &mdash; 09 de Outubro&rdquo;</li>
+          <li>Espa&ccedil;o para a pessoa colocar uma foto dela ou marcar amigos</li>
+          <li>Logo da Prime Hall no canto inferior</li>
+        </ul>
+        <div class="nota">
+          <strong>Distribui&ccedil;&atilde;o:</strong> Enviar a arte por WhatsApp para cada pessoa que comprar ingresso, junto com a mensagem: &ldquo;Obrigado por garantir seu ingresso! Posta essa arte nos seus stories e marca a @primehall pra gente repostar.&rdquo;
+        </div>
+      </div>
+    </div>
+
+    <!-- CRIATIVO 9: REELS -->
+    <div class="card">
+      <div class="card-tag">Criativo 09 &mdash; Reels</div>
+      <h3>Reels &ldquo;Por que voc&ecirc; n&atilde;o pode <em>perder</em>&rdquo;</h3>
+      <p>Um Reels curto com os melhores momentos dos artistas, editado no estilo r&aacute;pido com cortes secos e texto de impacto. Formato que viraliza f&aacute;cil e alcança gente que n&atilde;o segue o perfil.</p>
+      <div class="specs">
+        <span class="spec">Formato: Reels 9:16</span>
+        <span class="spec">Dura&ccedil;&atilde;o: 15&ndash;20 segundos</span>
+        <span class="spec">Quem produz: Editor de v&iacute;deo / CapCut</span>
+      </div>
+      <div class="roteiro">
+        <div class="roteiro-label">Roteiro do Reels</div>
+        <ul>
+          <li><strong>0&ndash;2s:</strong> Tela preta com texto &ldquo;DIA 09 DE OUTUBRO&rdquo; aparecendo com efeito de impacto</li>
+          <li><strong>2&ndash;5s:</strong> Corte r&aacute;pido &mdash; Ce&atilde; cantando no palco (melhor momento), texto &ldquo;CEI&Atilde; MUNIZ&rdquo;</li>
+          <li><strong>5&ndash;8s:</strong> Corte r&aacute;pido &mdash; Toinho no palco (ou foto com efeito), texto &ldquo;TOINHO&rdquo;</li>
+          <li><strong>8&ndash;11s:</strong> Corte r&aacute;pido &mdash; P&uacute;blico animado / ilumina&ccedil;&atilde;o do palco, texto &ldquo;PRIME HALL&rdquo;</li>
+          <li><strong>11&ndash;15s:</strong> Flyer do evento com pre&ccedil;os e pontos de venda, texto &ldquo;1.&ordm; LOTE &mdash; R$40&rdquo;</li>
+          <li><strong>15&ndash;17s:</strong> Tela final com &ldquo;GARANTA SEU INGRESSO&rdquo; + WhatsApp</li>
+        </ul>
+        <div class="nota">
+          <strong>M&uacute;sica:</strong> Usar um trecho de m&uacute;sica do pr&oacute;prio Ce&atilde; ou Toinho. Se n&atilde;o for poss&iacute;vel por direitos autorais, usar uma m&uacute;sica trending do Reels com batida forte.
+        </div>
+      </div>
+    </div>
+
+    <!-- CRIATIVO 10: ESCASSEZ -->
+    <div class="card">
+      <div class="card-tag">Criativo 10 &mdash; Urg&ecirc;ncia</div>
+      <h3>Artes de <em>escassez</em> &mdash; &ldquo;&Uacute;ltimos ingressos&rdquo;</h3>
+      <p>Quando o 1.&ordm; lote estiver acabando, o designer precisa ter pronto um conjunto de artes de urg&ecirc;ncia. Essas pe&ccedil;as ativam o gatilho de escassez &mdash; quem estava em d&uacute;vida corre para comprar.</p>
+      <div class="specs">
+        <span class="spec">Formato: Story 9:16 + Feed 1:1</span>
+        <span class="spec">Quantidade: 2 artes (1 feed + 1 story)</span>
+        <span class="spec">Quando usar: Quando restar menos de 20% dos ingressos do lote</span>
+      </div>
+      <div class="roteiro">
+        <div class="roteiro-label">Textos para as Artes</div>
+        <ul>
+          <li>&ldquo;1.&ordm; LOTE ESGOTANDO &mdash; &uacute;ltimas unidades a R$40&rdquo;</li>
+          <li>&ldquo;Depois disso, s&oacute; no 2.&ordm; lote com pre&ccedil;o maior&rdquo;</li>
+          <li>Manter pontos de venda e WhatsApp vis&iacute;veis</li>
+          <li>Visual: mesmo padr&atilde;o dourado, mas com faixa vermelha ou selo de &ldquo;ESGOTANDO&rdquo; sobreposto</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =========================================== -->
+<!-- SEÇÃO 3 — ESTRATÉGIAS DE VENDAS             -->
+<!-- =========================================== -->
+<div class="container">
+  <div class="section" id="secao3">
+    <div class="section-header">
+      <div class="section-number">Se&ccedil;&atilde;o 03</div>
+      <div class="section-title">Estrat&eacute;gias de <em>Vendas</em> para Lotar a Casa</div>
+      <div class="section-desc">A&ccedil;&otilde;es pr&aacute;ticas que a equipe pode aplicar a partir de hoje para maximizar a venda de ingressos nos 8 dias restantes. Cada estrat&eacute;gia vem com o passo a passo de como executar.</div>
+    </div>
+
+    <!-- ESTRATÉGIA 1 -->
+    <div class="strat-card">
+      <div class="strat-header">
+        <div class="strat-number">1</div>
+        <div class="strat-title">WhatsApp &mdash; Lista de <em>Transmiss&atilde;o</em> Segmentada</div>
+      </div>
+      <div class="strat-body">
+        <p>O WhatsApp &eacute; o canal de venda mais forte em Barreiras. A maioria das pessoas compra ingresso porque recebeu uma mensagem direta, n&atilde;o porque viu um an&uacute;ncio. A lista de transmiss&atilde;o permite disparar para muita gente ao mesmo tempo sem ser grupo.</p>
+
+        <h4>Como Montar</h4>
+        <ul>
+          <li>Pegar todos os contatos de quem comprou ingresso nos eventos anteriores (Malla 100 Al&ccedil;a, por exemplo)</li>
+          <li>Adicionar contatos de clientes da Tabacaria do Cais, Emp&oacute;rio Prime e A&ccedil;ougue</li>
+          <li>Criar listas de transmiss&atilde;o de no m&aacute;ximo 256 contatos cada (limite do WhatsApp)</li>
+          <li>Separar em grupos: clientes frequentes, compradores do &uacute;ltimo evento, contatos novos</li>
+        </ul>
+
+        <h4>Disparo 1 &mdash; Lan&ccedil;amento (Hoje, 01/out)</h4>
+        <div class="roteiro">
+          <div class="roteiro-label">Texto Pronto para Copiar e Enviar</div>
+          <p>Fala! Tudo bem? Aqui &eacute; da Prime Hall. Dia 09 de outubro vai rolar Ceian Muniz e Toinho aqui na casa. O primeiro lote t&aacute; dispon&iacute;vel: R$40 individual ou R$70 a casadinha. Voc&ecirc; pode garantir o seu na Tabacaria do Cais, Emp&oacute;rio Prime, A&ccedil;ougue do Cais ou aqui mesmo pelo WhatsApp. Vai ser uma noite incrivel &mdash; n&atilde;o fica de fora!</p>
+        </div>
+
+        <h4>Disparo 2 &mdash; Press&atilde;o de Lote (05/out ou quando o lote estiver acabando)</h4>
+        <div class="roteiro">
+          <div class="roteiro-label">Texto Pronto para Copiar e Enviar</div>
+          <p>E a&iacute;, j&aacute; garantiu seu ingresso pro show do Ceian Muniz e Toinho dia 09? O primeiro lote t&aacute; quase esgotando &mdash; depois disso o pre&ccedil;o sobe. Se quiser garantir no pre&ccedil;o de R$40, &eacute; agora. Responde aqui que eu te ajudo!</p>
+        </div>
+
+        <h4>Disparo 3 &mdash; &Uacute;ltimo Chamado (08/out)</h4>
+        <div class="roteiro">
+          <div class="roteiro-label">Texto Pronto para Copiar e Enviar</div>
+          <p>&Eacute; amanh&atilde;! Show do Ceian Muniz e Toinho na Prime Hall. Se voc&ecirc; ainda n&atilde;o comprou, hoje &eacute; o &uacute;ltimo dia pra garantir com pre&ccedil;o antecipado. Na porta vai ser mais caro. Bora?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESTRATÉGIA 2 -->
+    <div class="strat-card">
+      <div class="strat-header">
+        <div class="strat-number">2</div>
+        <div class="strat-title">Pontos de Venda F&iacute;sicos &mdash; <em>Meta</em> por Local</div>
+      </div>
+      <div class="strat-body">
+        <p>Cada ponto de venda precisa saber quantos ingressos tem pra vender e se sentir parte do resultado. Quando o vendedor tem uma meta, ele empurra a venda ativamente em vez de s&oacute; esperar o cliente perguntar.</p>
+
+        <h4>Como Executar</h4>
+        <ul>
+          <li>Distribuir uma quantidade definida de ingressos por local</li>
+          <li>Dar um incentivo para o ponto que mais vender (ex: 2 ingressos cortesia, desconto em produtos, divulga&ccedil;&atilde;o no Instagram da Prime Hall)</li>
+          <li>Cobrar um retorno di&aacute;rio de vendas de cada ponto &mdash; pode ser por WhatsApp, mensagem simples: &ldquo;Quantos vendeu hoje?&rdquo;</li>
+        </ul>
+
+        <h4>Pontos Confirmados</h4>
+        <ul>
+          <li><strong>Tabacaria do Cais</strong> &mdash; Ponto principal, maior fluxo</li>
+          <li><strong>Emp&oacute;rio Prime</strong> &mdash; P&uacute;blico diferente, complementar</li>
+          <li><strong>A&ccedil;ougue do Cais (todas as unidades)</strong> &mdash; Alto volume de clientes di&aacute;rios</li>
+          <li><strong>WhatsApp (77) 99801-4490</strong> &mdash; Venda direta pelo dono/equipe</li>
+          <li><strong>Carro de som</strong> &mdash; Divulga&ccedil;&atilde;o offline, direciona para os pontos</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ESTRATÉGIA 3 -->
+    <div class="strat-card">
+      <div class="strat-header">
+        <div class="strat-number">3</div>
+        <div class="strat-title">Promo&ccedil;&atilde;o de <em>Grupo</em> &mdash; Leve a Galera</div>
+      </div>
+      <div class="strat-body">
+        <p>Gente n&atilde;o vai a show sozinha. Quando voc&ecirc; facilita a compra em grupo, cada pessoa vira um vendedor que convence os amigos. Uma promo&ccedil;&atilde;o de grupo pode dobrar o volume de vendas de um dia.</p>
+
+        <h4>Op&ccedil;&otilde;es de Promo&ccedil;&atilde;o</h4>
+        <ul>
+          <li><strong>Op&ccedil;&atilde;o A &mdash; Leve 4 Pague 3:</strong> Quem comprar 4 ingressos de uma vez paga s&oacute; 3. Ou seja, 4 ingressos por R$120 em vez de R$160. Cada um sai a R$30</li>
+          <li><strong>Op&ccedil;&atilde;o B &mdash; Combo Galera:</strong> Pacote de 5 ingressos por R$180 (R$36 cada). Ideal para grupos de amigos</li>
+          <li><strong>Op&ccedil;&atilde;o C &mdash; Casadinha VIP:</strong> Casadinha (2 ingressos) + 2 cervejas por R$90. Agrega valor sem baixar o pre&ccedil;o do ingresso</li>
+        </ul>
+
+        <h4>Como Divulgar</h4>
+        <ul>
+          <li>Criar uma arte espec&iacute;fica para a promo&ccedil;&atilde;o de grupo (feed + story)</li>
+          <li>Enviar por WhatsApp para a base com a mensagem: &ldquo;Vem com a galera! Leve 4 e pague 3 &mdash; cada ingresso sai a R$30&rdquo;</li>
+          <li>Promo&ccedil;&atilde;o v&aacute;lida s&oacute; no 1.&ordm; lote para gerar urg&ecirc;ncia</li>
+        </ul>
+        <div class="roteiro">
+          <div class="roteiro-label">Texto de WhatsApp para Promo&ccedil;&atilde;o</div>
+          <p>Quer pagar mais barato? Junta a galera! Leve 4 ingressos e pague s&oacute; 3 pro show do Ceian Muniz e Toinho dia 09/10 na Prime Hall. Cada ingresso sai por R$30. Promo v&aacute;lida s&oacute; no 1.&ordm; lote. Chama os amigos e responde aqui!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESTRATÉGIA 4 -->
+    <div class="strat-card">
+      <div class="strat-header">
+        <div class="strat-number">4</div>
+        <div class="strat-title">Influenciadores e <em>Parceiros</em> Locais</div>
+      </div>
+      <div class="strat-body">
+        <p>Em cidades como Barreiras, influenciadores locais t&ecirc;m mais poder de convers&atilde;o do que qualquer an&uacute;ncio. Uma pessoa conhecida postando &ldquo;eu vou&rdquo; vale mais do que mil impress&otilde;es pagas.</p>
+
+        <h4>Como Executar</h4>
+        <ul>
+          <li><strong>Mapear 5&ndash;10 perfis influentes de Barreiras</strong> &mdash; n&atilde;o precisa ser famoso, precisa ser conhecido na cidade (DJ, fot&oacute;grafo de festas, dono de bar, digital influencer local, atleta, professor)</li>
+          <li><strong>Proposta:</strong> Oferecer 2 ingressos cortesia em troca de 3 stories divulgando o evento (1 teaser + 1 flyer + 1 &ldquo;eu vou&rdquo;)</li>
+          <li><strong>Enviar o material pronto:</strong> Mandar os v&iacute;deos de contagem regressiva e o flyer j&aacute; editados para facilitar o repost</li>
+          <li><strong>Pedir que marquem @primehall</strong> em todos os posts para gerar tr&aacute;fego pro perfil</li>
+        </ul>
+
+        <h4>Modelo de Mensagem para o Influenciador</h4>
+        <div class="roteiro">
+          <div class="roteiro-label">Texto Pronto</div>
+          <p>E a&iacute;, [nome]! Tudo bem? Dia 09 de outubro vai rolar Ceian Muniz e Toinho aqui na Prime Hall. Queria te convidar &mdash; separo 2 ingressos cortesia pra voc&ecirc;. Se puder dar uma for&ccedil;a divulgando nos seus stories, mando o material prontinho. Bora?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESTRATÉGIA 5 -->
+    <div class="strat-card">
+      <div class="strat-header">
+        <div class="strat-number">5</div>
+        <div class="strat-title">Carro de <em>Som</em> &mdash; Roteiro por Fase</div>
+      </div>
+      <div class="strat-body">
+        <p>O carro de som j&aacute; est&aacute; ativo. O que muda &eacute; a mensagem: conforme o evento se aproxima, o texto precisa evoluir de &ldquo;vem a&iacute;&rdquo; para &ldquo;&eacute; agora ou nunca&rdquo;.</p>
+
+        <h4>Fase 1 &mdash; Lan&ccedil;amento (01 a 03/out)</h4>
+        <div class="roteiro">
+          <div class="roteiro-label">Texto do Carro de Som</div>
+          <p>&ldquo;Aten&ccedil;&atilde;o, Barreiras! Dia nove de outubro, quinta-feira, tem Ceian Muniz e Toinho na Prime Hall! Primeiro lote dispon&iacute;vel: quarenta reais o individual, setenta a casadinha. Garanta o seu na Tabacaria do Cais, Emp&oacute;rio Prime ou pelo WhatsApp sete sete, nove nove oito zero um, quatro quatro nove zero. Prime Hall &mdash; a melhor experi&ecirc;ncia &eacute; aqui!&rdquo;</p>
+        </div>
+
+        <h4>Fase 2 &mdash; Urg&ecirc;ncia (04 a 07/out)</h4>
+        <div class="roteiro">
+          <div class="roteiro-label">Texto do Carro de Som</div>
+          <p>&ldquo;Barreiras, o show do Ceian Muniz e Toinho t&aacute; chegando! Faltam poucos dias e o primeiro lote t&aacute; acabando! Quem n&atilde;o garantir agora vai pagar mais caro. Corre pra Tabacaria do Cais, Emp&oacute;rio Prime ou chama no WhatsApp sete sete, nove nove oito zero um, quatro quatro nove zero. N&atilde;o fique de fora! Prime Hall, dia nove de outubro!&rdquo;</p>
+        </div>
+
+        <h4>Fase 3 &mdash; D-Day (08 e 09/out)</h4>
+        <div class="roteiro">
+          <div class="roteiro-label">Texto do Carro de Som</div>
+          <p>&ldquo;&Eacute; amanh&atilde;, Barreiras! Ceian Muniz e Toinho na Prime Hall! &Uacute;ltimos ingressos dispon&iacute;veis! Garanta agora ou s&oacute; na porta &mdash; e o pre&ccedil;o na porta vai ser maior. Corre! Tabacaria do Cais, Emp&oacute;rio Prime ou WhatsApp sete sete, nove nove oito zero um, quatro quatro nove zero. A casa vai lotar!&rdquo;</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESTRATÉGIA 6 -->
+    <div class="strat-card">
+      <div class="strat-header">
+        <div class="strat-number">6</div>
+        <div class="strat-title">Ativa&ccedil;&atilde;o em <em>Com&eacute;rcios</em> Parceiros</div>
+      </div>
+      <div class="strat-body">
+        <p>Al&eacute;m dos pontos de venda oficiais, outros com&eacute;rcios da cidade podem ajudar a divulgar em troca de visibilidade. Quanto mais lugares falando do evento, mais gente ouve.</p>
+
+        <h4>Como Executar</h4>
+        <ul>
+          <li><strong>Imprimir 20&ndash;30 c&oacute;pias do flyer</strong> em A4 colorido e distribuir em bares, lanchonetes, academias e sal&otilde;es de Barreiras</li>
+          <li><strong>Proposta simples:</strong> &ldquo;Posso colar esse cartaz aqui? Se voc&ecirc; quiser, tamb&eacute;m vendo ingresso com desconto pro dono do estabelecimento&rdquo;</li>
+          <li><strong>Restaurantes e bares pr&oacute;ximos:</strong> Oferecer divulga&ccedil;&atilde;o rec&iacute;proca &mdash; a Prime Hall posta sobre o bar nos stories, o bar posta sobre o show</li>
+          <li><strong>Academias:</strong> P&uacute;blico jovem que sai &agrave; noite &mdash; deixar panfleto na recep&ccedil;&atilde;o</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ESTRATÉGIA 7 -->
+    <div class="strat-card">
+      <div class="strat-header">
+        <div class="strat-number">7</div>
+        <div class="strat-title">Prova <em>Social</em> no Instagram</div>
+      </div>
+      <div class="strat-body">
+        <p>Mostrar que o evento est&aacute; vendendo bem gera um efeito de bola de neve. Ningu&eacute;m quer ficar de fora quando todo mundo est&aacute; indo.</p>
+
+        <h4>A&ccedil;&otilde;es Di&aacute;rias</h4>
+        <ul>
+          <li><strong>Repostar</strong> toda pessoa que postar que comprou ingresso ou marcar a Prime Hall</li>
+          <li><strong>Stories com n&uacute;meros:</strong> &ldquo;Mais 15 ingressos vendidos s&oacute; hoje &mdash; restam poucos do 1.&ordm; lote&rdquo;</li>
+          <li><strong>Prints do WhatsApp:</strong> Mostrar a demanda &mdash; prints de gente perguntando, comprando, pedindo informa&ccedil;&atilde;o (sem expor dados pessoais)</li>
+          <li><strong>Marcar quem comprou:</strong> Com autoriza&ccedil;&atilde;o, postar: &ldquo;[Nome] j&aacute; garantiu! E voc&ecirc;?&rdquo;</li>
+          <li><strong>Recordar o &uacute;ltimo evento:</strong> Postar um story com fotos/v&iacute;deos do show da Malla 100 Al&ccedil;a com a legenda: &ldquo;Quem tava sabe como foi. Dia 09 vai ser igual ou melhor.&rdquo;</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ESTRATÉGIA 8 -->
+    <div class="strat-card">
+      <div class="strat-header">
+        <div class="strat-number">8</div>
+        <div class="strat-title">Contagem Regressiva <em>Di&aacute;ria</em> no Instagram</div>
+      </div>
+      <div class="strat-body">
+        <p>Essa &eacute; a espinha dorsal da comunica&ccedil;&atilde;o visual. Todos os dias, sem falta, postar o v&iacute;deo de contagem regressiva correspondente. Isso cria um ritmo &mdash; o seguidor come&ccedil;a a esperar o pr&oacute;ximo.</p>
+
+        <h4>Regras de Postagem</h4>
+        <ul>
+          <li><strong>Hor&aacute;rio fixo:</strong> Sempre entre 17h e 19h &mdash; hor&aacute;rio de maior alcance</li>
+          <li><strong>Formato:</strong> Postar como Reels (alcance maior que stories) e repostar nos stories</li>
+          <li><strong>Legenda:</strong> Copy curta com emojis, urg&ecirc;ncia e CTA (ver cronograma abaixo)</li>
+          <li><strong>Nunca pular um dia</strong> &mdash; a consist&ecirc;ncia &eacute; o que faz a contagem funcionar. Se faltar v&iacute;deo, usar uma arte est&aacute;tica com o n&uacute;mero do dia</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ESTRATÉGIA 9 -->
+    <div class="strat-card">
+      <div class="strat-header">
+        <div class="strat-number">9</div>
+        <div class="strat-title">Tr&aacute;fego Pago &mdash; <em>Meta Ads</em></div>
+      </div>
+      <div class="strat-body">
+        <p>O tr&aacute;fego pago vai amplificar tudo que a equipe faz organicamente. Os an&uacute;ncios v&atilde;o rodar em paralelo com a contagem regressiva e direcionar as pessoas para o WhatsApp de vendas.</p>
+
+        <h4>O Que a ADS Company Vai Fazer</h4>
+        <ul>
+          <li>Criar as campanhas no Meta Ads (Facebook e Instagram) usando os criativos que j&aacute; foram produzidos</li>
+          <li>Segmentar para Barreiras e regi&atilde;o (raio de 30&ndash;50 km)</li>
+          <li>P&uacute;blico: 18&ndash;45 anos, interesses em shows, m&uacute;sica ao vivo, eventos, arrocha, forr&oacute;</li>
+          <li>Objetivo: Mensagens no WhatsApp (convers&atilde;o direta) + Alcance (awareness)</li>
+          <li>Or&ccedil;amento distribu&iacute;do por fase &mdash; mais investimento nos &uacute;ltimos 3 dias</li>
+          <li>Planejamento completo de tr&aacute;fego ser&aacute; entregue em documento separado</li>
+        </ul>
+        <div class="roteiro">
+          <div class="roteiro-label">A&ccedil;&atilde;o do Dono</div>
+          <p>Subir todos os criativos (imagens e v&iacute;deos) na biblioteca da conta de an&uacute;ncios. A ADS Company cuida do resto &mdash; segmenta&ccedil;&atilde;o, copies, or&ccedil;amento e otimiza&ccedil;&atilde;o.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESTRATÉGIA 10 -->
+    <div class="strat-card">
+      <div class="strat-header">
+        <div class="strat-number">10</div>
+        <div class="strat-title">Recorde do &Uacute;ltimo <em>Evento</em> &mdash; Malla 100 Al&ccedil;a</div>
+      </div>
+      <div class="strat-body">
+        <p>O show da Malla 100 Al&ccedil;a foi um sucesso. Usar a mem&oacute;ria dele para vender o pr&oacute;ximo &eacute; uma das estrat&eacute;gias mais eficazes &mdash; quem foi quer repetir, quem n&atilde;o foi n&atilde;o quer ficar de fora de novo.</p>
+
+        <h4>Como Usar</h4>
+        <ul>
+          <li><strong>Carrossel &ldquo;Quem tava sabe&rdquo;:</strong> 5 fotos do evento anterior (p&uacute;blico lotado, palco, artista cantando, galera se divertindo) com a legenda: &ldquo;Quem tava no show da Malla 100 Al&ccedil;a sabe o n&iacute;vel. Dia 09 de outubro vai ser assim de novo.&rdquo;</li>
+          <li><strong>V&iacute;deo compilado:</strong> Se tiver v&iacute;deos do evento anterior, montar um Reels de 15 segundos com os melhores momentos + texto final: &ldquo;E agora vem Ceian Muniz &amp; Toinho. Dia 09. Garanta seu ingresso.&rdquo;</li>
+          <li><strong>Depoimento do dono:</strong> &ldquo;O show da Malla lotou a casa. Agora a gente trouxe Ceian Muniz e Toinho pra fazer ainda melhor. Se voc&ecirc; n&atilde;o foi no &uacute;ltimo, essa &eacute; sua chance.&rdquo;</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- =============================== -->
+<!-- CRONOGRAMA DIÁRIO               -->
+<!-- =============================== -->
+<div class="container">
+  <div class="section" id="cronograma">
+    <div class="section-header">
+      <div class="section-number">Cronograma</div>
+      <div class="section-title">A&ccedil;&otilde;es <em>Dia a Dia</em></div>
+      <div class="section-desc">Tudo que precisa acontecer em cada dia at&eacute; o evento. Imprima essa p&aacute;gina e marque o que for executando.</div>
+    </div>
+
+    <!-- DIA 01/OUT -->
+    <div class="crono-day">
+      <div class="crono-day-header">
+        <div class="crono-date">01/out</div>
+        <div class="crono-label">Quarta &mdash; <strong>Faltam 08 Dias</strong></div>
+      </div>
+      <div class="crono-day-body">
+        <ul>
+          <li><strong>Instagram:</strong> Postar v&iacute;deo &ldquo;Faltam 08 Dias&rdquo; como Reels &agrave;s 18h + repostar nos stories</li>
+          <li><strong>Stories extra:</strong> Flyer principal corrigido (IMG-03) + sticker de contagem regressiva do Instagram</li>
+          <li><strong>WhatsApp:</strong> Disparo 1 &mdash; mensagem de lan&ccedil;amento para toda a lista de transmiss&atilde;o</li>
+          <li><strong>Carro de som:</strong> Iniciar com o texto da Fase 1</li>
+          <li><strong>Produ&ccedil;&atilde;o:</strong> Cobrar do designer a corre&ccedil;&atilde;o das 2 artes com data errada</li>
+          <li><strong>Ads:</strong> Subir criativos na biblioteca da conta de an&uacute;ncios</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DIA 02/OUT -->
+    <div class="crono-day">
+      <div class="crono-day-header">
+        <div class="crono-date">02/out</div>
+        <div class="crono-label">Quinta &mdash; <strong>Faltam 07 Dias</strong></div>
+      </div>
+      <div class="crono-day-body">
+        <ul>
+          <li><strong>Instagram:</strong> Postar v&iacute;deo &ldquo;Faltam 07 Dias&rdquo; como Reels &agrave;s 18h (precisa estar pronto!)</li>
+          <li><strong>Stories:</strong> Enquete &ldquo;Qual m&uacute;sica do Ce&atilde; voc&ecirc; quer ouvir dia 09?&rdquo;</li>
+          <li><strong>Influenciadores:</strong> Enviar mensagem para 5&ndash;10 perfis locais oferecendo cortesia</li>
+          <li><strong>Produ&ccedil;&atilde;o:</strong> Gravar v&iacute;deo do dono fazendo chamada (se ainda n&atilde;o gravou)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DIA 03/OUT -->
+    <div class="crono-day">
+      <div class="crono-day-header">
+        <div class="crono-date">03/out</div>
+        <div class="crono-label">Sexta &mdash; <strong>Faltam 06 Dias</strong></div>
+      </div>
+      <div class="crono-day-body">
+        <ul>
+          <li><strong>Instagram:</strong> Postar v&iacute;deo &ldquo;Faltam 06 Dias&rdquo; como Reels &agrave;s 18h</li>
+          <li><strong>Stories:</strong> V&iacute;deo do dono fazendo chamada + repost de quem comprou ingresso</li>
+          <li><strong>Instagram extra:</strong> Postar Reels &ldquo;Por que voc&ecirc; n&atilde;o pode perder&rdquo; (Criativo 09)</li>
+          <li><strong>Offline:</strong> Distribuir flyers impressos em 10&ndash;15 com&eacute;rcios de Barreiras</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DIA 04/OUT -->
+    <div class="crono-day">
+      <div class="crono-day-header">
+        <div class="crono-date">04/out</div>
+        <div class="crono-label">S&aacute;bado &mdash; <strong>Faltam 05 Dias</strong></div>
+      </div>
+      <div class="crono-day-body">
+        <ul>
+          <li><strong>Instagram:</strong> Postar v&iacute;deo &ldquo;Faltam 05 Dias&rdquo; como Reels &agrave;s 18h</li>
+          <li><strong>Stories:</strong> Quiz &ldquo;Quanto custa o ingresso no 1.&ordm; lote?&rdquo;</li>
+          <li><strong>Prova social:</strong> Postar stories mostrando vendas (&ldquo;J&aacute; vendemos X ingressos!&rdquo;)</li>
+          <li><strong>WhatsApp:</strong> Divulgar promo&ccedil;&atilde;o de grupo (se for fazer)</li>
+          <li><strong>Pontos de venda:</strong> Cobrar retorno de vendas de cada ponto</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DIA 05/OUT -->
+    <div class="crono-day">
+      <div class="crono-day-header">
+        <div class="crono-date">05/out</div>
+        <div class="crono-label">Domingo &mdash; <strong>Faltam 04 Dias</strong></div>
+      </div>
+      <div class="crono-day-body">
+        <ul>
+          <li><strong>Instagram:</strong> Postar v&iacute;deo &ldquo;Faltam 04 Dias&rdquo; como Reels &agrave;s 18h</li>
+          <li><strong>Stories:</strong> Enquete &ldquo;Vai sozinho ou com a galera?&rdquo; + repost de influenciadores</li>
+          <li><strong>WhatsApp:</strong> Disparo 2 &mdash; press&atilde;o de lote (se o 1.&ordm; lote estiver acabando)</li>
+          <li><strong>Avaliar:</strong> Se o 1.&ordm; lote esgotou, acionar arte de virada para 2.&ordm; lote</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DIA 06/OUT -->
+    <div class="crono-day">
+      <div class="crono-day-header">
+        <div class="crono-date">06/out</div>
+        <div class="crono-label">Segunda &mdash; <strong>Faltam 03 Dias</strong></div>
+      </div>
+      <div class="crono-day-body">
+        <ul>
+          <li><strong>Instagram:</strong> Postar v&iacute;deo &ldquo;Faltam 03 Dias&rdquo; como Reels &agrave;s 18h</li>
+          <li><strong>Stories:</strong> Carrossel &ldquo;Quem tava sabe&rdquo; com fotos do show da Malla 100 Al&ccedil;a</li>
+          <li><strong>Carro de som:</strong> Trocar para texto da Fase 2 (urg&ecirc;ncia)</li>
+          <li><strong>Prova social:</strong> Prints de conversas de gente comprando</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DIA 07/OUT -->
+    <div class="crono-day">
+      <div class="crono-day-header">
+        <div class="crono-date">07/out</div>
+        <div class="crono-label">Ter&ccedil;a &mdash; <strong>Faltam 02 Dias</strong></div>
+      </div>
+      <div class="crono-day-body">
+        <ul>
+          <li><strong>Instagram:</strong> Postar v&iacute;deo &ldquo;Faltam 02 Dias&rdquo; como Reels &agrave;s 18h</li>
+          <li><strong>Stories:</strong> Arte de escassez (&ldquo;&Uacute;ltimos ingressos!&rdquo;) + enquete &ldquo;J&aacute; garantiu seu ingresso?&rdquo;</li>
+          <li><strong>Bastidores:</strong> Se a montagem j&aacute; come&ccedil;ou, gravar e postar stories</li>
+          <li><strong>Produ&ccedil;&atilde;o:</strong> Garantir que o v&iacute;deo de &ldquo;01 Dia&rdquo; e &ldquo;&Eacute; HOJE&rdquo; est&atilde;o prontos</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DIA 08/OUT -->
+    <div class="crono-day">
+      <div class="crono-day-header">
+        <div class="crono-date">08/out</div>
+        <div class="crono-label">Quarta &mdash; <strong>Falta 01 Dia</strong></div>
+      </div>
+      <div class="crono-day-body">
+        <ul>
+          <li><strong>Instagram:</strong> Postar v&iacute;deo &ldquo;Falta 01 Dia&rdquo; como Reels &agrave;s 18h &mdash; m&aacute;xima urg&ecirc;ncia</li>
+          <li><strong>Stories:</strong> Bastidores da montagem (palco, som, ilumina&ccedil;&atilde;o) a cada 2&ndash;3 horas</li>
+          <li><strong>WhatsApp:</strong> Disparo 3 &mdash; &uacute;ltimo chamado (&ldquo;&Eacute; amanh&atilde;!&rdquo;)</li>
+          <li><strong>Carro de som:</strong> Trocar para texto da Fase 3 (&ldquo;&Eacute; amanh&atilde;!&rdquo;)</li>
+          <li><strong>Ads:</strong> Aumentar or&ccedil;amento do tr&aacute;fego pago para for&ccedil;ar &uacute;ltimas vendas</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DIA 09/OUT -->
+    <div class="crono-day" style="border: 1px solid var(--laranja-border); background: rgba(255,92,0,0.03);">
+      <div class="crono-day-header" style="border-bottom-color: var(--laranja-border);">
+        <div class="crono-date" style="font-size:1.3rem;">09/out</div>
+        <div class="crono-label">Quinta &mdash; <strong style="color:var(--laranja)">&Eacute; HOJE! Dia do Evento</strong></div>
+      </div>
+      <div class="crono-day-body">
+        <ul>
+          <li><strong>Instagram (manh&atilde;):</strong> Postar v&iacute;deo &ldquo;&Eacute; HOJE!&rdquo; como Reels &agrave;s 10h</li>
+          <li><strong>Stories (o dia todo):</strong> Bastidores da prepara&ccedil;&atilde;o final &mdash; palco pronto, equipe chegando, ilumina&ccedil;&atilde;o ligada</li>
+          <li><strong>Stories (&agrave; tarde):</strong> &ldquo;&Uacute;ltimos ingressos &mdash; garante o seu na porta ou pelo WhatsApp&rdquo;</li>
+          <li><strong>Stories (durante o show):</strong> Gravar 3&ndash;5 stories curtos do show acontecendo &mdash; p&uacute;blico cantando, artista no palco, casa lotada</li>
+          <li><strong>WhatsApp:</strong> Mensagem curta de manh&atilde;: &ldquo;&Eacute; hoje! Ceian Muniz e Toinho na Prime Hall. &Uacute;ltimos ingressos.&rdquo;</li>
+          <li><strong>Carro de som:</strong> Rodar at&eacute; 16h com texto &ldquo;&Eacute; HOJE!&rdquo;</li>
+          <li><strong>Ap&oacute;s o evento:</strong> Postar stories agradecendo quem foi &mdash; &ldquo;Obrigado, Barreiras! A casa lotou! Fiquem ligados no pr&oacute;ximo.&rdquo;</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">ADS <em>Company</em> &mdash; Assessoria de Marketing e Performance</div>
+  <div class="footer-sub">Direcionamento Estrat&eacute;gico &mdash; Ceian Muniz &amp; Toinho &mdash; Prime Hall &mdash; Outubro 2026</div>
+</div>
+
+</body>
+</html>
