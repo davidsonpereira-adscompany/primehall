@@ -97,6 +97,10 @@
 
   .rodape { text-align: center; padding: 26px; border-top: 1px solid var(--borda); color: var(--cinza); font-size: .68rem; letter-spacing: .25em; text-transform: uppercase; }
   canvas { max-width: 100%; }
+  .graf-wrap { position: relative; }
+  .graf-tooltip { position: absolute; pointer-events: none; background: #1C1917; color: #fff; border-radius: 10px; padding: 10px 14px; font-size: .74rem; line-height: 1.5; box-shadow: 0 6px 18px rgba(20,10,0,.25); opacity: 0; transition: opacity .12s; white-space: nowrap; z-index: 20; transform: translate(-50%, -110%); }
+  .graf-tooltip .tt-data { font-weight: 700; margin-bottom: 2px; color: #FF8A47; }
+  .graf-tooltip .tt-linha span { color: #B5AFA9; }
   .legenda { display: flex; flex-wrap: wrap; gap: 18px; font-size: .73rem; color: var(--cinza); margin-bottom: 14px; }
   .nota { font-size: .7rem; color: #8A847E; margin-top: 10px; }
 </style>
@@ -159,7 +163,10 @@
         <span><span style="display:inline-block;width:14px;height:2px;background:#333;vertical-align:middle;margin-right:6px"></span>Investido (R$)</span>
         <span id="leg-anterior" style="display:none"><span style="display:inline-block;width:14px;border-top:2px dashed #B5AFA9;vertical-align:middle;margin-right:6px"></span>Conversas no período anterior</span>
       </div>
-      <canvas id="grafico-diario" style="width:100%;height:270px"></canvas>
+      <div class="graf-wrap">
+        <canvas id="grafico-diario" style="width:100%;height:270px"></canvas>
+        <div class="graf-tooltip" id="graf-tooltip"></div>
+      </div>
     </div>
   </div>
 
@@ -378,7 +385,8 @@ function render(ini, fim) {
   desenharGrafico(sel, prevLista);
 }
 
-function desenharGrafico(sel, prev) {
+let GRAF = null; // geometria do último desenho, usada pelo tooltip
+function desenharGrafico(sel, prev, destaque) {
   const cv = document.getElementById("grafico-diario");
   const dpr = window.devicePixelRatio || 1;
   const W = cv.clientWidth, H = 270;
@@ -393,6 +401,11 @@ function desenharGrafico(sel, prev) {
   const maxConv = Math.max(...conv, ...(prevConv.length ? prevConv : [0]), 1) * 1.25;
   const maxInv = Math.max(...inv, 1) * 1.25;
   const n = sel.length, passo = plotW / n;
+  GRAF = { sel, prev, padL, padT, plotH, passo, n, maxInv };
+  if (destaque !== undefined && destaque !== null) {
+    ctx.fillStyle = "rgba(255,92,0,0.07)";
+    ctx.fillRect(padL + passo * destaque, padT, passo, plotH);
+  }
   ctx.font = "10px Inter, sans-serif";
   ctx.strokeStyle = "rgba(0,0,0,0.07)"; ctx.fillStyle = "#8A847E"; ctx.textAlign = "right";
   for (let i = 0; i <= 4; i++) {
@@ -433,7 +446,43 @@ function desenharGrafico(sel, prev) {
   ctx.fillStyle = "#8A847E"; ctx.textAlign = "center";
   const salto = Math.ceil(n / 14);
   sel.forEach((d, i) => { if (i % salto === 0) ctx.fillText(dataBR(d.data), padL + passo * i + passo / 2, H - 8); });
+  if (destaque !== undefined && destaque !== null) {
+    const x = padL + passo * destaque + passo / 2;
+    const y = padT + plotH - plotH * inv[destaque] / maxInv;
+    ctx.fillStyle = "#333"; ctx.beginPath(); ctx.arc(x, y, 4.5, 0, 7); ctx.fill();
+    ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x, y, 4.5, 0, 7); ctx.stroke();
+  }
 }
+
+// ===== tooltip do gráfico: mostra conversas e investimento do dia sob o mouse =====
+(function () {
+  const cv = document.getElementById("grafico-diario");
+  const tt = document.getElementById("graf-tooltip");
+  let idxAtual = null;
+  cv.addEventListener("mousemove", e => {
+    if (!GRAF) return;
+    const r = cv.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const i = Math.floor((x - GRAF.padL) / GRAF.passo);
+    if (i < 0 || i >= GRAF.n) { esconder(); return; }
+    const d = GRAF.sel[i];
+    if (i !== idxAtual) { idxAtual = i; desenharGrafico(GRAF.sel, GRAF.prev, i); }
+    tt.innerHTML =
+      `<div class="tt-data">${dataBRcompleta(d.data)}</div>` +
+      `<div class="tt-linha"><span>Conversas no WhatsApp:</span> <strong>${inteiro(d.conversas)}</strong></div>` +
+      `<div class="tt-linha"><span>Valor investido:</span> <strong>${moeda(d.investido)}</strong></div>` +
+      `<div class="tt-linha"><span>Custo por conversa:</span> <strong>${d.conversas ? moeda(d.investido / d.conversas) : "—"}</strong></div>`;
+    const cx = GRAF.padL + GRAF.passo * i + GRAF.passo / 2;
+    tt.style.left = Math.max(90, Math.min(r.width - 90, cx)) + "px";
+    tt.style.top = Math.max(54, GRAF.padT + GRAF.plotH - GRAF.plotH * d.investido / GRAF.maxInv) + "px";
+    tt.style.opacity = "1";
+  });
+  function esconder() {
+    tt.style.opacity = "0";
+    if (idxAtual !== null) { idxAtual = null; if (GRAF) desenharGrafico(GRAF.sel, GRAF.prev); }
+  }
+  cv.addEventListener("mouseleave", esconder);
+})();
 
 // ===== filtro de período =====
 const ULTIMA = DIAS[DIAS.length - 1].data, PRIMEIRA = DIAS[0].data;
